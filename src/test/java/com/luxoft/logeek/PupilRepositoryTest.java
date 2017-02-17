@@ -10,25 +10,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+@SuppressWarnings("unused")
 public class PupilRepositoryTest extends TestBase {
     
-    @Autowired private PupilRepository repository;
-
-    @Before
-    public void setUp() throws Exception {
-        List<Pupil> pupils = Arrays.asList(
-                new Pupil(1),
-                new Pupil(2),
-                new Pupil(3),
-                new Pupil(4),
-                new Pupil(5),
-                new Pupil(6)
-        );
-        repository.save(pupils);
-        repository.flush();
-        em.clear();
-    }
-
     /**
      * What instance of Set will be returned in the next two methods
      */
@@ -39,7 +23,7 @@ public class PupilRepositoryTest extends TestBase {
 
     @Test
     public void findOrdered() throws Exception {
-        Set<Pupil> pupilsOlderThan = repository.findPupilsOlderThan(3);
+        Set<Pupil> pupilsOlderThan = repository.findPupilsOlderThanOrderedByAge(3);
     }
 
     /**
