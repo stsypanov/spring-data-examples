@@ -25,17 +25,4 @@ public class PupilRepositoryTest extends TestBase {
     public void findOrdered() throws Exception {
         Set<Pupil> pupilsOlderThan = repository.findPupilsOlderThanOrderedByAge(3);
     }
-
-    /**
-     * What queries will be executed
-     */
-    @Test
-    public void deleteAll() throws Exception {
-        repository.deleteAll();
-    }
-
-    @Test
-    public void deleteAllInBatch() throws Exception {
-        repository.deleteAllInBatch();
-    }
 }
