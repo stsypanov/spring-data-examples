@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import java.util.Set;
 
+import static org.junit.Assert.assertTrue;
+
 @SuppressWarnings("unused")
 public class DeleteAllPupilsTest extends TestBase {
     
@@ -14,5 +16,6 @@ public class DeleteAllPupilsTest extends TestBase {
     @Test
     public void deleteAll() throws Exception {
         repository.deleteAll();
+        assertTrue(repository.findAll().isEmpty());
     }
 }
