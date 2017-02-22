@@ -1,7 +1,11 @@
 package com.luxoft.logeek;
 
+import com.luxoft.logeek.entity.Child;
+import com.luxoft.logeek.entity.Parent;
 import com.luxoft.logeek.entity.Pupil;
+import com.luxoft.logeek.repository.ChildRepository;
 import com.luxoft.logeek.repository.PupilRepository;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +24,9 @@ public abstract class TestBase {
     protected EntityManager em;
 
     @Autowired
-    protected PupilRepository repository;
+    protected PupilRepository pupilRepository;
+    @Autowired
+    protected ChildRepository childRepository;
 
     @Before
     public void setUp() throws Exception {
@@ -32,9 +38,29 @@ public abstract class TestBase {
                 new Pupil(5),
                 new Pupil(6)
         );
-        repository.save(pupils);
-        repository.flush();
+        pupilRepository.save(pupils);
+        pupilRepository.flush();
+
+        Parent papa = new Parent("папа");
+        Parent mama = new Parent("мама");
+
+        Child child1 = new Child(papa);
+        Child child2 = new Child(papa);
+        Child child3 = new Child(papa);
+        Child child4 = new Child(papa);
+
+        Child child5 = new Child(mama);
+        Child child6 = new Child(mama);
+
+		childRepository.save(Arrays.asList(child1, child2, child3, child4, child5, child6));
+		childRepository.flush();
+
         em.clear();
     }
 
+	@After
+	public void tearDown() throws Exception {
+		pupilRepository.deleteAllInBatch();
+		childRepository.deleteAllInBatch();
+	}
 }
