@@ -10,20 +10,24 @@
 	</Appenders>
 
 	<Loggers>
-		<Logger name= "org.springframework" level="warn" additivity="false">
-			<AppenderRef ref="ASYNC_CONSOLE"/>
-		</Logger>
-
-		<Logger name= "org.springframework.transaction" level="warn" additivity="false">
-			<AppenderRef ref="ASYNC_CONSOLE"/>
-		</Logger>
-
-		<Logger name= "org.hibernate" level="warn" additivity="false">
-			<AppenderRef ref="ASYNC_CONSOLE"/>
-		</Logger>
-
 		<Root level="all">
 			<AppenderRef ref="ASYNC_CONSOLE"/>
 		</Root>
+
+		<Logger name="org.springframework" level="warn" additivity="false">
+			<AppenderRef ref="ASYNC_CONSOLE"/>
+		</Logger>
+
+		<Logger name="org.springframework.transaction" level="warn" additivity="false">
+			<AppenderRef ref="ASYNC_CONSOLE"/>
+		</Logger>
+
+		<Logger name="org.hibernate" level="warn" additivity="false">
+			<AppenderRef ref="ASYNC_CONSOLE"/>
+		</Logger>
+
+		<Logger name="p6spy" level="info" additivity="false">
+			<AppenderRef ref="ASYNC_CONSOLE"/>
+		</Logger>
 	</Loggers>
 </Configuration>
