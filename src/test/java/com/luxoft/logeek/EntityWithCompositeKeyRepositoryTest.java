@@ -1,15 +1,19 @@
-package com.luxoft.logeek.repository;
+package com.luxoft.logeek;
 
-import com.luxoft.logeek.TestBase;
 import com.luxoft.logeek.entity.CompositeKey;
 import com.luxoft.logeek.entity.EntityWithCompositeKey;
+import com.luxoft.logeek.repository.EntityWithCompositeKeyRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class EntityWithCompositeKeyRepositoryTest extends TestBase {
+
+	@Autowired
+	private EntityWithCompositeKeyRepository entityWithCompositeKeyRepository;
 
 	private List<CompositeKey> compositeKeys;
 
@@ -36,6 +40,5 @@ public class EntityWithCompositeKeyRepositoryTest extends TestBase {
 	@Test
 	public void findAll() throws Exception {
 		List<EntityWithCompositeKey> all = entityWithCompositeKeyRepository.findAll(compositeKeys);
-
 	}
 }

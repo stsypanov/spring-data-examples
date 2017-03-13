@@ -4,7 +4,6 @@ import com.luxoft.logeek.entity.Child;
 import com.luxoft.logeek.entity.Parent;
 import com.luxoft.logeek.entity.Pupil;
 import com.luxoft.logeek.repository.ChildRepository;
-import com.luxoft.logeek.repository.EntityWithCompositeKeyRepository;
 import com.luxoft.logeek.repository.PupilRepository;
 import org.junit.After;
 import org.junit.Before;
@@ -23,13 +22,10 @@ import java.util.List;
 public abstract class TestBase {
     @PersistenceContext
     protected EntityManager em;
-
     @Autowired
     protected PupilRepository pupilRepository;
     @Autowired
     protected ChildRepository childRepository;
-    @Autowired
-	protected EntityWithCompositeKeyRepository entityWithCompositeKeyRepository;
 
     @Before
     public void setUp() throws Exception {
