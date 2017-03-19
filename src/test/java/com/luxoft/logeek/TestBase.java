@@ -29,9 +29,9 @@ public abstract class TestBase {
     protected Random random;
 
     public void setUp() throws Exception {
-    	random = new Random(System.nanoTime());
-    	
-        List<Pupil> pupils = Arrays.asList(
+		initRandom();
+
+		List<Pupil> pupils = Arrays.asList(
                 new Pupil(1),
                 new Pupil(2),
                 new Pupil(3),
@@ -58,6 +58,10 @@ public abstract class TestBase {
 
         em.clear();
     }
+
+	protected void initRandom() {
+		random = new Random(System.nanoTime());
+	}
 
 	@After
 	public void tearDown() throws Exception {
