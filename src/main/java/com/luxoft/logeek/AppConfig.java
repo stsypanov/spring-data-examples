@@ -31,9 +31,9 @@ public class AppConfig {
 				.setType(EmbeddedDatabaseType.H2)
 				.build();
 	}
-	
+
 	@Bean
-	public P6DataSource dataSource(DataSource actualDataSource){
+	public P6DataSource dataSource(DataSource actualDataSource) {
 		return new P6DataSource(actualDataSource);
 	}
 
@@ -60,6 +60,12 @@ public class AppConfig {
 		return em;
 	}
 
+	/**
+	 * Set both hibernate.show_sql and hibernate.format_sql
+	 * when running benchmarks
+	 *
+	 * @return hibernate props
+	 */
 	private Properties additionalProperties() {
 		Properties properties = new Properties();
 		properties.setProperty("hibernate.show_sql", "true");
