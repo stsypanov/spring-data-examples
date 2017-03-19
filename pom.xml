@@ -19,6 +19,7 @@
 	<properties>
 		<spring.version>4.3.6.RELEASE</spring.version>
 		<hibernate.version>5.2.8.Final</hibernate.version>
+		<jmh.version>1.18</jmh.version>
 	</properties>
 
 	<dependencies>
@@ -113,9 +114,23 @@
 			<artifactId>p6spy</artifactId>
 			<version>3.0.0</version>
 		</dependency>
+		
+		<!--JMH-->
+		<dependency>
+			<groupId>org.openjdk.jmh</groupId>
+			<artifactId>jmh-core</artifactId>
+			<version>${jmh.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openjdk.jmh</groupId>
+			<artifactId>jmh-generator-annprocess</artifactId>
+			<version>${jmh.version}</version>
+		</dependency>
+	
 	</dependencies>
 
 	<build>
+		<sourceDirectory>src/main/java, src/benchmark/java</sourceDirectory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
