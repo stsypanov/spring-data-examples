@@ -29,6 +29,8 @@ public abstract class TestBase {
     protected Random random;
 
     public void setUp() throws Exception {
+    	random = new Random(System.nanoTime());
+    	
         List<Pupil> pupils = Arrays.asList(
                 new Pupil(1),
                 new Pupil(2),

@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -13,7 +12,6 @@ public class DistinctTest extends TestBase {
 
 	@Before
 	public void setUp() throws Exception {
-		random = new Random(System.nanoTime());
 		List<Pupil> pupils = random
 				.ints(1000, 1, 400)
 				.boxed()
