@@ -6,7 +6,6 @@ import com.luxoft.logeek.entity.Pupil;
 import com.luxoft.logeek.repository.ChildRepository;
 import com.luxoft.logeek.repository.PupilRepository;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -16,6 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = AppConfig.class)
@@ -26,8 +26,8 @@ public abstract class TestBase {
     protected PupilRepository pupilRepository;
     @Autowired
     protected ChildRepository childRepository;
+    protected Random random;
 
-    @Before
     public void setUp() throws Exception {
         List<Pupil> pupils = Arrays.asList(
                 new Pupil(1),

@@ -9,27 +9,28 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class DistinctTest extends TestBase{
-	
+public class DistinctTest extends TestBase {
+
 	@Before
 	public void setUp() throws Exception {
-		List<Pupil> pupils = new Random()
-				.ints(1000, 0, 400)
+		random = new Random(System.nanoTime());
+		List<Pupil> pupils = random
+				.ints(1000, 1, 400)
 				.boxed()
-				.map(randomLong -> new Pupil(randomLong, String.valueOf(randomLong)))
+				.map(randomLong -> new Pupil(randomLong, String.valueOf(random.nextInt(100))))
 				.collect(Collectors.toList());
-		
+
 		pupilRepository.save(pupils);
 	}
 
 	@Test
 	public void findWithDistinct() throws Exception {
-		List<Pupil> pupils = pupilRepository.findAllDistinct();//todo distinct does not work if distinct p
+		List<String> pupils = pupilRepository.findAllNames();
 	}
 
 	@Test
 	public void findWithHashSetDistinct() throws Exception {
-		Set<Pupil> pupils = pupilRepository.findAllInSet();
+		Set<String> pupils = pupilRepository.findAllNamesAsSet();
 	}
 
 }
