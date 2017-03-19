@@ -10,18 +10,16 @@ import java.util.Set;
 
 public interface PupilRepository extends JpaRepository<Pupil, Long> {
 
-	@Query("select p from Pupil p " +
-			"where p.age >= :age")
+	@Query("select p from Pupil p where p.age >= :age")
 	Set<Pupil> findPupilsOlderThan(@Param("age") int age);
 
-	@Query("select p from Pupil p " +
-			"where p.age >= :age " +
+	@Query("select p from Pupil p where p.age >= :age " +
 			"order by p.age")
 	Set<Pupil> findPupilsOlderThanOrderedByAge(@Param("age") int age);
 	
 	@Query("select distinct p.name from Pupil p")
-	List<String> findAllDistinct();
+	List<String> findAllNames();
 
 	@Query("select p.name from Pupil p")
-	Set<Pupil> findAllInSet();
+	Set<String> findAllNamesAsSet();
 }
