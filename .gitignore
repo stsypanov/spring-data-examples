@@ -2,3 +2,4 @@
 .idea/
 spring-data-examples.iml
 target/
+*.log
