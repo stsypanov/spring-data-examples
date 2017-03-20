@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 @SuppressWarnings({"JpaQlInspection", "SameParameterValue"})
-public interface ChildRepository extends JpaRepository<Child, Long> {
+public interface ChildRepository extends JpaRepository<Child, Long>, ChildRepositoryCustom {
 
 	List<Child> findByParentName(String name);
 
