@@ -26,7 +26,7 @@
 			<AppenderRef ref="ASYNC_CONSOLE"/>
 		</Logger>
 
-		<Logger name="p6spy" level="info" additivity="false">
+		<Logger name="p6spy" level="warn" additivity="false">
 			<AppenderRef ref="ASYNC_CONSOLE"/>
 		</Logger>
 	</Loggers>
