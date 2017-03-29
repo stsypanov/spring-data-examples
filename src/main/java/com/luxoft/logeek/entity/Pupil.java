@@ -9,8 +9,9 @@ import javax.persistence.*;
 public class Pupil {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQUENCE")
+	@SequenceGenerator(name = "SEQUENCE", sequenceName = "PUPIL_SEQ", allocationSize = 5000)
+	private Long id;
 
 	@Column
 	private int age;
