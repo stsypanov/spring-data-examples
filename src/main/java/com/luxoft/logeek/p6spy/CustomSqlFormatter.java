@@ -9,13 +9,13 @@ public class CustomSqlFormatter implements MessageFormattingStrategy {
 	public String formatMessage(int connectionId, String now, long elapsed, String category, String prepared, String sql) {
 		return new StringBuilder("elapsed: ")
 				.append(elapsed)
-				.append(" ms; prepared: [")
+				.append(" ms;\nprepared:\n")
 				.append(P6Util.singleLine(prepared))
-				.append("]; sql: [")
+				.append("\nsql:\n")
 				.append(P6Util.singleLine(sql))
-				.append("]; category: [")
+				.append("\ncategory: ")
 				.append(category)
-				.append("]")
+				.append("\n")
 				.toString();
 	}
 }
