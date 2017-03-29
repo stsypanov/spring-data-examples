@@ -20,11 +20,11 @@ public class EntityWithCompositeKeyRepositoryTest extends TestBase {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		CompositeKey key1 = new CompositeKey(1, 1);
-		CompositeKey key2 = new CompositeKey(2, 2);
-		CompositeKey key3 = new CompositeKey(3, 3);
-		CompositeKey key4 = new CompositeKey(4, 4);
-		CompositeKey key5 = new CompositeKey(5, 1);
+		CompositeKey key1 = new CompositeKey(1L, 1L);
+		CompositeKey key2 = new CompositeKey(2L, 2L);
+		CompositeKey key3 = new CompositeKey(3L, 3L);
+		CompositeKey key4 = new CompositeKey(4L, 4L);
+		CompositeKey key5 = new CompositeKey(5L, 5L);
 
 		compositeKeys = Arrays.asList(key1, key2, key3, key4, key5);
 
