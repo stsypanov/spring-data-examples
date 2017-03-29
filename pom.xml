@@ -137,7 +137,6 @@
 	</dependencies>
 
 	<build>
-		<sourceDirectory>src/main/java, src/benchmark/java</sourceDirectory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
