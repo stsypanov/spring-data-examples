@@ -5,10 +5,11 @@ import com.luxoft.logeek.entity.Parent;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static java.util.Arrays.asList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class ChildRepositoryTest extends TestBase {
 
@@ -26,7 +27,7 @@ public class ChildRepositoryTest extends TestBase {
 		Child child5 = new Child(mama);
 		Child child6 = new Child(mama);
 
-		childRepository.save(Arrays.asList(child1, child2, child3, child4, child5, child6));
+		childRepository.save(asList(child1, child2, child3, child4, child5, child6));
 		childRepository.flush();
 	}
 
@@ -62,6 +63,7 @@ public class ChildRepositoryTest extends TestBase {
 	public void findByParentIdWithoutExplicitJoin() {
 		childRepository.findByParentIdWithoutExplicitJoin(1L);
 	}
+
 	@Test
 	public void testFindWithTemplate() throws Exception {
 		List<Child> children = childRepository.findUsingTemplate();
