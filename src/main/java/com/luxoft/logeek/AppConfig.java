@@ -70,6 +70,8 @@ public class AppConfig {
 		Properties properties = new Properties();
 		properties.setProperty("hibernate.show_sql", "true");
 		properties.setProperty("hibernate.format_sql", "true");
+//		properties.setProperty("hibernate.show_sql", "false");
+//		properties.setProperty("hibernate.format_sql", "false");
 		return properties;
 	}
 }
