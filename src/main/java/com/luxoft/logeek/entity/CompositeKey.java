@@ -1,9 +1,12 @@
 package com.luxoft.logeek.entity;
 
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
+@EqualsAndHashCode
 public class CompositeKey implements Serializable {
 	private Long key1;
 	private Long key2;
