@@ -1,9 +1,11 @@
 package com.luxoft.logeek.entity;
 
+import com.luxoft.logeek.entity.listener.PupilListener;
 import lombok.Getter;
 
 import javax.persistence.*;
 
+@EntityListeners({PupilListener.class})
 @Entity
 @Getter
 public class Pupil {
