@@ -2,12 +2,15 @@ package com.luxoft.logeek.entity;
 
 import com.luxoft.logeek.entity.listener.PupilListener;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @EntityListeners({PupilListener.class})
 @Entity
 @Getter
+@Setter
 public class Pupil {
 
 	@Id
@@ -20,6 +23,15 @@ public class Pupil {
 	
 	@Column
 	private String name;
+
+	@Column
+	private String lastName;
+
+	@Column
+	private String schoolName;
+	
+	@Column
+	private LocalDate enrolled;
 
 	protected Pupil() {
 	}
