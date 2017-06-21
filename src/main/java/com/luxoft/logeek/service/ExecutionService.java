@@ -1,7 +1,16 @@
 package com.luxoft.logeek.service;
 
-public interface ExecutionService {
-	void execute();
+import com.luxoft.logeek.entity.EntityWithManyStringFields;
+import com.luxoft.logeek.entity.Pupil;
 
-	void setUp();
+import java.util.List;
+
+public interface ExecutionService {
+
+    void setUp(int size);
+
+    List<EntityWithManyStringFields> execute();
+
+    void tearDown();
+
 }
