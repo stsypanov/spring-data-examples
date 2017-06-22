@@ -29,7 +29,7 @@
 		<profile>
 			<id>instrumentation</id>
 			<properties>
-				<use-instrumentation>true</use-instrumentation>
+				<use.instrumentation>true</use.instrumentation>
 			</properties>
 		</profile>
 	</profiles>
