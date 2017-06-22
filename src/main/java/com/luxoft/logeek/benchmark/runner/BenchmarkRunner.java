@@ -15,6 +15,7 @@ public class BenchmarkRunner {
 				.include(ByteCodeInstrumentationBenchmarkForSingleEntity.class.getSimpleName())
 				.warmupIterations(10)
 				.measurementIterations(10)
+				.forks(1)//0 makes debugging possible
 				.build();
 
 		new Runner(opt).run();
