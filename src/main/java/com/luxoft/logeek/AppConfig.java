@@ -1,6 +1,7 @@
 package com.luxoft.logeek;
 
 import com.p6spy.engine.spy.P6DataSource;
+import org.hibernate.cfg.AvailableSettings;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -68,10 +69,8 @@ public class AppConfig {
 	 */
 	private Properties additionalProperties() {
 		Properties properties = new Properties();
-		properties.setProperty("hibernate.show_sql", "true");
-		properties.setProperty("hibernate.format_sql", "true");
-//		properties.setProperty("hibernate.show_sql", "false");
-//		properties.setProperty("hibernate.format_sql", "false");
+		properties.setProperty(AvailableSettings.SHOW_SQL, "false");
+		properties.setProperty(AvailableSettings.FORMAT_SQL, "false");
 		return properties;
 	}
 }
