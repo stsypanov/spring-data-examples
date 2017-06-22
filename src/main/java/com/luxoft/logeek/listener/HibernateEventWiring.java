@@ -1,5 +1,6 @@
 package com.luxoft.logeek.listener;
 
+import lombok.RequiredArgsConstructor;
 import org.hibernate.event.service.spi.EventListenerRegistry;
 import org.hibernate.event.spi.EventType;
 import org.hibernate.internal.SessionFactoryImpl;
@@ -10,15 +11,10 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManagerFactory;
 
 @Component
+@RequiredArgsConstructor
 public class HibernateEventWiring {
 	private final EntityManagerFactory entityManagerFactory;
 	private final DeleteListener deleteListener;
-
-	@Autowired
-	public HibernateEventWiring(EntityManagerFactory entityManagerFactory, DeleteListener deleteListener) {
-		this.entityManagerFactory = entityManagerFactory;
-		this.deleteListener = deleteListener;
-	}
 
 	@PostConstruct
 	public void registerListeners() {
