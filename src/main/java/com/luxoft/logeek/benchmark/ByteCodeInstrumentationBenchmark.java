@@ -10,10 +10,10 @@ import java.util.concurrent.TimeUnit;
 @BenchmarkMode(value = {Mode.AverageTime})
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)
-public class BiteCodeInstrumentationBenchmark extends BenchmarkBase {
+public class ByteCodeInstrumentationBenchmark extends BenchmarkBase {
 	private ExecutionService service;
 
-	@Param({"10","100", "1000", "10000"})
+	@Param({"10", "100", "1000", "10000"})
 	private int size;
 
 	@Setup
