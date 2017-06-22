@@ -9,10 +9,11 @@ import java.util.concurrent.TimeUnit;
 //@BenchmarkMode(value = {Mode.Throughput, Mode.AverageTime, Mode.SingleShotTime})
 //@BenchmarkMode(value = {Mode.Throughput, Mode.AverageTime})
 @BenchmarkMode(value = {Mode.AverageTime})
-@OutputTimeUnit(TimeUnit.MILLISECONDS)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 @State(Scope.Benchmark)
-public class BiteCodeInstrumentationBenchmark1 extends BenchmarkBase {
+public class ByteCodeInstrumentationBenchmarkForSingleEntity extends BenchmarkBase {
     private EntityWithManyStringFieldsRepository repository;
+    private EntityWithManyStringFields entity;
 
     @Setup
     public void baseInit() {
@@ -35,6 +36,12 @@ public class BiteCodeInstrumentationBenchmark1 extends BenchmarkBase {
         repository.save(entity);
     }
 
+    @Setup(Level.Iteration)
+    public void initInvocation() {
+        entity = repository.findAll().iterator().next();
+        entity.setField1(random.nextGaussian() + "");
+    }
+
     @TearDown(Level.Iteration)
     public void teatDown() {
         repository.deleteAll();
@@ -42,17 +49,6 @@ public class BiteCodeInstrumentationBenchmark1 extends BenchmarkBase {
 
     @Benchmark
     public EntityWithManyStringFields measureDirtyChecking() {
-        EntityWithManyStringFields entity = repository.findAll().iterator().next();
-
-        entity.setField1(random.nextGaussian() + "");
-//        entity.setField2(random.nextGaussian() + "");
-//        entity.setField3(random.nextGaussian() + "");
-//        entity.setField4(random.nextGaussian() + "");
-//        entity.setField5(random.nextGaussian() + "");
-//        entity.setField6(random.nextGaussian() + "");
-//        entity.setField7(random.nextGaussian() + "");
-//        entity.setField8(random.nextGaussian() + "");
-
         return repository.saveAndFlush(entity);
     }
 }

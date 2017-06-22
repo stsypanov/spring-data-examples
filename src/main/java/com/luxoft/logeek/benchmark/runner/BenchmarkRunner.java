@@ -1,7 +1,7 @@
 package com.luxoft.logeek.benchmark.runner;
 
 import com.luxoft.logeek.benchmark.BiteCodeInstrumentationBenchmark;
-import com.luxoft.logeek.benchmark.BiteCodeInstrumentationBenchmark1;
+import com.luxoft.logeek.benchmark.ByteCodeInstrumentationBenchmarkForSingleEntity;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -14,7 +14,7 @@ public class BenchmarkRunner {
 //				.include(DistinctVsSetBenchmark.class.getSimpleName())
 //				.include(ProjectionVsDataBenchmark.class.getSimpleName())
 				.include(BiteCodeInstrumentationBenchmark.class.getSimpleName())
-//				.include(BiteCodeInstrumentationBenchmark.class.getSimpleName())
+//				.include(ByteCodeInstrumentationBenchmarkForSingleEntity.class.getSimpleName())
 				.warmupIterations(10)
 //				.verbosity(VerboseMode.EXTRA)
 				.measurementIterations(10)
