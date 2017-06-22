@@ -16,6 +16,24 @@
 		<version>2.0.8.RELEASE</version>
 	</parent>
 
+	<profiles>
+		<profile>
+			<id>no-instrumentation</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<use.instrumentation>false</use.instrumentation>
+			</properties>
+		</profile>
+		<profile>
+			<id>instrumentation</id>
+			<properties>
+				<use-instrumentation>true</use-instrumentation>
+			</properties>
+		</profile>
+	</profiles>
+
 	<properties>
 		<spring.version>4.3.8.RELEASE</spring.version>
 		<hibernate.version>5.2.10.Final</hibernate.version>
@@ -153,7 +171,7 @@
 				<executions>
 					<execution>
 						<configuration>
-							<enableDirtyTracking>false</enableDirtyTracking>
+							<enableDirtyTracking>${use.instrumentation}</enableDirtyTracking>
 						</configuration>
 						<goals>
 							<goal>enhance</goal>
