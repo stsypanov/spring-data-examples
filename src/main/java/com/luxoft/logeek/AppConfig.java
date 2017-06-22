@@ -62,8 +62,8 @@ public class AppConfig {
 	}
 
 	/**
-	 * Set both hibernate.show_sql and hibernate.format_sql
-	 * when running benchmarks
+	 * Set false for both hibernate.show_sql and hibernate.format_sql
+	 * when running benchmarks to prevent JMH log pollution
 	 *
 	 * @return hibernate props
 	 */
