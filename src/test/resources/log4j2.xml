@@ -22,7 +22,7 @@
 			<AppenderRef ref="ASYNC_CONSOLE"/>
 		</Logger>
 
-		<Logger name="org.springframework.transaction.interceptor.TransactionInterceptor" level="trace" additivity="false">
+		<Logger name="org.springframework.transaction.interceptor.TransactionInterceptor" level="warn" additivity="false">
 			<AppenderRef ref="ASYNC_CONSOLE"/>
 		</Logger>
 
