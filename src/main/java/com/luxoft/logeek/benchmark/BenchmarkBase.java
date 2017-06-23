@@ -11,6 +11,6 @@ public abstract class BenchmarkBase {
 
 	protected void initContext() {
 		context = new AnnotationConfigApplicationContext(AppConfig.class);
-		random = new Random(System.nanoTime());
+		random = new Random();
 	}
 }
