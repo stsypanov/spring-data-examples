@@ -20,9 +20,9 @@ public class ExecutionServiceImpl implements ExecutionService {
     private final Random random = new Random();
 
     @Override
-    public void setUp(int size) {
+    public void setUp(int entityCount) {
         List<EntityWithManyStringFields> items = random
-                .ints(size)
+                .ints(entityCount)
                 .boxed()
                 .map(rnd -> {
                     EntityWithManyStringFields entity = new EntityWithManyStringFields();
@@ -42,21 +42,16 @@ public class ExecutionServiceImpl implements ExecutionService {
     }
 
     @Override
-    public List<EntityWithManyStringFields> execute() {
+    public List<EntityWithManyStringFields> executeFieldModification() {
         List<EntityWithManyStringFields> entities = repository.findAll();
-        entities = entities.stream()
-                .peek(entity -> {
-                    entity.setField1(random.nextGaussian() + "");
-//					entity.setField2(random.nextGaussian() + "");
-//					entity.setField3(random.nextGaussian() + "");
-//					entity.setField4(random.nextGaussian() + "");
-//					entity.setField5(random.nextGaussian() + "");
-//					entity.setField6(random.nextGaussian() + "");
-//					entity.setField7(random.nextGaussian() + "");
-//					entity.setField8(random.nextGaussian() + "");
-                })
-                .collect(toList());
+        entities.forEach(entity -> entity.setField1(random.nextGaussian() + ""));
 
+        return repository.save(entities);
+    }
+
+    @Override
+    public List<EntityWithManyStringFields> executeWithoutFieldModification() {
+        List<EntityWithManyStringFields> entities = repository.findAll();
         return repository.save(entities);
     }
 

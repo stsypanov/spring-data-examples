@@ -14,7 +14,7 @@ public class ByteCodeInstrumentationBenchmark extends BenchmarkBase {
 	private ExecutionService service;
 
 	@Param({"10", "100", "1000", "10000"})
-	private int size;
+	private int entityCount;
 
 	@Setup
 	public void initBase() {
@@ -22,18 +22,23 @@ public class ByteCodeInstrumentationBenchmark extends BenchmarkBase {
 		service = context.getBean(ExecutionService.class);
 	}
 
-	@Setup(Level.Iteration)
+	@Setup(Level.Invocation)
 	public void init() {
-		service.setUp(size);
+		service.setUp(entityCount);
 	}
 
-	@TearDown(Level.Iteration)
+	@TearDown(Level.Invocation)
 	public void tearDown() {
 		service.tearDown();
 	}
 
 	@Benchmark
-	public List<EntityWithManyStringFields> measureDirtyChecking() {
-		return service.execute();
+	public List<EntityWithManyStringFields> measureDirtyCheckingForModifiedFields() {
+		return service.executeFieldModification();
+	}
+
+	@Benchmark
+	public List<EntityWithManyStringFields> measureDirtyCheckingForNonModifiedFields() {
+		return service.executeWithoutFieldModification();
 	}
 }

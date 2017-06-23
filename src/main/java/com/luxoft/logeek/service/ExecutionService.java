@@ -9,7 +9,9 @@ public interface ExecutionService {
 
     void setUp(int size);
 
-    List<EntityWithManyStringFields> execute();
+    List<EntityWithManyStringFields> executeFieldModification();
+
+    List<EntityWithManyStringFields> executeWithoutFieldModification();
 
     void tearDown();
 
