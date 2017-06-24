@@ -19,7 +19,7 @@ public interface ChildRepository extends JpaRepository<Child, Long>, ChildReposi
 
 	@Query("select c from Child c " +
 			"where c.parent.name = :name")
-	List<Child> findByParentNameWithoutExplicitJoin(@Param("name") String name);
+	List<Child> findByParentNameNoExplicitJoin(@Param("name") String name);
 
 	List<Child> findByParentId(Long id);
 

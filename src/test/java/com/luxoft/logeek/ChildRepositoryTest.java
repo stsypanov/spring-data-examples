@@ -45,7 +45,7 @@ public class ChildRepositoryTest extends TestBase {
 
 	@Test
 	public void testQueryWithoutExplicitJoin() throws Exception {
-		List<Child> children = childRepository.findByParentNameWithoutExplicitJoin("мама");
+		List<Child> children = childRepository.findByParentNameNoExplicitJoin("мама");
 		assertEquals(2, children.size());
 	}
 
