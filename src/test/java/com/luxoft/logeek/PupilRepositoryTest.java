@@ -1,6 +1,8 @@
 package com.luxoft.logeek;
 
 import com.luxoft.logeek.entity.Pupil;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -11,7 +13,19 @@ import static org.junit.Assert.assertEquals;
 
 @SuppressWarnings("unused")
 public class PupilRepositoryTest extends TestBase {
-    
+
+    @Override
+    @Before
+    public void setUp() throws Exception {
+        super.setUp();
+    }
+
+    @Override
+    @After
+    public void tearDown() throws Exception {
+        super.tearDown();
+    }
+
     /**
      * What instance of Set will be returned in the next two methods
      */
