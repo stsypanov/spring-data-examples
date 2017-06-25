@@ -14,8 +14,7 @@ import java.time.LocalDate;
 public class Pupil {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQUENCE")
-	@SequenceGenerator(name = "SEQUENCE", sequenceName = "PUPIL_SEQ", allocationSize = 5000)
+	@GeneratedValue
 	private Long id;
 
 	@Column

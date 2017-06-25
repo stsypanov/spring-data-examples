@@ -6,8 +6,7 @@ import javax.persistence.*;
 public class Parent {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQUENCE")
-	@SequenceGenerator(name = "SEQUENCE", sequenceName = "PARENT_SEQ", allocationSize = 1000)
+	@GeneratedValue
 	private Long id;
 
 	@Column

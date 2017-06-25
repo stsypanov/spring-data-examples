@@ -7,8 +7,7 @@ import javax.persistence.*;
 public class Child {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQUENCE")
-	@SequenceGenerator(name = "SEQUENCE", sequenceName = "CHILD_SEQ", allocationSize = 1000)
+	@GeneratedValue
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
