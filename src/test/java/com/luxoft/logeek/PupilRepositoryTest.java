@@ -40,4 +40,10 @@ public class PupilRepositoryTest extends TestBase {
         Set<Pupil> pupilsOlderThan = pupilRepository.findPupilsOlderThanOrderedByAge(3);
         assertEquals(LinkedHashSet.class.getName(), pupilsOlderThan.getClass().getName());
     }
+
+    @Test
+    public void findSorted() throws Exception {
+        Set<Pupil> pupilsOlderThan = pupilRepository.findPupilsOlderThanSortedByAge(3);
+        assertEquals(LinkedHashSet.class.getName(), pupilsOlderThan.getClass().getName());
+    }
 }
