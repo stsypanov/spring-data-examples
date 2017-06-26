@@ -6,12 +6,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
+import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -26,11 +26,29 @@ import java.util.Properties;
 @ComponentScan(basePackages = {"com.luxoft.logeek"})
 public class AppConfig {
 
+//	@Bean
+//	public DataSource actualDataSource() {
+//		return new EmbeddedDatabaseBuilder()
+//				.setType(EmbeddedDatabaseType.H2)
+//				.build();
+//	}
+
+//	@Bean
+//	public DataSource actualDataSource() {
+//		DriverManagerDataSource ds = new DriverManagerDataSource();
+//				ds.setDriverClassName("org.apache.derby.jdbc.ClientDriver40");
+//				ds.setUrl("jdbc:derby://localhost:1527/testdb");
+//		return ds;
+//	}
+
 	@Bean
 	public DataSource actualDataSource() {
-		return new EmbeddedDatabaseBuilder()
-				.setType(EmbeddedDatabaseType.H2)
-				.build();
+		DriverManagerDataSource ds = new DriverManagerDataSource();
+		ds.setDriverClassName("org.postgresql.Driver");
+		ds.setUrl("jdbc:postgresql://localhost:5432/postgres");
+		ds.setUsername("postgres");
+		ds.setPassword("postgres");
+		return ds;
 	}
 
 	@Bean
@@ -41,7 +59,8 @@ public class AppConfig {
 	@Bean
 	public JpaVendorAdapter jpaVendorAdapter() {
 		HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-		adapter.setDatabase(Database.H2);
+//		adapter.setDatabase(Database.H2);
+		adapter.setDatabase(Database.POSTGRESQL);
 		adapter.setGenerateDdl(true);
 		return adapter;
 	}
@@ -58,6 +77,7 @@ public class AppConfig {
 		em.setJpaVendorAdapter(jpaVendorAdapter());
 		em.setPackagesToScan("com.luxoft.logeek.entity");
 		em.setJpaProperties(additionalProperties());
+		em.setJpaDialect(new HibernateJpaDialect());
 		return em;
 	}
 
@@ -69,7 +89,7 @@ public class AppConfig {
 	 */
 	private Properties additionalProperties() {
 		Properties properties = new Properties();
-		properties.setProperty(AvailableSettings.SHOW_SQL, "false");
+		properties.setProperty(AvailableSettings.SHOW_SQL, "true");
 		properties.setProperty(AvailableSettings.FORMAT_SQL, "false");
 		return properties;
 	}
