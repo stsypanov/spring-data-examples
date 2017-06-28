@@ -1,6 +1,5 @@
 package com.luxoft.logeek.benchmark.runner;
 
-import com.luxoft.logeek.benchmark.ByteCodeInstrumentationBenchmark;
 import com.luxoft.logeek.benchmark.ByteCodeInstrumentationBenchmarkForSingleEntity;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
@@ -13,6 +12,8 @@ public class BenchmarkRunner {
 		Options opt = new OptionsBuilder()
 //				.include(ByteCodeInstrumentationBenchmark.class.getSimpleName())
 				.include(ByteCodeInstrumentationBenchmarkForSingleEntity.class.getSimpleName())
+//				.include(DistinctVsSetBenchmark.class.getSimpleName())
+//				.include(ProjectionVsDataBenchmark.class.getSimpleName())
 				.warmupIterations(10)
 				.measurementIterations(10)
 				.forks(1)//0 makes debugging possible
