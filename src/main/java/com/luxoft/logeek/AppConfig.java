@@ -91,6 +91,7 @@ public class AppConfig {
 		Properties properties = new Properties();
 		properties.setProperty(AvailableSettings.SHOW_SQL, "true");
 		properties.setProperty(AvailableSettings.FORMAT_SQL, "false");
+//		properties.setProperty(AvailableSettings.DIALECT, "false");
 		return properties;
 	}
 }
