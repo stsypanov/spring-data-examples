@@ -1,0 +1,10 @@
+#* @vtlvariable name="doUnion" type="java.lang.Boolean" *#
+
+select * from 
+(
+    select t1.id from table1 t1
+    #if($doUnion)
+      union all 
+      #parse("templates/IncludedTemplate.sql.vm")
+    #end
+);

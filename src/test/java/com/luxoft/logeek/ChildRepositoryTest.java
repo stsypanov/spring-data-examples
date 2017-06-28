@@ -66,7 +66,7 @@ public class ChildRepositoryTest extends TestBase {
 
 	@Test
 	public void testFindWithTemplate() throws Exception {
-		List<Child> children = childRepository.findUsingTemplate();
+		List<Child> children = childRepository.findUsingTemplate(false, false, false);
 		assertFalse(children.isEmpty());
 	}
 }

@@ -1,0 +1,1 @@
+select t2.id from table2 t2; 

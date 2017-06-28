@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ChildRepositoryCustom {
 	
-	List<Child> findUsingTemplate();
+	List<Child> findUsingTemplate(boolean fetchParent, boolean fetchToys, boolean orderByAge);
 }
