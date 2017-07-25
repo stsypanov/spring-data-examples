@@ -1,6 +1,7 @@
 package com.luxoft.logeek.entity;
 
 
+import lombok.Getter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -8,8 +9,15 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @Entity
+@NamedEntityGraphs(value = {
+		@NamedEntityGraph(name = Child.PARENT, attributeNodes = {
+				@NamedAttributeNode("parent")
+		})
+})
 public class Child {
+	public static final String PARENT = "Child[parent]";
 
 	@Id
 	@GeneratedValue

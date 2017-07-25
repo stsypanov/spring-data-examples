@@ -1,12 +1,14 @@
 package com.luxoft.logeek;
 
+import com.luxoft.logeek.repository.BaseJpaRepositoryImpl;
 import com.p6spy.engine.spy.P6DataSource;
 import org.hibernate.cfg.AvailableSettings;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -22,33 +24,15 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories("com.luxoft.logeek.repository")
+@EnableJpaRepositories(value = "com.luxoft.logeek.repository", repositoryBaseClass = BaseJpaRepositoryImpl.class)
 @ComponentScan(basePackages = {"com.luxoft.logeek"})
 public class AppConfig {
 
-//	@Bean
-//	public DataSource actualDataSource() {
-//		return new EmbeddedDatabaseBuilder()
-//				.setType(EmbeddedDatabaseType.H2)
-//				.build();
-//	}
-
-//	@Bean
-//	public DataSource actualDataSource() {
-//		DriverManagerDataSource ds = new DriverManagerDataSource();
-//				ds.setDriverClassName("org.apache.derby.jdbc.ClientDriver40");
-//				ds.setUrl("jdbc:derby://localhost:1527/testdb");
-//		return ds;
-//	}
-
 	@Bean
 	public DataSource actualDataSource() {
-		DriverManagerDataSource ds = new DriverManagerDataSource();
-		ds.setDriverClassName("org.postgresql.Driver");
-		ds.setUrl("jdbc:postgresql://localhost:5432/postgres");
-		ds.setUsername("postgres");
-		ds.setPassword("postgres");
-		return ds;
+		return new EmbeddedDatabaseBuilder()
+				.setType(EmbeddedDatabaseType.H2)
+				.build();
 	}
 
 	@Bean
@@ -59,8 +43,7 @@ public class AppConfig {
 	@Bean
 	public JpaVendorAdapter jpaVendorAdapter() {
 		HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-//		adapter.setDatabase(Database.H2);
-		adapter.setDatabase(Database.POSTGRESQL);
+		adapter.setDatabase(Database.H2);
 		adapter.setGenerateDdl(true);
 		return adapter;
 	}
