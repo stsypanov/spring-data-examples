@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-@SuppressWarnings({"SameParameterValue"})
+@SuppressWarnings({"SameParameterValue", "unused"})
 public interface ChildRepository extends JpaRepository<Child, Long>, ChildRepositoryCustom {
 
 	List<Child> findByParentName(String name);
@@ -31,4 +31,12 @@ public interface ChildRepository extends JpaRepository<Child, Long>, ChildReposi
 	@Query("select c from Child c " +
 			"where c.parent.id = :id")
 	List<Child> findByParentIdWithoutExplicitJoin(@Param("id") Long id);
+
+
+	@Query("select child from Child child " +
+			" join child.parent parent " +
+			"where parent.id in :ids")
+	List<Child> findAllByParentIds(@Param("ids") Iterable<Long> ids);
+
+
 }

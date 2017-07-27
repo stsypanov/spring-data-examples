@@ -6,11 +6,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Сергей on 02.04.2017.
  */
+@SuppressWarnings("unused")
 @Component
 @Transactional
 public class ChildServiceImpl implements ChildService {
@@ -40,5 +43,11 @@ public class ChildServiceImpl implements ChildService {
 	@Override
 	public List findAllWithEm() {
 		return em.createQuery("select c from Child c").getResultList();
+	}
+
+
+	public List<Child> findAllByParentIds(List<Long> ids) {
+		Set<Long> parentIds = new HashSet<>(ids);
+		return childRepository.findAllByParentIds(parentIds);
 	}
 }
