@@ -1,6 +1,7 @@
 package com.luxoft.logeek.entity.listener;
 
-import javax.persistence.PostRemove;
+import com.luxoft.logeek.entity.Pupil;
+
 import javax.persistence.PreRemove;
 
 /**
@@ -8,16 +9,15 @@ import javax.persistence.PreRemove;
  */
 public class PupilListener {
 
+	public static final String MESSAGE =
+			"It's prohibited to delete pupils older than 9.";
 
 	@PreRemove
-	void preRemove(Object object) {
-		throw new RuntimeException();
+	void preRemove(Pupil pupil) {
+		int age = pupil.getAge();
+		if (age > 9) {
+			throw new RuntimeException(MESSAGE);
+		}
 	}
-
-	@PostRemove
-	void postRemove(Object object) {
-		throw new RuntimeException();
-	}
-
 
 }
