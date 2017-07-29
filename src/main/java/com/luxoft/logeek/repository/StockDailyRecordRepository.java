@@ -7,11 +7,10 @@ import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 
+@SuppressWarnings("SpringDataRepositoryMethodReturnTypeInspection")
 public interface StockDailyRecordRepository extends JpaRepository<StockDailyRecord, Long> {
 
-    @SuppressWarnings("SpringDataRepositoryMethodReturnTypeInspection")
-
-    @Query("select nvl(record.fixedRate, record.averageRecordRate) " +
+    @Query("select coalesce(record.fixedRate, record.averageRecordRate) " +
             " from StockDailyRecord record " +
             "where record.currency = :currency")
     BigDecimal findRateByCurrency(@Param("currency") String currency);

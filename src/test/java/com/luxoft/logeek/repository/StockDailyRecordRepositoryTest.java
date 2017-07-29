@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.*;
 
-@ActiveProfiles("oracle")
+@ActiveProfiles(value = "oracle", inheritProfiles = false)
 public class StockDailyRecordRepositoryTest extends TestBase{
     @Autowired private StockDailyRecordRepository stockDailyRecordRepository;
 

@@ -9,6 +9,7 @@ import com.luxoft.logeek.repository.PupilRepository;
 import org.junit.After;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Random;
 
 @Transactional
+@ActiveProfiles(profiles = "h2")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = AppConfig.class)
 public abstract class TestBase {
@@ -30,7 +32,7 @@ public abstract class TestBase {
     @Autowired
     protected ChildRepository childRepository;
     @Autowired
-    private ParentRepository parentRepository;
+    protected ParentRepository parentRepository;
 
     protected Random random;
 

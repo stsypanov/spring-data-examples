@@ -1,8 +1,11 @@
 package com.luxoft.logeek.entity;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
 public class Parent {
 
 	@Id
