@@ -11,10 +11,14 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Profile("deleteListenerOn")
-public class DeleteListener extends DefaultDeleteEventListener {
+public class DeleteListener
+		extends DefaultDeleteEventListener {
 
 	@Override
-	public void onDelete(DeleteEvent event) throws HibernateException {
+	public void onDelete(DeleteEvent event) {
+		String entityName = event.getEntityName();
+		Object object = event.getObject();
+
 		//todo implement some logic here
 		super.onDelete(event);
 	}
