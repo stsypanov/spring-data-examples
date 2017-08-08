@@ -1,12 +1,13 @@
 package com.luxoft.logeek.config;
 
-import org.hibernate.dialect.Oracle12cDialect;
+import org.hibernate.dialect.H2Dialect;
 import org.hibernate.dialect.function.StandardSQLFunction;
 
-public class CustomDialect extends Oracle12cDialect {
+public class CustomH2Dialect extends H2Dialect {
 
-    public CustomDialect() {
+    public CustomH2Dialect() {
         super();
         registerFunction("coalesce", new StandardSQLFunction("coalesce"));
+        registerFunction("total_count", new TotalCountFunc());
     }
 }

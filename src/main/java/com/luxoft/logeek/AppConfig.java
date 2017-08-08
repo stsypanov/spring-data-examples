@@ -1,12 +1,13 @@
 package com.luxoft.logeek;
 
+import com.luxoft.logeek.config.CustomOracleDialect;
+import com.luxoft.logeek.config.CustomH2Dialect;
+import com.luxoft.logeek.config.CustomPostgresDialect;
 import com.luxoft.logeek.config.PersistenceConfig;
 import com.p6spy.engine.spy.P6DataSource;
 import org.hibernate.cfg.AvailableSettings;
-import org.hibernate.dialect.Oracle10gDialect;
 import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -60,13 +61,32 @@ public class AppConfig {
 	 * @return hibernate props
 	 */
 	@Bean
-	@Profile("!oracle")
+	@Profile("h2")
 	public Supplier<Properties> additionalProperties() {
 		return () -> {
 			Properties properties = new Properties();
 			properties.setProperty(AvailableSettings.SHOW_SQL, "true");
 			properties.setProperty(AvailableSettings.FORMAT_SQL, "false");
+			properties.setProperty(AvailableSettings.DIALECT, CustomH2Dialect.class.getName());
 //		properties.setProperty(AvailableSettings.DIALECT, "false");
+			return properties;
+		};
+	}
+
+	/**
+	 * Set false for both hibernate.show_sql and hibernate.format_sql
+	 * when running benchmarks to prevent JMH log pollution
+	 *
+	 * @return hibernate props
+	 */
+	@Bean
+	@Profile("postgres")
+	public Supplier<Properties> postgresProperties() {
+		return () -> {
+			Properties properties = new Properties();
+			properties.setProperty(AvailableSettings.SHOW_SQL, "true");
+			properties.setProperty(AvailableSettings.FORMAT_SQL, "false");
+			properties.setProperty(AvailableSettings.DIALECT, CustomPostgresDialect.class.getName());
 			return properties;
 		};
 	}
@@ -78,7 +98,7 @@ public class AppConfig {
 			Properties properties = new Properties();
 			properties.setProperty(AvailableSettings.SHOW_SQL, "true");
 			properties.setProperty(AvailableSettings.FORMAT_SQL, "false");
-			properties.setProperty(AvailableSettings.DIALECT, Oracle10gDialect.class.getName());
+			properties.setProperty(AvailableSettings.DIALECT, CustomOracleDialect.class.getName());
 			properties.setProperty(AvailableSettings.HBM2DDL_AUTO, "create");
 			return properties;
 		};
