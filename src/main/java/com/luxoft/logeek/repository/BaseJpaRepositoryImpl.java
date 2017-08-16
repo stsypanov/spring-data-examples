@@ -1,5 +1,7 @@
 package com.luxoft.logeek.repository;
 
+import com.google.common.collect.Lists;
+import com.luxoft.logeek.misc.OracleConstants;
 import org.hibernate.jpa.QueryHints;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
@@ -83,6 +85,31 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 		TypedQuery<T> query = getQuery(specification, (Sort) null).setHint(QueryHints.HINT_READONLY, true);
 
 		return query.setParameter(specification.parameter, ids).getResultList();
+	}
+
+	@Override
+	public List<T> findAll(Iterable<ID> ids) {
+		if (ids instanceof Collection && ((Collection) ids).size() <= OracleConstants.MAX_IN_COUNT) {
+			return this.findAll(ids, false);
+		}
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<T> query = cb.createQuery(getDomainClass());
+
+		Root<T> from = query.from(getDomainClass());
+
+		Predicate predicate = cb.or(splitToPredicates(ids, from));
+		query = query.select(from).where(predicate);
+
+		return entityManager.createQuery(query).getResultList();
+	}
+
+	private Predicate[] splitToPredicates(Iterable<ID> ids, Root<T> root) {
+		List<List<ID>> chunks = Lists.partition(Lists.newArrayList(ids), OracleConstants.MAX_IN_COUNT);
+
+		return chunks.stream()
+				.map(chunk -> root.get(entityInformation.getIdAttribute()).in(chunk))
+				.toArray(Predicate[]::new);
 	}
 
 
