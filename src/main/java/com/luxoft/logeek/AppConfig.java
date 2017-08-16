@@ -1,7 +1,7 @@
 package com.luxoft.logeek;
 
-import com.luxoft.logeek.config.CustomOracleDialect;
 import com.luxoft.logeek.config.CustomH2Dialect;
+import com.luxoft.logeek.config.CustomOracleDialect;
 import com.luxoft.logeek.config.CustomPostgresDialect;
 import com.luxoft.logeek.config.PersistenceConfig;
 import com.luxoft.logeek.repository.BaseJpaRepositoryImpl;
@@ -9,11 +9,10 @@ import com.p6spy.engine.spy.P6DataSource;
 import org.hibernate.cfg.AvailableSettings;
 import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -30,31 +29,6 @@ import java.util.function.Supplier;
 @ComponentScan(basePackages = {"com.luxoft.logeek"})
 @Import(PersistenceConfig.class)
 public class AppConfig {
-
-//	@Bean
-//	public DataSource actualDataSource() {
-//		return new EmbeddedDatabaseBuilder()
-//				.setType(EmbeddedDatabaseType.H2)
-//				.build();
-//	}
-
-//	@Bean
-//	public DataSource actualDataSource() {
-//		DriverManagerDataSource ds = new DriverManagerDataSource();
-//				ds.setDriverClassName("org.apache.derby.jdbc.ClientDriver40");
-//				ds.setUrl("jdbc:derby://localhost:1527/testdb");
-//		return ds;
-//	}
-
-	@Bean
-	public DataSource actualDataSource() {
-		DriverManagerDataSource ds = new DriverManagerDataSource();
-		ds.setDriverClassName("org.postgresql.Driver");
-		ds.setUrl("jdbc:postgresql://localhost:5432/postgres");
-		ds.setUsername("postgres");
-		ds.setPassword("postgres");
-		return ds;
-	}
 
 	@Bean
 	public P6DataSource dataSource(DataSource actualDataSource) {
