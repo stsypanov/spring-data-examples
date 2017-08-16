@@ -11,7 +11,13 @@ import java.util.List;
 
 @Getter
 @Entity
+@NamedEntityGraphs(value = {
+		@NamedEntityGraph(name = Child.PARENT, attributeNodes = {
+				@NamedAttributeNode("parent")
+		})
+})
 public class Child implements IChild {
+	public static final String PARENT = "Child[parent]";
 
 	@Id
 	@GeneratedValue

@@ -3,18 +3,18 @@ package com.luxoft.logeek;
 import com.luxoft.logeek.entity.Child;
 import com.luxoft.logeek.entity.Parent;
 import org.junit.Before;
-import org.junit.Test;
-
-import java.util.List;
+import org.springframework.test.annotation.Commit;
 
 import static java.util.Arrays.asList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
+@Commit
 public class ChildRepositoryTest extends TestBase {
+
+	private Long childId;
 
 	@Override
 	@Before
+	@Commit
 	public void setUp() throws Exception {
 		Parent papa = new Parent("папа");
 		Parent mama = new Parent("мама");
@@ -28,10 +28,11 @@ public class ChildRepositoryTest extends TestBase {
 		Child child6 = new Child(mama);
 
 		childRepository.save(asList(child1, child2, child3, child4, child5, child6));
-		childRepository.flush();
+
+		childId = child1.getId();
 	}
 
-	@Test
+	/*@Test
 	public void testNamedQuery() throws Exception {
 		List<Child> children = childRepository.findByParentName("мама");
 		assertEquals(2, children.size());
@@ -68,5 +69,7 @@ public class ChildRepositoryTest extends TestBase {
 	public void testFindWithTemplate() throws Exception {
 		List<Child> children = childRepository.findUsingTemplate(false, false, false);
 		assertFalse(children.isEmpty());
-	}
+	}*/
+
+	
 }
