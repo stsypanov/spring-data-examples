@@ -64,6 +64,14 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 	}
 
 	@Override
+	public T findOne(ID id, boolean readOnly) {
+		Map<String, Object> hints = new HashMap<>();
+		hints.put(QueryHints.HINT_READONLY, true);
+
+		return entityManager.find(getDomainClass(), id, hints);
+	}
+
+	@Override
 	public List<T> findAll(Iterable<ID> ids, boolean readOnly) {
 
 		if (ids == null || !ids.iterator().hasNext()) {
@@ -75,7 +83,7 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 			List<T> results = new ArrayList<T>();
 
 			for (ID id : ids) {
-				results.add(findOne(id));
+				results.add(findOne(id, readOnly));
 			}
 
 			return results;
