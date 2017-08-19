@@ -21,7 +21,6 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 
 	private JpaEntityInformation<T, ?> entityInformation;
 	private EntityManager entityManager;
-	private CrudMethodMetadata metadata;
 
 	public BaseJpaRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
 		super(entityInformation, entityManager);
@@ -31,7 +30,6 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 
 	@Override
 	public void setRepositoryMethodMetadata(CrudMethodMetadata crudMethodMetadata) {
-		this.metadata = crudMethodMetadata;
 		super.setRepositoryMethodMetadata(crudMethodMetadata);
 	}
 
@@ -57,7 +55,7 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 	@Override
 	public T findOne(ID id, EntityGraph graph, boolean readOnly) {
 		Map<String, Object> hints = new HashMap<>();
-		hints.put(QueryHints.HINT_READONLY, true);
+		hints.put(QueryHints.HINT_READONLY, readOnly);
 		hints.put(QueryHints.HINT_LOADGRAPH, graph);
 
 		return entityManager.find(getDomainClass(), id, hints);
@@ -66,7 +64,7 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 	@Override
 	public T findOne(ID id, boolean readOnly) {
 		Map<String, Object> hints = new HashMap<>();
-		hints.put(QueryHints.HINT_READONLY, true);
+		hints.put(QueryHints.HINT_READONLY, readOnly);
 
 		return entityManager.find(getDomainClass(), id, hints);
 	}
