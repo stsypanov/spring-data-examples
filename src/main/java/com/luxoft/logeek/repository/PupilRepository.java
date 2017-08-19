@@ -1,7 +1,6 @@
 package com.luxoft.logeek.repository;
 
 import com.luxoft.logeek.entity.Pupil;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -10,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 
-public interface PupilRepository extends JpaRepository<Pupil, Long> {
+public interface PupilRepository extends BaseJpaRepository<Pupil, Long> {
 
 	@Query("select p from Pupil p where p.age >= :age")
 	Set<Pupil> findPupilsOlderThan(@Param("age") int age);

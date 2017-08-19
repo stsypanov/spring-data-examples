@@ -1,14 +1,13 @@
 package com.luxoft.logeek.repository;
 
 import com.luxoft.logeek.entity.StockDailyRecord;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 
 @SuppressWarnings("SpringDataRepositoryMethodReturnTypeInspection")
-public interface StockDailyRecordRepository extends JpaRepository<StockDailyRecord, Long> {
+public interface StockDailyRecordRepository extends BaseJpaRepository<StockDailyRecord, Long> {
 
     @Query("select coalesce(record.fixedRate, record.averageRecordRate) " +
             " from StockDailyRecord record " +
