@@ -1,5 +1,6 @@
 package com.luxoft.logeek;
 
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.luxoft.logeek.entity.Child;
 import com.luxoft.logeek.entity.Parent;
 import com.luxoft.logeek.entity.Pupil;
@@ -32,7 +33,8 @@ import java.util.Random;
 @ContextConfiguration(classes = AppConfig.class)
 @TestExecutionListeners(value = {
 		DependencyInjectionTestExecutionListener.class,
-		TransactionalTestExecutionListener.class
+		TransactionalTestExecutionListener.class,
+		DbUnitTestExecutionListener.class
 })
 public abstract class TestBase {
     @PersistenceContext

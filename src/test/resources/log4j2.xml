@@ -33,6 +33,10 @@
 		<Logger name="org.hibernate" level="warn" additivity="false">
 			<AppenderRef ref="ASYNC_CONSOLE"/>
 		</Logger>
+		
+		<Logger name="org.dbunit" level="warn" additivity="false">
+			<AppenderRef ref="ASYNC_CONSOLE"/>
+		</Logger>
 
 		<!--hibernate transactions-->
 		<Logger name="org.hibernate.engine.transaction" level="warn" additivity="false">
