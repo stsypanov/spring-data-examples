@@ -24,4 +24,6 @@ public interface BaseJpaRepository<T, ID extends Serializable> extends JpaReposi
 
 	@Override
 	List<T> findAll(Iterable<ID> ids);
+	
+	void clear();
 }

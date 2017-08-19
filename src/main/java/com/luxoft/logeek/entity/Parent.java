@@ -21,4 +21,8 @@ public class Parent {
 
 	protected Parent() {
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

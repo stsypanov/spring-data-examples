@@ -72,6 +72,16 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 	}
 
 	@Override
+	public List<T> findAll(Iterable<ID> ids) {
+		return findAll(ids, false);
+	}
+
+	@Override
+	public void clear() {
+		entityManager.clear();
+	}
+
+	@Override
 	public List<T> findAll(Iterable<ID> ids, boolean readOnly) {
 
 		if (ids == null || !ids.iterator().hasNext()) {
@@ -89,18 +99,19 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 			return results;
 		}
 
-		ByIdsSpecification<T> specification = new ByIdsSpecification<T>(entityInformation);
-		TypedQuery<T> query = getQuery(specification, (Sort) null).setHint(QueryHints.HINT_READONLY, true);
+		ArrayList<ID> idsCopy = Lists.newArrayList(ids);
+		
+		if (idsCopy.size() > OracleConstants.MAX_IN_COUNT) {
+			return findAllSafely(idsCopy, readOnly);
+		}
+			
+		ByIdsSpecification<T> specification = new ByIdsSpecification<>(entityInformation);
+		TypedQuery<T> query = getQuery(specification, (Sort) null).setHint(QueryHints.HINT_READONLY, readOnly);
 
 		return query.setParameter(specification.parameter, ids).getResultList();
 	}
-
-	@Override
-	public List<T> findAll(Iterable<ID> ids) {
-		if (ids instanceof Collection && ((Collection) ids).size() <= OracleConstants.MAX_IN_COUNT) {
-			return this.findAll(ids, false);
-		}
-
+	
+	private List<T> findAllSafely(ArrayList<ID> ids, boolean readOnly) {
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<T> query = cb.createQuery(getDomainClass());
 
@@ -108,12 +119,18 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 
 		Predicate predicate = cb.or(splitToPredicates(ids, from));
 		query = query.select(from).where(predicate);
-
-		return entityManager.createQuery(query).getResultList();
+		
+		if (readOnly) {
+			return entityManager.createQuery(query)
+					.setHint(QueryHints.HINT_READONLY, true)
+					.getResultList();
+		} else {
+			return entityManager.createQuery(query).getResultList();
+		}
 	}
 
-	private Predicate[] splitToPredicates(Iterable<ID> ids, Root<T> root) {
-		List<List<ID>> chunks = Lists.partition(Lists.newArrayList(ids), OracleConstants.MAX_IN_COUNT);
+	private Predicate[] splitToPredicates(ArrayList<ID> ids, Root<T> root) {
+		List<List<ID>> chunks = Lists.partition(ids, OracleConstants.MAX_IN_COUNT);
 
 		return chunks.stream()
 				.map(chunk -> root.get(entityInformation.getIdAttribute()).in(chunk))
