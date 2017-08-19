@@ -24,11 +24,9 @@ public class ChildServiceImplTest extends TestBase{
 		childService.saveChild(new Child(parent));
 	}
 
-	@Override
 	@After
 	public void tearDown() throws Exception {
 		List<Child> children = childRepository.findAll();
 		assertFalse(children.isEmpty());
-		super.tearDown();
 	}
 }

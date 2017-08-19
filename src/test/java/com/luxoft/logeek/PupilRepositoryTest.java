@@ -20,12 +20,6 @@ public class PupilRepositoryTest extends TestBase {
         super.setUp();
     }
 
-    @Override
-    @After
-    public void tearDown() throws Exception {
-        super.tearDown();
-    }
-
     /**
      * What instance of Set will be returned in the next two methods
      */

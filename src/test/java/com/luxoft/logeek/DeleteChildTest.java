@@ -30,7 +30,6 @@ public class DeleteChildTest extends TestBase {
         papaId = papa.getId();
     }
 
-    @Override
     @After
     public void tearDown() throws Exception {
         //do not call super.tearDown();

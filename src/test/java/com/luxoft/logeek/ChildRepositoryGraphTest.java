@@ -44,7 +44,6 @@ public class ChildRepositoryGraphTest extends TestBase {
 		assertFalse(initialized);
 	}
 
-	@Override
 	@After
 	public void tearDown() throws Exception {
 		childRepository.deleteAll();

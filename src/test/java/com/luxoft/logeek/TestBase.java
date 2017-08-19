@@ -6,9 +6,9 @@ import com.luxoft.logeek.entity.Pupil;
 import com.luxoft.logeek.repository.ChildRepository;
 import com.luxoft.logeek.repository.ParentRepository;
 import com.luxoft.logeek.repository.PupilRepository;
-import org.junit.After;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Random;
 
 @Transactional
+@DirtiesContext
 @ActiveProfiles(profiles = "h2")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = AppConfig.class)
@@ -78,13 +79,6 @@ public abstract class TestBase {
 
 	protected void initRandom() {
 		random = new Random(System.nanoTime());
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		pupilRepository.deleteAllInBatch();
-		childRepository.deleteAllInBatch();
-		parentRepository.deleteAllInBatch();
 	}
 
 	@BeforeTransaction
