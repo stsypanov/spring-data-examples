@@ -27,4 +27,10 @@ public interface PupilRepository extends BaseJpaRepository<Pupil, Long> {
 
 	@Query("select p.name from Pupil p")
 	Set<String> findAllNamesAsSet();
+
+	@Query("select distinct p from Pupil p")
+	List<String> findAllDistinct();
+
+	@Query("select p from Pupil p")
+	Set<String> findAllAsSet();
 }
