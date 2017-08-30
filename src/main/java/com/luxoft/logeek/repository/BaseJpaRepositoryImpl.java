@@ -63,11 +63,29 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 
 	@Override
 	public T findOne(ID id, boolean readOnly) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<T> query = criteriaBuilder.createQuery(getDomainClass());
+
+		Root<T> from = query.from(getDomainClass());
+        Predicate predicate = criteriaBuilder.equal(from.get(entityInformation.getIdAttribute()), id);
+
+        query = query.select(from).where(predicate);
+
+		return entityManager.createQuery(query)
+				.setHint(QueryHints.HINT_READONLY, readOnly)
+				.getSingleResult();
+	}
+
+/*
+    //This does not turn off dirty checking
+	@Override
+	public T findOne(ID id, boolean readOnly) {
 		Map<String, Object> hints = new HashMap<>();
 		hints.put(QueryHints.HINT_READONLY, readOnly);
 
 		return entityManager.find(getDomainClass(), id, hints);
 	}
+*/
 
 	@Override
 	public List<T> findAll(Iterable<ID> ids) {

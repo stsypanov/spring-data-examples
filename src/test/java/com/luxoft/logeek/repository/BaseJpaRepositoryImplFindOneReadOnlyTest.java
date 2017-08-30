@@ -27,7 +27,8 @@ public class BaseJpaRepositoryImplFindOneReadOnlyTest extends TestBase {
 	@Test
 	public void testFindOneReadOnlyTrue_expectValueNotUpdated() {
 		readOnly = true;
-		pupilRepository.findOne(pupilId, readOnly).setAge(newAge);//bug 
+		Pupil pupil = pupilRepository.findOne(pupilId, readOnly);
+		pupil.setAge(newAge);
 	}
 
 	@Test
