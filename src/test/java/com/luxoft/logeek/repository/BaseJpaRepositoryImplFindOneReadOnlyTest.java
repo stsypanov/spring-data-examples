@@ -2,9 +2,14 @@ package com.luxoft.logeek.repository;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.TestBase;
+import com.luxoft.logeek.entity.Pupil;
+import org.hibernate.jpa.QueryHints;
 import org.junit.Test;
 import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.transaction.AfterTransaction;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -23,6 +28,17 @@ public class BaseJpaRepositoryImplFindOneReadOnlyTest extends TestBase {
 	public void testFindOneReadOnlyTrue_expectValueNotUpdated() {
 		readOnly = true;
 		pupilRepository.findOne(pupilId, readOnly).setAge(newAge);//bug 
+	}
+
+	@Test
+	public void testFindOneReadOnlyTrue_useEntityManager_expectValueNotUpdated() {
+		readOnly = true;
+
+		Map<String, Object> hints = new HashMap<>();
+		hints.put(QueryHints.HINT_READONLY, readOnly);
+
+		Pupil pupil = em.find(Pupil.class, pupilId, hints);//bug
+		pupil.setAge(newAge);
 	}
 
 	@Test
