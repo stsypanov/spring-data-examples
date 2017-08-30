@@ -11,8 +11,9 @@ import org.springframework.test.context.transaction.AfterTransaction;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsNot.not;
 
 
 @Commit
@@ -38,8 +39,8 @@ public class BaseJpaRepositoryImplFindOneReadOnlyTest extends TestBase {
 		Map<String, Object> hints = new HashMap<>();
 		hints.put(QueryHints.HINT_READONLY, readOnly);
 
-		Pupil pupil = em.find(Pupil.class, pupilId, hints);//bug
-		pupil.setAge(newAge);
+		Pupil pupil = em.find(Pupil.class, pupilId, hints);
+		pupil.setAge(newAge); //bug: dirty checking is on, while HINT_READONLY = true
 	}
 
 	@Test
@@ -53,9 +54,9 @@ public class BaseJpaRepositoryImplFindOneReadOnlyTest extends TestBase {
 		int actualAge = pupilRepository.findOne(pupilId).getAge();
 
 		if (readOnly) {
-			assertNotEquals(newAge, actualAge);
+			assertThat(newAge, not(actualAge));
 		} else {
-			assertEquals(newAge, actualAge);
+			assertThat(newAge, equalTo(actualAge));
 		}
 	}
 }
