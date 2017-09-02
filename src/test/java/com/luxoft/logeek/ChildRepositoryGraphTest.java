@@ -5,12 +5,14 @@ import com.luxoft.logeek.entity.Parent;
 import org.hibernate.Hibernate;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.test.annotation.Commit;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+@Ignore
 @Commit
 public class ChildRepositoryGraphTest extends TestBase {
 

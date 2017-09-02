@@ -2,6 +2,7 @@ package com.luxoft.logeek;
 
 import com.luxoft.logeek.entity.Pupil;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -16,6 +17,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @Commit
+@Ignore
 @TestExecutionListeners(listeners = {
         DependencyInjectionTestExecutionListener.class,
         TestExecutionListener.class

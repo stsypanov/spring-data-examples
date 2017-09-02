@@ -3,11 +3,13 @@ package com.luxoft.logeek;
 import com.luxoft.logeek.entity.Child;
 import com.luxoft.logeek.entity.Parent;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.springframework.test.annotation.Commit;
 
 import static java.util.Arrays.asList;
 
 @Commit
+@Ignore
 public class ChildRepositoryTest extends TestBase {
 
 	private Long childId;
