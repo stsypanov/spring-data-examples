@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class VelocityTemplateParserTest {
-	private static final String query = "select c from Child c;";
+	private static final String query = "select c from Child c";
 	
 	@Test
 	public void parse() throws Exception {

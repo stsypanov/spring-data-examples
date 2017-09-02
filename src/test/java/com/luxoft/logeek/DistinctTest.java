@@ -12,6 +12,7 @@ public class DistinctTest extends TestBase {
 
 	@Before
 	public void setUp() throws Exception {
+		super.initRandom();
 		List<Pupil> pupils = random
 				.ints(1000, 1, 400)
 				.boxed()
