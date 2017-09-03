@@ -1,41 +1,46 @@
 package com.luxoft.logeek;
 
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.entity.Pupil;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.springframework.test.annotation.Commit;
 
-import static com.luxoft.logeek.entity.listener.PupilListener.MESSAGE;
-import static java.util.Arrays.asList;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 @Commit
+@DatabaseSetup("/DeleteWithHandlerTest.xml")
 public class DeleteWithHandlerTest extends TestBase {
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
-    @Before
-    public void setUp() {
-        pupilRepository.save(asList(new Pupil(9), new Pupil(10)));
-    }
+    private boolean entityListenerUsed;
 
-    @Test
+    @Test(expected = Exception.class)
     public void deleteAll() {
+        entityListenerUsed = true;
+
         exception.expect(Exception.class);
-        exception.expectMessage(MESSAGE);
         pupilRepository.deleteAll();
     }
 
     @Test
     public void deleteAllInBatch() {
-        assertFalse(pupilRepository.findAll().isEmpty());
+        entityListenerUsed = false;
 
         pupilRepository.deleteAllInBatch();
-
-        assertTrue(pupilRepository.findAll().isEmpty());
     }
 
+    @After
+    public void tearDown() {
+        if (entityListenerUsed) {
+            assertThat(pupilRepository.findAll().size(), is(1));
+        } else {
+            assertThat(pupilRepository.findAll().size(), is(0));
+        }
+    }
 }
