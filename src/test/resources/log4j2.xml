@@ -34,7 +34,11 @@
 			<AppenderRef ref="ASYNC_CONSOLE"/>
 		</Logger>
 		
-		<Logger name="org.dbunit" level="warn" additivity="false">
+		<Logger name="org.dbunit" level="error" additivity="false">
+			<AppenderRef ref="ASYNC_CONSOLE"/>
+		</Logger>
+
+		<Logger name="com.github.springtestdbunit" level="error" additivity="false">
 			<AppenderRef ref="ASYNC_CONSOLE"/>
 		</Logger>
 
