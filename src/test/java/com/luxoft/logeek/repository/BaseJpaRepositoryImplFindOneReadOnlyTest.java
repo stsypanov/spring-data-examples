@@ -49,6 +49,12 @@ public class BaseJpaRepositoryImplFindOneReadOnlyTest extends TestBase {
 		pupilRepository.findOne(pupilId, readOnly).setAge(newAge);
 	}
 
+	@Test
+	public void testFindOneStateless_expectValueNotUpdated() {
+		readOnly = true;
+		pupilRepository.findOneStateless(pupilId).setAge(newAge);
+	}
+
 	@AfterTransaction
 	public void afterTransaction() {
 		int actualAge = pupilRepository.findOne(pupilId).getAge();

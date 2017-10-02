@@ -20,6 +20,8 @@ public interface BaseJpaRepository<T, ID extends Serializable> extends JpaReposi
 	
 	T findOne(ID id, boolean readOnly);
 
+	T findOneStateless(ID id);
+
 	List<T> findAll(Iterable<ID> ids, boolean readOnly);
 
 	@Override

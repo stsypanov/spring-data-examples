@@ -2,6 +2,8 @@ package com.luxoft.logeek.repository;
 
 import com.google.common.collect.Lists;
 import com.luxoft.logeek.misc.OracleConstants;
+import org.hibernate.Session;
+import org.hibernate.StatelessSession;
 import org.hibernate.jpa.QueryHints;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
@@ -75,6 +77,14 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 				.setHint(QueryHints.HINT_READONLY, readOnly)
 				.getSingleResult();
 	}
+
+	@Override
+	public T findOneStateless(ID id) {
+		try (StatelessSession statelessSession = entityManager.unwrap(Session.class).getSessionFactory().openStatelessSession()) {
+			return (T) statelessSession.get(getDomainClass(), id);
+		}
+	}
+
 
 /*
     //This does not turn off dirty checking
