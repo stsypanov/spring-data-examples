@@ -30,7 +30,9 @@ import java.util.function.Supplier;
 @Import(PersistenceConfig.class)
 public class AppConfig {
 
-	@Bean
+    private static final String FALSE = "false";
+
+    @Bean
 	public P6DataSource dataSource(DataSource actualDataSource) {
 		return new P6DataSource(actualDataSource);
 	}
@@ -74,8 +76,8 @@ public class AppConfig {
 	public Supplier<Properties> additionalProperties() {
 		return () -> {
 			Properties properties = new Properties();
-			properties.setProperty(AvailableSettings.SHOW_SQL, "true");
-			properties.setProperty(AvailableSettings.FORMAT_SQL, "false");
+			properties.setProperty(AvailableSettings.SHOW_SQL, FALSE);
+			properties.setProperty(AvailableSettings.FORMAT_SQL, FALSE);
 			properties.setProperty(AvailableSettings.DIALECT, CustomH2Dialect.class.getName());
 //		properties.setProperty(AvailableSettings.DIALECT, "false");
 			return properties;
@@ -93,8 +95,8 @@ public class AppConfig {
 	public Supplier<Properties> postgresProperties() {
 		return () -> {
 			Properties properties = new Properties();
-			properties.setProperty(AvailableSettings.SHOW_SQL, "true");
-			properties.setProperty(AvailableSettings.FORMAT_SQL, "false");
+			properties.setProperty(AvailableSettings.SHOW_SQL, FALSE);
+			properties.setProperty(AvailableSettings.FORMAT_SQL, FALSE);
 			properties.setProperty(AvailableSettings.DIALECT, CustomPostgresDialect.class.getName());
 			return properties;
 		};
@@ -105,8 +107,8 @@ public class AppConfig {
 	public Supplier<Properties> oracleProperties() {
 		return () -> {
 			Properties properties = new Properties();
-			properties.setProperty(AvailableSettings.SHOW_SQL, "true");
-			properties.setProperty(AvailableSettings.FORMAT_SQL, "false");
+			properties.setProperty(AvailableSettings.SHOW_SQL, FALSE);
+			properties.setProperty(AvailableSettings.FORMAT_SQL, FALSE);
 			properties.setProperty(AvailableSettings.DIALECT, CustomOracleDialect.class.getName());
 			properties.setProperty(AvailableSettings.HBM2DDL_AUTO, "create");
 			return properties;
