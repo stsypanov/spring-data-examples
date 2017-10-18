@@ -5,7 +5,6 @@ import com.luxoft.logeek.config.CustomOracleDialect;
 import com.luxoft.logeek.config.CustomPostgresDialect;
 import com.luxoft.logeek.config.PersistenceConfig;
 import com.luxoft.logeek.repository.BaseJpaRepositoryImpl;
-import com.p6spy.engine.spy.P6DataSource;
 import org.hibernate.cfg.AvailableSettings;
 import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -33,8 +32,8 @@ public class AppConfig {
     private static final String FALSE = "false";
 
     @Bean
-	public P6DataSource dataSource(DataSource actualDataSource) {
-		return new P6DataSource(actualDataSource);
+	public DataSource dataSource(DataSource actualDataSource) {
+		return actualDataSource;
 	}
 
 	@Bean
@@ -57,7 +56,7 @@ public class AppConfig {
 			DataSource dataSource
 	) {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-		em.setDataSource(new P6DataSource(dataSource));
+		em.setDataSource(dataSource);
 		em.setJpaVendorAdapter(jpaVendorAdapter());
 		em.setPackagesToScan("com.luxoft.logeek.entity");
 		em.setJpaProperties(propertiesSupplier.get());

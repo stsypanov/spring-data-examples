@@ -1,6 +1,7 @@
 package com.luxoft.logeek;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
+import com.luxoft.logeek.config.PersistenceConfig;
 import com.luxoft.logeek.entity.Child;
 import com.luxoft.logeek.entity.Parent;
 import com.luxoft.logeek.entity.Pupil;
@@ -9,11 +10,13 @@ import com.luxoft.logeek.repository.ParentRepository;
 import com.luxoft.logeek.repository.PupilRepository;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.transaction.AfterTransaction;
 import org.springframework.test.context.transaction.BeforeTransaction;
@@ -29,22 +32,22 @@ import java.util.Random;
 @Transactional
 @DirtiesContext
 @ActiveProfiles(profiles = "h2")
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AppConfig.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = AppConfig.class)
 @TestExecutionListeners(value = {
 		DependencyInjectionTestExecutionListener.class,
 		TransactionalTestExecutionListener.class,
 		DbUnitTestExecutionListener.class
 })
 public abstract class TestBase {
-    @PersistenceContext
-    protected EntityManager em;
-    @Autowired
-    protected PupilRepository pupilRepository;
-    @Autowired
-    protected ChildRepository childRepository;
-    @Autowired
-    protected ParentRepository parentRepository;
+	@PersistenceContext
+	protected EntityManager em;
+	@Autowired
+	protected PupilRepository pupilRepository;
+	@Autowired
+	protected ChildRepository childRepository;
+	@Autowired
+	protected ParentRepository parentRepository;
 
 	protected Random random;
 
