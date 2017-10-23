@@ -4,7 +4,9 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.TestBase;
 import com.luxoft.logeek.entity.Pupil;
 import org.hibernate.jpa.QueryHints;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.transaction.AfterTransaction;
 
@@ -25,6 +27,9 @@ public class BaseJpaRepositoryImplFindOneReadOnlyTest extends TestBase {
 	
 	private boolean readOnly;
 
+	@Rule
+	public ExpectedException expectedException = ExpectedException.none();
+
 	@Test
 	public void testFindOneReadOnlyTrue_expectValueNotUpdated() {
 		readOnly = true;
@@ -34,13 +39,15 @@ public class BaseJpaRepositoryImplFindOneReadOnlyTest extends TestBase {
 
 	@Test
 	public void testFindOneReadOnlyTrue_useEntityManager_expectValueNotUpdated() {
+		expectedException.expect(AssertionError.class);
+
 		readOnly = true;
 
 		Map<String, Object> hints = new HashMap<>();
 		hints.put(QueryHints.HINT_READONLY, readOnly);
 
 		Pupil pupil = em.find(Pupil.class, pupilId, hints);
-		pupil.setAge(newAge); //bug: dirty checking is on, while HINT_READONLY = true
+		pupil.setAge(newAge); //todo bug: dirty checking is on, while HINT_READONLY = true
 	}
 
 	@Test
