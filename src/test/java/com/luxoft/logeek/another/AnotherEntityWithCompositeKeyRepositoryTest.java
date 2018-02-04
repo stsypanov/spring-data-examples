@@ -20,7 +20,7 @@ public class AnotherEntityWithCompositeKeyRepositoryTest extends TestBase {
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		CompositeKey key1 = new CompositeKey(1L, 1L);
 		CompositeKey key2 = new CompositeKey(2L, 2L);
 		CompositeKey key3 = new CompositeKey(3L, 3L);
@@ -39,7 +39,7 @@ public class AnotherEntityWithCompositeKeyRepositoryTest extends TestBase {
 	}
 
 	@Test
-	public void findAll() throws Exception {
+	public void findAll() {
 		List<EntityWithCompositeKey> all = anotherEntityWithCompositeKeyRepository.findAll(compositeKeys);
 	}
 }

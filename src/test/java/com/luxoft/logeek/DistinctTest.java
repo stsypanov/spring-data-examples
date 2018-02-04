@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class DistinctTest extends TestBase {
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		initRandom();
 		List<Pupil> pupils = random
 				.ints(1000, 1, 400)
@@ -23,12 +23,12 @@ public class DistinctTest extends TestBase {
 	}
 
 	@Test
-	public void findWithDistinct() throws Exception {
+	public void findWithDistinct() {
 		List<String> pupils = pupilRepository.findAllNames();
 	}
 
 	@Test
-	public void findWithHashSetDistinct() throws Exception {
+	public void findWithHashSetDistinct() {
 		Set<String> pupils = pupilRepository.findAllNamesAsSet();
 	}
 

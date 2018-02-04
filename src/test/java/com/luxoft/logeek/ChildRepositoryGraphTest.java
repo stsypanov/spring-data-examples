@@ -20,7 +20,7 @@ public class ChildRepositoryGraphTest extends TestBase {
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		Parent papa = new Parent("папа");
 
 		Child child1 = new Child(papa);
@@ -47,7 +47,7 @@ public class ChildRepositoryGraphTest extends TestBase {
 	}
 
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() {
 		childRepository.deleteAll();
 	}
 }

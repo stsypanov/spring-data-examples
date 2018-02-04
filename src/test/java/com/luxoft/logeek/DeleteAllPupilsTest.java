@@ -14,7 +14,7 @@ public class DeleteAllPupilsTest extends TestBase {
 
     @Override
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         super.setUp();
     }
 
@@ -22,19 +22,19 @@ public class DeleteAllPupilsTest extends TestBase {
      * What queries will be executed?
      */
     @Test
-    public void deleteAll() throws Exception {
+    public void deleteAll() {
         pupilRepository.deleteAll();
         assertTrue(pupilRepository.findAll().isEmpty());
     }
 
     @Test
-    public void deleteOne() throws Exception {
+    public void deleteOne() {
         List<Pupil> all = pupilRepository.findAll();
         pupilRepository.delete(all.iterator().next());
     }
 
     @Test
-    public void deleteAllInBatch() throws Exception {
+    public void deleteAllInBatch() {
         List<Pupil> all = pupilRepository.findAll();
 
         assertFalse(pupilRepository.findAll().isEmpty());

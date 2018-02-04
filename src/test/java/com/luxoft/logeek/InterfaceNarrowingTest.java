@@ -27,7 +27,7 @@ public class InterfaceNarrowingTest extends TestBase {
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		initRandom();
 		List<SomeEntity> entities = random.longs(50)
 				.boxed()

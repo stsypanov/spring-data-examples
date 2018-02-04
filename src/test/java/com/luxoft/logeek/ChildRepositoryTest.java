@@ -17,7 +17,7 @@ public class ChildRepositoryTest extends TestBase {
 	@Override
 	@Before
 	@Commit
-	public void setUp() throws Exception {
+	public void setUp() {
 		Parent papa = new Parent("папа");
 		Parent mama = new Parent("мама");
 

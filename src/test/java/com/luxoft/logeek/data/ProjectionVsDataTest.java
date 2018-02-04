@@ -13,7 +13,7 @@ public class ProjectionVsDataTest extends TestBase {
 
 	@Before
 	@Override
-	public void setUp() throws Exception {
+	public void setUp() {
 		super.setUp();
 	}
 
@@ -25,7 +25,7 @@ public class ProjectionVsDataTest extends TestBase {
 	}
 
 	@Test
-	public void findAllWithTotalCount() throws Exception {
+	public void findAllWithTotalCount() {
 		List<ChildWithTotalCount> allWithTotalCount = childRepository.findAllWithTotalCountAsProjection();
 		
 		Long totalCount = allWithTotalCount.get(0).getTotalCount();

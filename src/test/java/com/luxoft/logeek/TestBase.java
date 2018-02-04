@@ -51,7 +51,7 @@ public abstract class TestBase {
 
 	protected Random random;
 
-	public void setUp() throws Exception {
+	public void setUp() {
 		initRandom();
 
 		List<Pupil> pupils = Arrays.asList(
