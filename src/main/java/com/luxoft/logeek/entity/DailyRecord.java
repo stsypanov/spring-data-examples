@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @Entity
 @Getter
 @Setter
-public class StockDailyRecord {
+public class DailyRecord {
     @Id
     @GeneratedValue
     private Long id;
@@ -23,19 +23,14 @@ public class StockDailyRecord {
     private String currency;
 
     @Column(name = "record_rate")
-    private BigDecimal recordRate;
+    private BigDecimal rate;
 
     @Column(name = "fixed_rate")
-    private BigDecimal fixedRate;
+    private BigDecimal fxRate;
 
     @Setter(value = AccessLevel.PACKAGE)
-    @Formula("select avg(rec.fixed_rate) from StockDailyRecord rec where rec.currency = currency")
-    private BigDecimal averageFixedRate;
-
-    @Setter(value = AccessLevel.PACKAGE)
-    @Formula("select avg(rec.fixed_rate) from StockDailyRecord rec where rec.currency = currency")
-    private BigDecimal averageRecordRate;
-
+    @Formula("select avg(rec.record_rate) from DailyRecord rec where rec.currency = currency")
+    private BigDecimal avgRate;
 
     public Long getId() {
         return id;
