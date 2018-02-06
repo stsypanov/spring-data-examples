@@ -1,0 +1,12 @@
+<dataset>
+    <Parent id="1" name="папа"/>
+    <Parent id="2" name="мама"/>
+
+    <Child id="1" parent_id="1" age="7"/>
+    <Child id="2" parent_id="1" age="7"/>
+    <Child id="3" parent_id="1" age="7"/>
+    <Child id="4" parent_id="1" age="7"/>
+
+    <Child id="5" parent_id="2" age="7"/>
+    <Child id="6" parent_id="2" age="7"/>
+</dataset>
