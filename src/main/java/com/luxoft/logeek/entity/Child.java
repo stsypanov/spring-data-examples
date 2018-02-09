@@ -2,6 +2,7 @@ package com.luxoft.logeek.entity;
 
 
 import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Setter
 @Entity
 @NamedEntityGraphs(value = {
 		@NamedEntityGraph(name = Child.PARENT, attributeNodes = {
@@ -38,7 +40,7 @@ public class Child implements IChild {
 		this.parent = parent;
 	}
 
-	protected Child() {
+	public Child() {
 	}
 
 	public void addToy(Toy toy) {
