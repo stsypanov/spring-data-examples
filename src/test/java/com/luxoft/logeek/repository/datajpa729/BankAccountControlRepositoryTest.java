@@ -1,4 +1,4 @@
-package com.luxoft.logeek.repository.jira729;
+package com.luxoft.logeek.repository.datajpa729;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.TestBase;
