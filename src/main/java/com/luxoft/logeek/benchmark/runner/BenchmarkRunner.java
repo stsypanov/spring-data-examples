@@ -16,7 +16,7 @@ public class BenchmarkRunner {
 //				.include(ProjectionVsDataBenchmark.class.getSimpleName())
 				.warmupIterations(10)
 				.measurementIterations(10)
-				.forks(1)//0 makes debugging possible
+				.forks(3)//0 makes debugging possible
 				.build();
 
 		new Runner(opt).run();
