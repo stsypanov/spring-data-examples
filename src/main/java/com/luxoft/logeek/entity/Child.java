@@ -16,10 +16,14 @@ import java.util.List;
 @NamedEntityGraphs(value = {
 		@NamedEntityGraph(name = Child.PARENT, attributeNodes = {
 				@NamedAttributeNode("parent")
+		}),
+		@NamedEntityGraph(name = Child.TOYS, attributeNodes = {
+				@NamedAttributeNode("toys")
 		})
 })
 public class Child implements IChild {
 	public static final String PARENT = "Child[parent]";
+	public static final String TOYS = "Child[toys]";
 
 	@Id
 	@GeneratedValue
@@ -32,9 +36,9 @@ public class Child implements IChild {
 	@Column
 	private short age;
 
-	@OneToMany(mappedBy = "owner")
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
 	@LazyCollection(value = LazyCollectionOption.EXTRA)
-	private List<Toy> toys;
+	private List<Toy> toys = new ArrayList<>();
 
 	public Child(Parent parent) {
 		this.parent = parent;
@@ -44,9 +48,6 @@ public class Child implements IChild {
 	}
 
 	public void addToy(Toy toy) {
-		if (toys == null) {
-			toys = new ArrayList<>();
-		}
 		toy.setOwner(this);
 		toys.add(toy);
 	}

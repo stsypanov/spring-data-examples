@@ -1,10 +1,12 @@
 package com.luxoft.logeek.entity;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Getter
+@Setter
 @Entity
 public class Toy {
 
@@ -16,7 +18,4 @@ public class Toy {
 	@JoinColumn(name = "child_id")
 	private Child owner;
 
-	public void setOwner(Child child) {
-		this.owner = child;
-	}
 }
