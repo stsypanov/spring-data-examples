@@ -1,5 +1,6 @@
 package com.luxoft.logeek;
 
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.entity.CompositeKey;
 import com.luxoft.logeek.entity.EntityWithCompositeKey;
 import com.luxoft.logeek.repository.EntityWithCompositeKeyRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Arrays;
 import java.util.List;
 
+@DatabaseSetup("/EntityWithCompositeKeyRepositoryTest.xml")
 public class EntityWithCompositeKeyRepositoryTest extends TestBase {
 
 	@Autowired
@@ -27,14 +29,6 @@ public class EntityWithCompositeKeyRepositoryTest extends TestBase {
 		CompositeKey key5 = new CompositeKey(5L, 5L);
 
 		compositeKeys = Arrays.asList(key1, key2, key3, key4, key5);
-
-		EntityWithCompositeKey e1 = new EntityWithCompositeKey(key1);
-		EntityWithCompositeKey e2 = new EntityWithCompositeKey(key2);
-		EntityWithCompositeKey e3 = new EntityWithCompositeKey(key3);
-		EntityWithCompositeKey e4 = new EntityWithCompositeKey(key4);
-		EntityWithCompositeKey e5 = new EntityWithCompositeKey(key5);
-
-		entityWithCompositeKeyRepository.saveAll(Arrays.asList(e1, e2, e3, e4, e5));
 	}
 
 	@Test

@@ -1,0 +1,7 @@
+<dataset>
+    <EntityWithCompositeKey key1 = "1" key2="1"/>
+    <EntityWithCompositeKey key1 = "2" key2="2"/>
+    <EntityWithCompositeKey key1 = "3" key2="3"/>
+    <EntityWithCompositeKey key1 = "4" key2="4"/>
+    <EntityWithCompositeKey key1 = "5" key2="5"/>
+</dataset>

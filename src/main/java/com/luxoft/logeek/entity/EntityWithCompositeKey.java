@@ -9,10 +9,6 @@ public class EntityWithCompositeKey {
 	@EmbeddedId
 	private CompositeKey key;
 
-	public EntityWithCompositeKey(CompositeKey key) {
-		this.key = key;
-	}
-
 	protected EntityWithCompositeKey() {
 	}
 }
