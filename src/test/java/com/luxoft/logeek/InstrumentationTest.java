@@ -17,7 +17,7 @@ public class InstrumentationTest extends TestBase {
 
 	@Before
 	@Override
-	public void setUp() throws Exception {
+	public void setUp() {
 		super.setUp();
 		List<Pupil> pupils = random
 				.ints(5000, 0, 400)

@@ -1,9 +1,7 @@
 package com.luxoft.logeek;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.luxoft.logeek.entity.Pupil;
-import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
