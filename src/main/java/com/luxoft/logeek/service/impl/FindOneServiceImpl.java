@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -21,8 +22,8 @@ public class FindOneServiceImpl implements FindOneService {
 
     @Override
     @Transactional
-    public SomeEntity findOne(Long id) {
-        return repository.findOne(id);
+    public Optional<SomeEntity> findOne(Long id) {
+        return repository.findById(id);
     }
 
     @Override

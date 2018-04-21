@@ -27,7 +27,7 @@ public class BaseJpaRepositoryImplTest extends TestBase {
 
 	@Test
 	public void findAll() {
-		List<Child> all = childRepository.findAll(ids);
+		List<Child> all = childRepository.findAllById(ids);
 
 		assertNotNull(all);
 	}

@@ -25,7 +25,7 @@ public interface BaseJpaRepository<T, ID extends Serializable> extends JpaReposi
 	List<T> findAll(Iterable<ID> ids, boolean readOnly);
 
 	@Override
-	List<T> findAll(Iterable<ID> ids);
+	List<T> findAllById(Iterable<ID> ids);
 	
 	void clear();
 }

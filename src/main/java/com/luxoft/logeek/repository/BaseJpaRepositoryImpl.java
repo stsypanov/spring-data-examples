@@ -98,7 +98,7 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 */
 
 	@Override
-	public List<T> findAll(Iterable<ID> ids) {
+	public List<T> findAllById(Iterable<ID> ids) {
 		return findAll(ids, false);
 	}
 
@@ -117,9 +117,12 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 		if (entityInformation.hasCompositeId()) {
 
 			List<T> results = new ArrayList<T>();
-
 			for (ID id : ids) {
-				results.add(findOne(id, readOnly));
+				if (readOnly) {
+					results.add(findOne(id, true));
+				} else {
+					findById(id).ifPresent(results::add);
+				}
 			}
 
 			return results;
@@ -132,7 +135,7 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 		}
 			
 		ByIdsSpecification<T> specification = new ByIdsSpecification<>(entityInformation);
-		TypedQuery<T> query = getQuery(specification, (Sort) null).setHint(QueryHints.HINT_READONLY, readOnly);
+		TypedQuery<T> query = getQuery(specification, Sort.unsorted()).setHint(QueryHints.HINT_READONLY, readOnly);
 
 		return query.setParameter(specification.parameter, ids).getResultList();
 	}

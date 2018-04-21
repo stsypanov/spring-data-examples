@@ -19,7 +19,7 @@ public class DistinctTest extends TestBase {
 				.map(randomLong -> new Pupil(randomLong, String.valueOf(random.nextInt(100))))
 				.collect(Collectors.toList());
 
-		pupilRepository.save(pupils);
+		pupilRepository.saveAll(pupils);
 	}
 
 	@Test

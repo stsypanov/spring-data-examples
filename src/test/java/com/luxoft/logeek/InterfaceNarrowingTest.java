@@ -34,7 +34,7 @@ public class InterfaceNarrowingTest extends TestBase {
 				.map(id -> new SomeEntity(id, getValueForId(id)))
 				.collect(Collectors.toList());
 		
-		repository.save(entities);
+		repository.saveAll(entities);
 	}
 
 	private Long getValueForId(Long id) {
@@ -54,7 +54,7 @@ public class InterfaceNarrowingTest extends TestBase {
 	}
 
 	@Test
-	public void findByIdsWithPossibleDuplicates() throws Exception {
+	public void findByIdsWithPossibleDuplicates() {
 		List<Long> idList = Arrays.asList(TWO, TWO, THREE, SEVEN, FIVE, NINE, THREE, SEVEN, NINE);
 		Set<Long> idSet = new HashSet<>(idList);
 

@@ -38,7 +38,7 @@ public class BiteCodeInstrumentationBenchmark extends BenchmarkBase {
 				})
 				.collect(toList());
 
-		repository.save(pupils);
+		repository.saveAll(pupils);
 	}
 
 	@Benchmark
@@ -57,7 +57,7 @@ public class BiteCodeInstrumentationBenchmark extends BenchmarkBase {
 				})
 				.collect(toList());
 
-		entities = repository.save(entities);
+		entities = repository.saveAll(entities);
 		repository.flush();
 		return entities;
 	}

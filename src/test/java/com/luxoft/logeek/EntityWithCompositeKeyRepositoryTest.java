@@ -34,11 +34,11 @@ public class EntityWithCompositeKeyRepositoryTest extends TestBase {
 		EntityWithCompositeKey e4 = new EntityWithCompositeKey(key4);
 		EntityWithCompositeKey e5 = new EntityWithCompositeKey(key5);
 
-		entityWithCompositeKeyRepository.save(Arrays.asList(e1, e2, e3, e4, e5));
+		entityWithCompositeKeyRepository.saveAll(Arrays.asList(e1, e2, e3, e4, e5));
 	}
 
 	@Test
 	public void findAll() {
-		List<EntityWithCompositeKey> all = entityWithCompositeKeyRepository.findAll(compositeKeys);
+		List<EntityWithCompositeKey> all = entityWithCompositeKeyRepository.findAllById(compositeKeys);
 	}
 }

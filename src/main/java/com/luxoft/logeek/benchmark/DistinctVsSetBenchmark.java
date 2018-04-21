@@ -28,7 +28,7 @@ public class DistinctVsSetBenchmark extends BenchmarkBase {
 				.map(randomLong -> new Pupil(randomLong, String.valueOf(random.nextInt(100))))
 				.collect(Collectors.toList());
 
-		repository.save(pupils);
+		repository.saveAll(pupils);
 	}
 
 	@Benchmark

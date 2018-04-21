@@ -38,7 +38,7 @@ public class ExecutionServiceImpl implements ExecutionService {
                 })
                 .collect(toList());
 
-        repository.save(items);
+        repository.saveAll(items);
     }
 
     @Override
@@ -46,13 +46,13 @@ public class ExecutionServiceImpl implements ExecutionService {
         List<EntityWithManyStringFields> entities = repository.findAll();
         entities.forEach(entity -> entity.setField1(random.nextGaussian() + ""));
 
-        return repository.save(entities);
+        return repository.saveAll(entities);
     }
 
     @Override
     public List<EntityWithManyStringFields> executeWithoutFieldModification() {
         List<EntityWithManyStringFields> entities = repository.findAll();
-        return repository.save(entities);
+        return repository.saveAll(entities);
     }
 
     @Override

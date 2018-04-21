@@ -19,7 +19,7 @@ public class DailyRecordRepositoryTest extends TestBase {
 
     @Test
     public void findRateByCurrency() {
-        DailyRecord record = dailyRecordRepository.findOne(1L);
+        DailyRecord record = dailyRecordRepository.findById(1L).orElseThrow(NullPointerException::new);
         BigDecimal expected = BigDecimal.valueOf(2);
 
         assertEquals(0, record.getAvgRate().compareTo(expected));

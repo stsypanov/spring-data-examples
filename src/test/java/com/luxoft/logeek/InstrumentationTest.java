@@ -25,7 +25,7 @@ public class InstrumentationTest extends TestBase {
 				.map(randomLong -> new Pupil(randomLong, String.valueOf(random.nextInt(100))))
 				.collect(toList());
 
-		pupilRepository.save(pupils);
+		pupilRepository.saveAll(pupils);
 	}
 
 	@Test
@@ -39,7 +39,7 @@ public class InstrumentationTest extends TestBase {
 				})
 				.collect(toList());
 
-		pupilRepository.save(updatedPupils);
+		pupilRepository.saveAll(updatedPupils);
 		pupilRepository.flush();
 
 //		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");

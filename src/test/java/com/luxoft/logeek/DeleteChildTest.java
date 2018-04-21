@@ -18,7 +18,7 @@ public class DeleteChildTest extends TestBase {
     public void deleteAllInBatch_expectParentIsNotDeleted() {
         childRepository.deleteAllInBatch();
 
-        Parent papa = parentRepository.findOne(papaId);
+        Parent papa = parentRepository.findById(papaId).orElse(null);
 
         assertNotNull(papa);
     }
@@ -27,7 +27,7 @@ public class DeleteChildTest extends TestBase {
     public void deleteAll_expectParentIsDeleted() {
         childRepository.deleteAll();//проверить, почему в лог записан update
 
-        Parent papa = parentRepository.findOne(papaId);
+        Parent papa = parentRepository.findById(papaId).orElse(null);
 
         assertNull(papa);
     }

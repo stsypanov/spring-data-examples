@@ -62,7 +62,7 @@ public abstract class TestBase {
 				new Pupil(5),
 				new Pupil(6)
 		);
-		pupilRepository.save(pupils);
+		pupilRepository.saveAll(pupils);
 		pupilRepository.flush();
 
 		Parent papa = new Parent("папа");
@@ -76,7 +76,7 @@ public abstract class TestBase {
 		Child child5 = new Child(mama);
 		Child child6 = new Child(mama);
 
-		childRepository.save(Arrays.asList(child1, child2, child3, child4, child5, child6));
+		childRepository.saveAll(Arrays.asList(child1, child2, child3, child4, child5, child6));
 		childRepository.flush();
 
 		em.clear();

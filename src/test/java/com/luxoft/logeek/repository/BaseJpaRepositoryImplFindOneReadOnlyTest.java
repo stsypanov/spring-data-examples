@@ -64,7 +64,7 @@ public class BaseJpaRepositoryImplFindOneReadOnlyTest extends TestBase {
 
 	@AfterTransaction
 	public void afterTransaction() {
-		int actualAge = pupilRepository.findOne(pupilId).getAge();
+		int actualAge = pupilRepository.findById(pupilId).map(Pupil::getAge).orElseThrow(RuntimeException::new);
 
 		if (readOnly) {
 			assertThat(newAge, not(actualAge));

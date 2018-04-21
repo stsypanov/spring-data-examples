@@ -1,10 +1,10 @@
 package com.luxoft.logeek.benchmark;
 
 import com.luxoft.logeek.entity.SomeEntity;
-import com.luxoft.logeek.repository.SomeRepository;
 import com.luxoft.logeek.service.FindOneService;
 import org.openjdk.jmh.annotations.*;
 
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @State(Scope.Benchmark)
@@ -32,7 +32,7 @@ public class DirtyCheckingBenchmark extends BenchmarkBase {
     }
 
     @Benchmark
-    public SomeEntity measureConventionalFindOne() {
+    public Optional<SomeEntity> measureConventionalFindOne() {
         return service.findOne(id);
     }
 }

@@ -40,7 +40,7 @@ public class ChildRepositoryGraphTest extends TestBase {
 
 	@Test
 	public void testGraph_expectFieldNotInitialized() {
-		Child child1 = childRepository.findOne(childId);
+		Child child1 = childRepository.findById(childId).orElseThrow(NullPointerException::new);
 
 		boolean initialized = Hibernate.isInitialized(child1.getParent());
 		assertFalse(initialized);

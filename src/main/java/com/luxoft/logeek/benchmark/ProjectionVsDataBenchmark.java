@@ -26,7 +26,7 @@ public class ProjectionVsDataBenchmark extends BenchmarkBase {
 				.map(randomLong -> new EntityWithManyFields(randomLong, String.valueOf(randomLong), "ivan"))
 				.collect(Collectors.toList());
 
-		repository.save(entities);
+		repository.saveAll(entities);
 	}
 
 	@Benchmark

@@ -18,7 +18,7 @@ public class BlindFindOneTest extends TestBase {
     @Test
     public void testFindOne() {
         Child child = new Child();
-        child.setParent(parentRepository.findOne(parentId));
+        parentRepository.findById(parentId).ifPresent(child::setParent);
 
         childId = childRepository.save(child).getId();
     }
@@ -33,7 +33,7 @@ public class BlindFindOneTest extends TestBase {
 
     @AfterTransaction
     public void after() {
-        final Child child = childRepository.findOne(childId);
+        final Child child = childRepository.findById(childId).orElse(null);
         assertNotNull(child);
 
         assertNotNull(child.getParent());

@@ -8,18 +8,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Component
 @RequiredArgsConstructor
 public class ChildUpdater {
     private final ChildRepository repository;
 
     @Transactional
-    public Child updateChild(Long childId, short age, Parent parent) {
-        Child child = repository.findOne(childId);
-        child.setAge(age);
-        child.setParent(parent);
-        child.addToy(new Toy());
-        return repository.save(child);
+    public Optional<Child> updateChild(Long childId, short age, Parent parent) {
+        Optional<Child> child = repository.findById(childId);
+        child.ifPresent(c -> c.setAge(age));
+        child.ifPresent(c -> c.setParent(parent));
+        child.ifPresent(c -> c.addToy(new Toy()));
+        return child.map(repository::save);
     }
 
     /**
@@ -27,11 +29,11 @@ public class ChildUpdater {
      * @see <a href="https://jira.spring.io/browse/DATAJPA-1261">https://jira.spring.io/browse/DATAJPA-1261</a>
      */
     @Transactional
-    public Child updateChildIncorrectly(Long childId, short age, Parent parent) {
-        Child child = repository.findOne(childId);
-        child.setAge(age);
-        child.setParent(parent);
-        child.addToy(new Toy());
+    public Optional<Child> updateChildIncorrectly(Long childId, short age, Parent parent) {
+        Optional<Child> child = repository.findById(childId);
+        child.ifPresent(c -> c.setAge(age));
+        child.ifPresent(c -> c.setParent(parent));
+        child.ifPresent(c -> c.addToy(new Toy()));
         return child;
     }
 }

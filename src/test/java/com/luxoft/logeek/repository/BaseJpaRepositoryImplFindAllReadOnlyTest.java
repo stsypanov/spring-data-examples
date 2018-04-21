@@ -45,13 +45,13 @@ public class BaseJpaRepositoryImplFindAllReadOnlyTest extends TestBase {
 	}
 
 	private void assertNotModified() {
-		pupilRepository.findAll(ids).stream().map(Pupil::getAge).forEach(age -> {
+		pupilRepository.findAllById(ids).stream().map(Pupil::getAge).forEach(age -> {
 			assertNotEquals(newAge, age);
 		});
 	}
 
 	private void assertModified() {
-		pupilRepository.findAll(ids).stream().map(Pupil::getAge).forEach(age -> {
+		pupilRepository.findAllById(ids).stream().map(Pupil::getAge).forEach(age -> {
 			assertEquals(newAge, age);
 		});
 	}
