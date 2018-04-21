@@ -1,116 +1,12 @@
 package com.luxoft.logeek;
 
-import com.luxoft.logeek.config.CustomH2Dialect;
-import com.luxoft.logeek.config.CustomOracleDialect;
-import com.luxoft.logeek.config.CustomPostgresDialect;
-import com.luxoft.logeek.config.PersistenceConfig;
 import com.luxoft.logeek.repository.BaseJpaRepositoryImpl;
-import org.hibernate.cfg.AvailableSettings;
-import org.springframework.context.annotation.*;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.JpaVendorAdapter;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.Database;
-import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
-import java.util.Properties;
-import java.util.function.Supplier;
 
 @Configuration
-@EnableTransactionManagement
-@EnableJpaRepositories(value = "com.luxoft.logeek.repository", repositoryBaseClass = BaseJpaRepositoryImpl.class)
-@ComponentScan(basePackages = {"com.luxoft.logeek"})
-@Import(PersistenceConfig.class)
+@EnableAutoConfiguration
+@EnableJpaRepositories(repositoryBaseClass = BaseJpaRepositoryImpl.class)
 public class AppConfig {
-
-    private static final String FALSE = "false";
-
-    @Bean
-	public DataSource dataSource(DataSource actualDataSource) {
-		return actualDataSource;
-	}
-
-	@Bean
-	public JpaVendorAdapter jpaVendorAdapter() {
-		HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-//		adapter.setDatabase(Database.H2);
-		adapter.setDatabase(Database.POSTGRESQL);
-		adapter.setGenerateDdl(true);
-		return adapter;
-	}
-
-	@Bean
-	public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-		return new JpaTransactionManager(entityManagerFactory);
-	}
-
-	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-			Supplier<Properties> propertiesSupplier,
-			DataSource dataSource
-	) {
-		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-		em.setDataSource(dataSource);
-		em.setJpaVendorAdapter(jpaVendorAdapter());
-		em.setPackagesToScan("com.luxoft.logeek.entity");
-		em.setJpaProperties(propertiesSupplier.get());
-		em.setJpaDialect(new HibernateJpaDialect());
-		return em;
-	}
-
-	/**
-	 * Set false for both hibernate.show_sql and hibernate.format_sql
-	 * when running benchmarks to prevent JMH log pollution
-	 *
-	 * @return hibernate props
-	 */
-	@Bean
-	@Profile("h2")
-	public Supplier<Properties> additionalProperties() {
-		return () -> {
-			Properties properties = new Properties();
-			properties.setProperty(AvailableSettings.SHOW_SQL, FALSE);
-			properties.setProperty(AvailableSettings.FORMAT_SQL, FALSE);
-			properties.setProperty(AvailableSettings.DIALECT, CustomH2Dialect.class.getName());
-//		properties.setProperty(AvailableSettings.DIALECT, "false");
-			return properties;
-		};
-	}
-
-	/**
-	 * Set false for both hibernate.show_sql and hibernate.format_sql
-	 * when running benchmarks to prevent JMH log pollution
-	 *
-	 * @return hibernate props
-	 */
-	@Bean
-	@Profile("postgres")
-	public Supplier<Properties> postgresProperties() {
-		return () -> {
-			Properties properties = new Properties();
-			properties.setProperty(AvailableSettings.SHOW_SQL, FALSE);
-			properties.setProperty(AvailableSettings.FORMAT_SQL, FALSE);
-			properties.setProperty(AvailableSettings.DIALECT, CustomPostgresDialect.class.getName());
-			return properties;
-		};
-	}
-
-	@Bean
-	@Profile("oracle")
-	public Supplier<Properties> oracleProperties() {
-		return () -> {
-			Properties properties = new Properties();
-			properties.setProperty(AvailableSettings.SHOW_SQL, FALSE);
-			properties.setProperty(AvailableSettings.FORMAT_SQL, FALSE);
-			properties.setProperty(AvailableSettings.DIALECT, CustomOracleDialect.class.getName());
-			properties.setProperty(AvailableSettings.HBM2DDL_AUTO, "create");
-			return properties;
-		};
-	}
 }

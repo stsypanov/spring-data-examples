@@ -29,7 +29,7 @@ public class DailyRecord {
     private BigDecimal fxRate;
 
     @Setter(value = AccessLevel.PACKAGE)
-    @Formula("select avg(rec.record_rate) from DailyRecord rec where rec.currency = currency")
+    @Formula("select avg(rec.record_rate) from daily_record rec where rec.currency = currency")
     private BigDecimal avgRate;
 
     public Long getId() {
