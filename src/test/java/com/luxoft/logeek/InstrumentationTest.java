@@ -44,7 +44,6 @@ public class InstrumentationTest extends TestBase {
 
 //		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 //		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-		Thread.sleep(TimeUnit.MINUTES.toMillis(2));
-		
+//		Thread.sleep(TimeUnit.MINUTES.toMillis(2));
 	}
 }
