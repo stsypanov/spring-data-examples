@@ -1,7 +1,6 @@
 package com.luxoft.logeek;
 
 import com.luxoft.logeek.entity.Pupil;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 

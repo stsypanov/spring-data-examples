@@ -1,6 +1,5 @@
 package com.luxoft.logeek.listener;
 
-import org.hibernate.HibernateException;
 import org.hibernate.event.internal.DefaultDeleteEventListener;
 import org.hibernate.event.spi.DeleteEvent;
 import org.springframework.context.annotation.Profile;

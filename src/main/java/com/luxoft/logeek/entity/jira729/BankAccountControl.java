@@ -13,6 +13,5 @@ public class BankAccountControl {
     @ManyToOne
     @JoinColumn(name ="uac_id", nullable = false)
     private UserAccount userAccount;
- 
 
 }

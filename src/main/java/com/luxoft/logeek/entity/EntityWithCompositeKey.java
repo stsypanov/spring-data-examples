@@ -5,10 +5,6 @@ import javax.persistence.Entity;
 
 @Entity
 public class EntityWithCompositeKey {
-
 	@EmbeddedId
 	private CompositeKey key;
-
-	protected EntityWithCompositeKey() {
-	}
 }
