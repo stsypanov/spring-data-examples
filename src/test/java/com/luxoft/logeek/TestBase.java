@@ -1,7 +1,6 @@
 package com.luxoft.logeek;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
-import com.luxoft.logeek.config.PersistenceConfig;
 import com.luxoft.logeek.entity.Child;
 import com.luxoft.logeek.entity.Parent;
 import com.luxoft.logeek.entity.Pupil;
@@ -13,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.transaction.AfterTransaction;
@@ -28,6 +25,7 @@ import javax.persistence.PersistenceContext;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Transactional
 @DirtiesContext
@@ -83,7 +81,7 @@ public abstract class TestBase {
 	}
 
 	protected void initRandom() {
-		random = new Random(System.nanoTime());
+		random = ThreadLocalRandom.current();
 	}
 
 	@BeforeTransaction
