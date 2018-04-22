@@ -9,8 +9,9 @@ public interface BankAccountControlRepository extends BaseJpaRepository<BankAcco
     /**
      * @see <a href="https://jira.spring.io/browse/DATAJPA-729">https://jira.spring.io/browse/DATAJPA-729</a>
      */
-    Long countByUserAccount_Id(Long id);
+    long countByUserAccount_Id(Long id);
 
-    @Query("select count(c.id) from BankAccountControl c where c.userAccount.id = ?1")
-    Long countByUserAccountId(Long id);
+    @Query("select count(c.id) from BankAccountControl c " +
+           " where c.userAccount.id = ?1")
+    long countByUserAccountId(Long id);
 }
