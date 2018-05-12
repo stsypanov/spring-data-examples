@@ -4,14 +4,14 @@ import com.luxoft.logeek.AppConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class BenchmarkBase {
-	protected Random random;
+	protected ThreadLocalRandom random;
 	protected ConfigurableApplicationContext context;
 
-	protected void initContext() {
+	void initContext() {
 		context = SpringApplication.run(AppConfig.class);
-		random = new Random();
+		random = ThreadLocalRandom.current();
 	}
 }
