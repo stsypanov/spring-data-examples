@@ -1,0 +1,18 @@
+logging.level.root: error
+logging.level.org.springframework: error
+logging.level.org.springframework.transaction: error
+logging.level.org.springframework.transaction.interceptor.TransactionInterceptor: error
+logging.level.org.springframework.orm.jpa.JpaTransactionManager: error
+logging.level.org.hibernate: error
+logging.level.org.hibernate.engine.transaction: error
+logging.level.p6spy: error
+
+spring.datasource.url: jdbc:h2:file:~/test;DB_CLOSE_ON_EXIT: FALSE
+
+spring.jpa.show-sql: false
+spring.jpa.hibernate.ddl-auto: create
+spring.jpa.properties.hibernate.dialect: com.luxoft.logeek.config.CustomH2Dialect
+
+logging.level.org.hibernate.SQL: error
+
+spring.main.banner-mode: off
