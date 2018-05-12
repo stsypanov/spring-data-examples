@@ -1,21 +1,16 @@
 package com.luxoft.logeek.data;
 
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.TestBase;
 import com.luxoft.logeek.entity.Parent;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
+@DatabaseSetup("/ProjectionVsDataTest.xml")
 @ActiveProfiles(value = "postgres", inheritProfiles = false)
 public class ProjectionVsDataTest extends TestBase {
-
-	@Before
-	@Override
-	public void setUp() {
-		super.setUp();
-	}
 
 	@Test
 	public void getChildData() {
