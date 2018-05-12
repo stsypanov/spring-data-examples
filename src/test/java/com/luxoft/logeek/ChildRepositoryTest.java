@@ -3,14 +3,12 @@ package com.luxoft.logeek;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.entity.Child;
 import org.junit.Test;
-import org.springframework.test.annotation.Commit;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-@Commit
 @DatabaseSetup("/ChildRepositoryTest.xml")
 public class ChildRepositoryTest extends TestBase {
 
