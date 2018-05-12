@@ -21,7 +21,7 @@ import java.util.List;
 				@NamedAttributeNode("toys")
 		})
 })
-public class Child implements IChild {
+public class Child {
 	public static final String PARENT = "Child[parent]";
 	public static final String TOYS = "Child[toys]";
 
