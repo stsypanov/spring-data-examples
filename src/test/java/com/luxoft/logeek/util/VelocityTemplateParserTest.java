@@ -8,7 +8,7 @@ public class VelocityTemplateParserTest {
 	private static final String query = "select c from Child c";
 	
 	@Test
-	public void parse() throws Exception {
+	public void parse() {
 		String parse = VelocityTemplateParser.template("templates/StatusTemplate.sql.vm").parse();
 		assertEquals(query, parse);
 	}

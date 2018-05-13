@@ -28,7 +28,7 @@ public class InstrumentationTest extends TestBase {
 	}
 
 	@Test
-	public void name() throws Exception {
+	public void name() {
 		List<Pupil> pupils = pupilRepository.findAll();
 		List<Pupil> updatedPupils = pupils.stream()
 				.peek(pupil -> {

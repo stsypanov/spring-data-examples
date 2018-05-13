@@ -19,13 +19,13 @@ public class ChildServiceImplTest extends TestBase{
 	@Autowired private ChildRepository childRepository;
 
 	@Test
-	public void saveChild() throws Exception {
+	public void saveChild() {
 		Parent parent = new Parent("mama");
 		childService.saveChild(new Child(parent));
 	}
 
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() {
 		List<Child> children = childRepository.findAll();
 		assertFalse(children.isEmpty());
 	}

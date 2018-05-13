@@ -14,7 +14,7 @@ public class EntityWithManyFieldsRepositoryTest extends TestBase{
 	private EntityWithManyFieldsRepository repository;
 	
 	@Test
-	public void findAllByName() throws Exception {
+	public void findAllByName() {
 		repository.save(new EntityWithManyFields(1L, "1", "ivan"));
 		
 		
