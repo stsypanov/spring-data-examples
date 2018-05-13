@@ -3,10 +3,6 @@ spring:
     hibernate:
       ddl-auto: create
     show-sql: true
-  data:
-    jpa:
-      repositories:
-        enabled: true
   main:
     banner-mode: "off"
 
