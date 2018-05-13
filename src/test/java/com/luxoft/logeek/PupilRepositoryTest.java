@@ -1,7 +1,7 @@
 package com.luxoft.logeek;
 
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.entity.Pupil;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -10,14 +10,8 @@ import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
-@SuppressWarnings("unused")
+@DatabaseSetup("/PupilRepositoryTest.xml")
 public class PupilRepositoryTest extends TestBase {
-
-    @Override
-    @Before
-    public void setUp() {
-        super.setUp();
-    }
 
     /**
      * What instance of Set will be returned in the next two methods
