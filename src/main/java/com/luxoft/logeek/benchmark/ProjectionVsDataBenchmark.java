@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-@BenchmarkMode(value = {Mode.Throughput, Mode.AverageTime})
-@OutputTimeUnit(TimeUnit.MILLISECONDS)
-@State(Scope.Benchmark)
+@BenchmarkMode(value = Mode.AverageTime)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
+@State(Scope.Thread)
 public class ProjectionVsDataBenchmark extends BenchmarkBase {
 	private EntityWithManyFieldsRepository repository;
 
-	@Setup()
+	@Setup
 	public void init() {
 		super.initContext();
 		repository = context.getBean(EntityWithManyFieldsRepository.class);
