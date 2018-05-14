@@ -1,21 +1,17 @@
 package com.luxoft.logeek.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
 @EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class CompositeKey implements Serializable {
 	private Long key1;
 	private Long key2;
-
-	public CompositeKey(Long key1, Long key2) {
-		this.key1 = key1;
-		this.key2 = key2;
-	}
-
-	protected CompositeKey() {
-	}
 }
