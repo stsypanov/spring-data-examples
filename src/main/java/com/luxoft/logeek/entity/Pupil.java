@@ -18,7 +18,7 @@ public class Pupil {
 	private Long id;
 
 	@Column
-	private int age;
+	public int age;
 	
 	@Column
 	private String name;
