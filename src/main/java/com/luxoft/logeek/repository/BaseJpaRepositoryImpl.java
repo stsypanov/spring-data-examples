@@ -108,13 +108,13 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 
 		Root<T> from = query.from(getDomainClass());
 
-		Predicate predicate = toPredicate(cb, ids, from);
+		Predicate predicate = predicate(cb, ids, from);
 		query = query.select(from).where(predicate);
 
 		return entityManager.createQuery(query).getResultList();
 	}
 
-	private Predicate toPredicate(CriteriaBuilder cb, Collection<ID> ids, Root<T> root) {
+	private Predicate predicate(CriteriaBuilder cb, Collection<ID> ids, Root<T> root) {
 		ArrayList<ID> idList = new ArrayList<>(ids);
 		List<List<ID>> chunks = Lists.partition(idList, OracleConstants.MAX_IN_COUNT);
 
