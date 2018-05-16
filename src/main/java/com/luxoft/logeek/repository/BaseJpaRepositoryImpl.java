@@ -129,13 +129,4 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 		return cb.or(predicates);
 	}
 
-//	private List<T> findAll(Set<ID> uniqueIds) {
-//		List<ID> ids = Lists.newArrayList(uniqueIds);
-//
-//		List<List<ID>> idChunks = Lists.partition(ids, OracleConstants.MAX_IN_COUNT);
-//		return idChunks.stream()
-//				.map(super::findAllById)
-//				.flatMap(List::stream)
-//				.collect(Collectors.toList());
-//	}
 }
