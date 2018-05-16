@@ -20,6 +20,7 @@ import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements BaseJpaRepository<T, ID> {
 
@@ -102,28 +103,13 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 		return findAll(idsCopy);
 	}
 
-	private List<T> findAll(Collection<ID> ids) {
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-		CriteriaQuery<T> query = cb.createQuery(getDomainClass());
+	private List<T> findAll(Set<ID> uniqueIds) {
+		List<ID> ids = Lists.newArrayList(uniqueIds);
 
-		Root<T> from = query.from(getDomainClass());
-
-		Predicate predicate = toPredicate(cb, ids, from);
-		query = query.select(from).where(predicate);
-
-		return entityManager.createQuery(query).getResultList();
+		List<List<ID>> idChunks = Lists.partition(ids, OracleConstants.MAX_IN_COUNT);
+		return idChunks.stream()
+				.map(super::findAllById)
+				.flatMap(List::stream)
+				.collect(Collectors.toList());
 	}
-
-	private Predicate toPredicate(CriteriaBuilder cb, Collection<ID> ids, Root<T> root) {
-		ArrayList<ID> idList = new ArrayList<>(ids);
-		List<List<ID>> chunks = Lists.partition(idList, OracleConstants.MAX_IN_COUNT);
-
-		SingularAttribute<? super T, ?> id = entityInfo.getIdAttribute();
-
-		Predicate[] predicates = chunks.stream()
-				.map(chunk -> root.get(id).in(chunk))
-				.toArray(Predicate[]::new);
-		return cb.or(predicates);
-	}
-
 }
