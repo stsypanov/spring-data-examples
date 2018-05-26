@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 public interface BankAccountControlRepository extends BaseJpaRepository<BankAccountControl, Long> {
 
     /**
+     * Bug: unnecessary left outer join
      * @see <a href="https://jira.spring.io/browse/DATAJPA-729">https://jira.spring.io/browse/DATAJPA-729</a>
      */
     long countByUserAccount_Id(Long id);
