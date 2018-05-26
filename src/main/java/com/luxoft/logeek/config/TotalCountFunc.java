@@ -31,7 +31,7 @@ public class TotalCountFunc implements SQLFunction {
 			throw new IllegalArgumentException("Only 1 argument must be passed into total_count() ");
 		}
 
-		return " count(" + String.valueOf(arguments.get(0)) + ") over () ";
+		return " count(" + arguments.get(0) + ") over () ";
 	}
 
 }
