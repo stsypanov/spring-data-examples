@@ -91,6 +91,8 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 
 	@Override
 	public List<T> findAllById(Iterable<ID> ids) {
+        Assert.notNull(ids, "The given Iterable of Id's must not be null!");
+
         Set<ID> idsCopy = Sets.newHashSet(ids);
 
         if (idsCopy.size() <= OracleConstants.MAX_IN_COUNT) {
