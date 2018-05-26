@@ -2,6 +2,7 @@ package com.luxoft.logeek.repository.datajpa729;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.TestBase;
+import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,13 +12,23 @@ import static org.junit.Assert.*;
 public class BankAccountControlRepositoryTest extends TestBase {
     @Autowired
     BankAccountControlRepository bankAccountControlRepository;
+    private Long count1;
+    private Long count2;
+
+    @Test
+    public void countByUserAccountId() {
+        count1 = bankAccountControlRepository.countByUserAccountId(1L);
+    }
 
     @Test
     public void countByUserAccount_Id() {
-        long count1 = bankAccountControlRepository.countByUserAccount_Id(1L);
+        count2 = bankAccountControlRepository.countByUserAccount_Id(1L);
+    }
 
-        long count2 = bankAccountControlRepository.countByUserAccountId(1L);
-
-        assertEquals(count1, count2);
+    @After
+    public void tearDown() {
+        if (count1 != null && count2 != null) {
+            assertEquals(count1, count2);
+        }
     }
 }
