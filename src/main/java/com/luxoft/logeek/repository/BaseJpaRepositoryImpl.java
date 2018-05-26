@@ -33,11 +33,6 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 	}
 
 	@Override
-	public void setRepositoryMethodMetadata(CrudMethodMetadata crudMethodMetadata) {
-		super.setRepositoryMethodMetadata(crudMethodMetadata);
-	}
-
-	@Override
 	public T findOne(ID id, String graphName) {
 		return findOne(id, graphName, false);
 	}
