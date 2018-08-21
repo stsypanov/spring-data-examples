@@ -84,11 +84,13 @@ public abstract class TestBase {
 
 	@BeforeTransaction
 	public void beforeTransaction() {
-		System.out.println("transaction begins");
+		System.out.println("------------------");
+		System.out.println("Transaction begins");
 	}
 
 	@AfterTransaction
 	public void afterTransaction() {
-		System.out.println("transaction is over");
+		System.out.println("------------------");
+		System.out.println("Transaction finished");
 	}
 }
