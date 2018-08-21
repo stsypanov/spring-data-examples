@@ -14,7 +14,7 @@ import static java.util.stream.Collectors.toList;
 //@BenchmarkMode(value = {Mode.AverageTime})
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)
-public class BiteCodeInstrumentationBenchmark extends BenchmarkBase {
+public class ByteCodeInstrumentationBenchmark extends BenchmarkBase {
 	private EntityWithManyStringFieldsRepository repository;
 
 	@Setup
