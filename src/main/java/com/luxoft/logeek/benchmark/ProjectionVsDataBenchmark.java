@@ -1,41 +1,50 @@
 package com.luxoft.logeek.benchmark;
 
 import com.luxoft.logeek.data.HasIdAndName;
+import com.luxoft.logeek.data.IdAndNameDto;
 import com.luxoft.logeek.entity.EntityWithManyFields;
 import com.luxoft.logeek.repository.EntityWithManyFieldsRepository;
-import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.TearDown;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-@BenchmarkMode(value = Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
 @State(Scope.Thread)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
+@BenchmarkMode(value = Mode.AverageTime)
 public class ProjectionVsDataBenchmark extends BenchmarkBase {
-	private EntityWithManyFieldsRepository repository;
+    private EntityWithManyFieldsRepository repository;
 
-	@Setup
-	public void init() {
-		super.initContext();
-		repository = context.getBean(EntityWithManyFieldsRepository.class);
-		List<EntityWithManyFields> entities = random
-				.longs(5000, 0, 400)
-				.boxed()
-				.map(randomLong -> new EntityWithManyFields(randomLong, String.valueOf(randomLong), "ivan"))
-				.collect(Collectors.toList());
+    @Setup
+    public void before() {
+        super.initContext();
+        repository = context.getBean(EntityWithManyFieldsRepository.class);
+        IntStream.range(0, 10)
+                .boxed()
+                .map(id -> new EntityWithManyFields(id, "ivan"))
+                .forEach(repository::save);
+    }
 
-		repository.saveAll(entities);
-	}
+    @TearDown
+    public void after() {
+        repository.deleteAllInBatch();
+    }
 
-	@Benchmark
-	public Collection<HasIdAndName> findAllByNameUsingObject() {
-		return repository.findAllByNameUsingObject("ivan");
-	}
+    @Benchmark
+    public List<IdAndNameDto> findAllByNameUsingObject() {
+        return repository.findAllByNameUsingDto("ivan");
+    }
 
-	@Benchmark
-	public Collection<HasIdAndName> findAllByName() {
-		return repository.findAllByName("ivan");
-	}
+    @Benchmark
+    public List<HasIdAndName> findAllByName() {
+        return repository.findAllByName("ivan");
+    }
 }

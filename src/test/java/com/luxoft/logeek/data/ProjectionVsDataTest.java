@@ -9,7 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 import java.util.List;
 
 @DatabaseSetup("/ProjectionVsDataTest.xml")
-@ActiveProfiles(value = "postgres", inheritProfiles = false)
+@ActiveProfiles(value = "h2", inheritProfiles = false)
 public class ProjectionVsDataTest extends TestBase {
 
 	@Test
