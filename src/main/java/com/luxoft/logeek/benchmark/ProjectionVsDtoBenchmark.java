@@ -2,8 +2,8 @@ package com.luxoft.logeek.benchmark;
 
 import com.luxoft.logeek.data.HasIdAndName;
 import com.luxoft.logeek.data.IdAndNameDto;
-import com.luxoft.logeek.entity.EntityWithManyFields;
-import com.luxoft.logeek.repository.EntityWithManyFieldsRepository;
+import com.luxoft.logeek.entity.SimpleEntity;
+import com.luxoft.logeek.repository.SimpleEntityRepository;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
@@ -20,16 +20,16 @@ import java.util.stream.IntStream;
 @State(Scope.Thread)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @BenchmarkMode(value = Mode.AverageTime)
-public class ProjectionVsDataBenchmark extends BenchmarkBase {
-    private EntityWithManyFieldsRepository repository;
+public class ProjectionVsDtoBenchmark extends BenchmarkBase {
+    private SimpleEntityRepository repository;
 
     @Setup
     public void before() {
         super.initContext();
-        repository = context.getBean(EntityWithManyFieldsRepository.class);
+        repository = context.getBean(SimpleEntityRepository.class);
         IntStream.range(0, 10)
                 .boxed()
-                .map(id -> new EntityWithManyFields(id, "ivan"))
+                .map(id -> new SimpleEntity(id, "ivan"))
                 .forEach(repository::save);
     }
 

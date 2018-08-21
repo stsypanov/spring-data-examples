@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EntityWithManyFields {
+public class SimpleEntity {
     @Id
     private int id;
 
