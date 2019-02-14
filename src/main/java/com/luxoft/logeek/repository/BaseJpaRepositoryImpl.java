@@ -23,8 +23,8 @@ import java.util.*;
 
 public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements BaseJpaRepository<T, ID> {
 
-	private JpaEntityInformation<T, ?> entityInfo;
-	private EntityManager entityManager;
+	private final JpaEntityInformation<T, ?> entityInfo;
+	private final EntityManager entityManager;
 
 	public BaseJpaRepositoryImpl(JpaEntityInformation<T, ?> entityInfo, EntityManager entityManager) {
 		super(entityInfo, entityManager);
@@ -91,11 +91,11 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 
 	@Override
 	public List<T> findAllById(Iterable<ID> ids) {
-        Assert.notNull(ids, "The given Iterable of Id's must not be null!");
+		Assert.notNull(ids, "The given Iterable of Id's must not be null!");
 
-        Set<ID> idsCopy = Sets.newHashSet(ids);
+		Set<ID> idsCopy = Sets.newHashSet(ids);
 
-        if (idsCopy.size() <= OracleConstants.MAX_IN_COUNT) {
+		if (idsCopy.size() <= OracleConstants.MAX_IN_COUNT) {
 			return super.findAllById(ids);
 		}
 
