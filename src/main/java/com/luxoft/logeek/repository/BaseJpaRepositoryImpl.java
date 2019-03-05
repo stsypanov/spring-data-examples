@@ -6,7 +6,6 @@ import com.luxoft.logeek.misc.OracleConstants;
 import org.hibernate.Session;
 import org.hibernate.StatelessSession;
 import org.hibernate.jpa.QueryHints;
-import org.springframework.data.jpa.repository.support.CrudMethodMetadata;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.util.Assert;
