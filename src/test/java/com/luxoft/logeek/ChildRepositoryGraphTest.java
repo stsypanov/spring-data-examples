@@ -1,34 +1,18 @@
 package com.luxoft.logeek;
 
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.entity.Child;
-import com.luxoft.logeek.entity.Parent;
+
 import org.hibernate.Hibernate;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.test.annotation.Commit;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-@Ignore
-@Commit
+@DatabaseSetup("/ChildRepositoryGraphTest.xml")
 public class ChildRepositoryGraphTest extends TestBase {
 
-	private Long childId;
-
-	@Override
-	@Before
-	public void setUp() {
-		Parent papa = new Parent("папа");
-
-		Child child1 = new Child(papa);
-
-		childRepository.save(child1);
-
-		childId = child1.getId();
-	}
+	private final Long childId = 1L;
 
 	@Test
 	public void testGraph_expectFieldInitialized() {
@@ -46,8 +30,4 @@ public class ChildRepositoryGraphTest extends TestBase {
 		assertFalse(initialized);
 	}
 
-	@After
-	public void tearDown() {
-		childRepository.deleteAll();
-	}
 }
