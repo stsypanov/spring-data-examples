@@ -16,13 +16,13 @@ public class ChildRepositoryImpl extends BaseDao implements ChildRepositoryCusto
   private final TemplateParser templateParser;
 
   @Override
-  public List<Child> findUsingTemplate(boolean fetchParent, boolean fetchToys, boolean orderByAge) {
+  public List<Child> findAll(boolean fetchParent, boolean fetchToys, boolean orderByAge) {
     Map<String, Object> params = new HashMap<>();
     params.put("fetchParent", fetchParent);
     params.put("fetchToys", fetchToys);
     params.put("orderByAge", orderByAge);
 
-    String query = templateParser.parseFreeMarker(BASE_CHILD_TEMPLATE.name, params);
+    String query = templateParser.prepareQuery(BASE_CHILD_TEMPLATE.name, params);
 
     return em.createQuery(query, Child.class).getResultList();
   }

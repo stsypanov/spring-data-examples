@@ -15,9 +15,8 @@ public class TemplateParser {
   private final Configuration configuration;
 
   @SneakyThrows
-  public String parseFreeMarker(String templateName, Map<String, Object> params){
+  public String prepareQuery(String templateName, Map<String, Object> params){
     Template template = configuration.getTemplate(templateName);
-    String string = FreeMarkerTemplateUtils.processTemplateIntoString(template, params);
-    return string;
+    return FreeMarkerTemplateUtils.processTemplateIntoString(template, params);
   }
 }

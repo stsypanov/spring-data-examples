@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
-
 public class TemplateParserTest extends TestBase {
   @Autowired
   private TemplateParser templateParser;
@@ -20,6 +18,6 @@ public class TemplateParserTest extends TestBase {
     params.put("fetchToys", true);
     params.put("orderByAge", true);
 
-    templateParser.parseFreeMarker("BaseChildTemplate.hql.ftl", params);
+    templateParser.prepareQuery("BaseChildTemplate.hql.ftl", params);
   }
 }
