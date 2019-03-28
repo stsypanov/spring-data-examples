@@ -2,12 +2,12 @@ package com.luxoft.logeek;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.entity.Child;
+import org.hibernate.Hibernate;
 import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 @DatabaseSetup("/ChildRepositoryTest.xml")
 public class ChildRepositoryTest extends TestBase {
@@ -46,10 +46,17 @@ public class ChildRepositoryTest extends TestBase {
     }
 
     @Test
-    public void testFindWithTemplate() {
-        List<Child> children = childRepository.findAll(false, false, false);
-        assertFalse(children.isEmpty());
+    public void testFindWithTemplateFetchingParent() {
+        List<Child> children = childRepository.findAll(true, false, false);
+
+        children.forEach(child -> assertTrue(Hibernate.isInitialized(child.getParent())));
     }
 
+    @Test
+    public void testFindWithTemplateNotFetchingParent() {
+        List<Child> children = childRepository.findAll(false, false, false);
+
+        children.forEach(child -> assertFalse(Hibernate.isInitialized(child.getParent())));
+    }
 
 }
