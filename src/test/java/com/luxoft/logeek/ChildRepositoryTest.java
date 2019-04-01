@@ -1,15 +1,15 @@
 package com.luxoft.logeek;
 
-import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.entity.Child;
 import org.hibernate.Hibernate;
 import org.junit.Test;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
 import static org.junit.Assert.*;
 
-@DatabaseSetup("/ChildRepositoryTest.xml")
+@Sql("/ChildRepositoryTest.sql")
 public class ChildRepositoryTest extends TestBase {
 
     @Test

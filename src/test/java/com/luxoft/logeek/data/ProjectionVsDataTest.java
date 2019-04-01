@@ -1,14 +1,14 @@
 package com.luxoft.logeek.data;
 
-import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.TestBase;
 import com.luxoft.logeek.entity.Parent;
 import org.junit.Test;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
-@DatabaseSetup("/ProjectionVsDataTest.xml")
+@Sql("/ProjectionVsDataTest.sql")
 @ActiveProfiles(value = "h2", inheritProfiles = false)
 public class ProjectionVsDataTest extends TestBase {
 

@@ -1,14 +1,13 @@
 package com.luxoft.logeek.repository;
 
-import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.TestBase;
 import com.luxoft.logeek.entity.Pupil;
 import org.hibernate.jpa.QueryHints;
+import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.springframework.test.annotation.Commit;
-import org.springframework.test.context.transaction.AfterTransaction;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,8 +17,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 
 
-@Commit
-@DatabaseSetup("/BaseJpaRepositoryImplFindOneReadOnlyTest.xml")
+@Sql(value = "/BaseJpaRepositoryImplFindOneReadOnlyTest.sql")
 public class BaseJpaRepositoryImplFindOneReadOnlyTest extends TestBase {
 
 	private final Long pupilId = 1L;
@@ -62,7 +60,7 @@ public class BaseJpaRepositoryImplFindOneReadOnlyTest extends TestBase {
 		pupilRepository.findOneStateless(pupilId).setAge(newAge);
 	}
 
-	@AfterTransaction
+	@After
 	public void afterTransaction() {
 		int actualAge = pupilRepository.findById(pupilId).map(Pupil::getAge).orElseThrow(RuntimeException::new);
 

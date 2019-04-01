@@ -1,18 +1,17 @@
 package com.luxoft.logeek.service.impl;
 
-import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.TestBase;
 import com.luxoft.logeek.entity.Pupil;
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Commit;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.transaction.AfterTransaction;
 
 import static org.junit.Assert.assertEquals;
 
 @Commit
-@DatabaseSetup("/ModifierTest.xml")
+@Sql("/ModifierTest.sql")
 public class ModifierTest extends TestBase {
     @Autowired
     private Modifier modifier;

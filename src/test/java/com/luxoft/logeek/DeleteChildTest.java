@@ -1,15 +1,13 @@
 package com.luxoft.logeek;
 
-import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.entity.Parent;
 import org.junit.Test;
-import org.springframework.test.annotation.Commit;
+import org.springframework.test.context.jdbc.Sql;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-@Commit
-@DatabaseSetup("/DeleteChildTest.xml")
+@Sql("/DeleteChildTest.sql")
 public class DeleteChildTest extends TestBase {
 
     private Long papaId = 1L;

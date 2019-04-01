@@ -1,7 +1,0 @@
-<dataset>
-    <entity_with_composite_key key1 = "1" key2="1"/>
-    <entity_with_composite_key key1 = "2" key2="2"/>
-    <entity_with_composite_key key1 = "3" key2="3"/>
-    <entity_with_composite_key key1 = "4" key2="4"/>
-    <entity_with_composite_key key1 = "5" key2="5"/>
-</dataset>

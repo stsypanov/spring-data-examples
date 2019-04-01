@@ -1,9 +1,0 @@
-<dataset>
-    <daily_record id = "1" currency = "RUB" record_rate = "1.0" fixed_rate = "1.0"/>
-    <daily_record id = "2" currency = "RUB" record_rate = "2.0" fixed_rate = "2.0"/>
-    <daily_record id = "3" currency = "RUB" record_rate = "3.0" fixed_rate = "3.0"/>
-    <daily_record id = "4" currency = "EUR" record_rate = "4.0" fixed_rate = "4.0"/>
-    <daily_record id = "5" currency = "EUR" record_rate = "5.0" fixed_rate = "5.0"/>
-    <daily_record id = "6" currency = "EUR" record_rate = "6.0" fixed_rate = "6.0"/>
-    <daily_record id = "7" currency = "USD" record_rate = "7.0" fixed_rate = "7.0"/>
-</dataset>

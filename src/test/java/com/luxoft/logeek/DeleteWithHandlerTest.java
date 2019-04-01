@@ -1,17 +1,17 @@
 package com.luxoft.logeek;
 
-import com.github.springtestdbunit.annotation.DatabaseSetup;
 import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.springframework.test.annotation.Commit;
+import org.springframework.test.context.jdbc.Sql;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 @Commit
-@DatabaseSetup("/DeleteWithHandlerTest.xml")
+@Sql("/DeleteWithHandlerTest.sql")
 public class DeleteWithHandlerTest extends TestBase {
     @Rule
     public ExpectedException exception = ExpectedException.none();

@@ -1,9 +1,0 @@
-<dataset>
-    <Parent id = "1" name = "папа"/>
-
-    <Child id = "1" parent_id="1" age="1" />
-    <Child id = "2" parent_id="1" age="2" />
-    <Child id = "3" parent_id="1" age="3" />
-    <Child id = "4" parent_id="1" age="4" />
-    <Child id = "5" parent_id="1" age="5" />
-</dataset>

@@ -1,6 +1,0 @@
-<dataset>
-    <Parent id = "1" name = "папа"/>
-
-    <Child id = "11" age="10" />
-</dataset>
-

@@ -1,8 +1,8 @@
 package com.luxoft.logeek;
 
-import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.entity.Pupil;
 import org.junit.Test;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -10,7 +10,7 @@ import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
-@DatabaseSetup("/PupilRepositoryTest.xml")
+@Sql("/PupilRepositoryTest.sql")
 public class PupilRepositoryTest extends TestBase {
 
     /**

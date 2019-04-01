@@ -4,6 +4,7 @@ import com.luxoft.logeek.entity.Pupil;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertFalse;
@@ -15,7 +16,16 @@ public class DeleteAllPupilsTest extends TestBase {
     @Override
     @Before
     public void setUp() {
-        super.setUp();
+        List<Pupil> pupils = Arrays.asList(
+                new Pupil(1),
+                new Pupil(2),
+                new Pupil(3),
+                new Pupil(4),
+                new Pupil(5),
+                new Pupil(6)
+        );
+        pupilRepository.saveAll(pupils);
+        pupilRepository.flush();
     }
 
     /**

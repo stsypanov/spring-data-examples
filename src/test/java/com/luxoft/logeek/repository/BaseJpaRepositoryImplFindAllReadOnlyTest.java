@@ -1,11 +1,11 @@
 package com.luxoft.logeek.repository;
 
-import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.TestBase;
 import com.luxoft.logeek.entity.Pupil;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.test.annotation.Commit;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.transaction.AfterTransaction;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import static org.junit.Assert.assertNotEquals;
 
 @Commit
 @Ignore
-@DatabaseSetup("/BaseJpaRepositoryImplFindAllReadOnlyTest.xml")
+@Sql("/BaseJpaRepositoryImplFindAllReadOnlyTest.sql")
 public class BaseJpaRepositoryImplFindAllReadOnlyTest extends TestBase {
 	private final Integer newAge = 0;
 

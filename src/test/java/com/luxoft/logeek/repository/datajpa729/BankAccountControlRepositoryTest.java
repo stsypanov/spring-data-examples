@@ -1,14 +1,14 @@
 package com.luxoft.logeek.repository.datajpa729;
 
-import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.TestBase;
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.jdbc.Sql;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-@DatabaseSetup("/BankAccountControlRepositoryTest.xml")
+@Sql("/BankAccountControlRepositoryTest.sql")
 public class BankAccountControlRepositoryTest extends TestBase {
     @Autowired
     BankAccountControlRepository bankAccountControlRepository;

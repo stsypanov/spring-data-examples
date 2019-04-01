@@ -1,11 +1,11 @@
 package com.luxoft.logeek;
 
-import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.entity.Child;
 
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by Сергей on 02.04.2017.
  */
-@DatabaseSetup("/ChildServiceImplTest.xml")
+@Sql("/ChildServiceImplTest.sql")
 public class ChildServiceImplTest extends TestBase {
     @Autowired
     private ChildService childService;

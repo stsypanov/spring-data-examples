@@ -1,15 +1,13 @@
 package com.luxoft.logeek;
 
-import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.entity.Child;
+import org.junit.After;
 import org.junit.Test;
-import org.springframework.test.annotation.Commit;
-import org.springframework.test.context.transaction.AfterTransaction;
+import org.springframework.test.context.jdbc.Sql;
 
 import static org.junit.Assert.assertNotNull;
 
-@Commit
-@DatabaseSetup("/BlindFindOneTest.xml")
+@Sql("/BlindFindOneTest.sql")
 public class BlindFindOneTest extends TestBase {
 
     private Long childId;
@@ -31,7 +29,7 @@ public class BlindFindOneTest extends TestBase {
         childId = childRepository.save(child).getId();
     }
 
-    @AfterTransaction
+    @After
     public void after() {
         final Child child = childRepository.findById(childId).orElse(null);
         assertNotNull(child);

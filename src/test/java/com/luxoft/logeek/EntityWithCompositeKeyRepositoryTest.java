@@ -1,18 +1,18 @@
 package com.luxoft.logeek;
 
-import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.entity.CompositeKey;
 import com.luxoft.logeek.repository.EntityWithCompositeKeyRepository;
 import com.luxoft.logeek.repository.another.AnotherEntityWithCompositeKeyRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-@DatabaseSetup("/EntityWithCompositeKeyRepositoryTest.xml")
+@Sql("/EntityWithCompositeKeyRepositoryTest.sql")
 public class EntityWithCompositeKeyRepositoryTest extends TestBase {
 
     @Autowired

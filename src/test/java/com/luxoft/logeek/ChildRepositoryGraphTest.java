@@ -1,15 +1,15 @@
 package com.luxoft.logeek;
 
-import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.entity.Child;
 
 import org.hibernate.Hibernate;
 import org.junit.Test;
+import org.springframework.test.context.jdbc.Sql;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-@DatabaseSetup("/ChildRepositoryGraphTest.xml")
+@Sql("/ChildRepositoryGraphTest.sql")
 public class ChildRepositoryGraphTest extends TestBase {
 
 	private final Long childId = 1L;

@@ -1,18 +1,18 @@
 package com.luxoft.logeek.repository;
 
-import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.luxoft.logeek.TestBase;
 import com.luxoft.logeek.entity.DailyRecord;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
 @ActiveProfiles(value = "oracle", inheritProfiles = false)
-@DatabaseSetup("/DailyRecordRepositoryTest.xml")
+@Sql("/DailyRecordRepositoryTest.sql")
 public class DailyRecordRepositoryTest extends TestBase {
   @Autowired
   private DailyRecordRepository dailyRecordRepository;
