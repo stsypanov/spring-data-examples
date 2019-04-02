@@ -5,17 +5,16 @@ import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
 
 public class CustomSqlFormatter implements MessageFormattingStrategy {
 
-	@Override
-	public String formatMessage(int connectionId, String now, long elapsed, String category, String prepared, String sql) {
-		return new StringBuilder("elapsed: ")
-				.append(elapsed)
-				.append(" ms;\nprepared:\n")
-				.append(P6Util.singleLine(prepared))
-				.append("\nsql:\n")
-				.append(P6Util.singleLine(sql))
-				.append("\ncategory: ")
-				.append(category)
-				.append("\n")
-				.toString();
-	}
+  @Override
+  public String formatMessage(int connectionId, String now, long elapsed, String category, String prepared, String sql, String url) {
+    return "elapsed: " +
+            elapsed +
+            " ms;\nprepared:\n" +
+            P6Util.singleLine(prepared) +
+            "\nsql:\n" +
+            P6Util.singleLine(sql) +
+            "\ncategory: " +
+            category +
+            '\n';
+  }
 }
