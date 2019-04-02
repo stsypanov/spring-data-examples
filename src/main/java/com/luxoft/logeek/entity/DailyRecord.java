@@ -15,28 +15,20 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class DailyRecord {
-    @Id
-    @GeneratedValue
-    private Long id;
+  @Id
+  @GeneratedValue
+  private Long id;
 
-    @Column
-    private String currency;
+  @Column
+  private String currency;
 
-    @Column(name = "record_rate")
-    private BigDecimal rate;
+  @Column(name = "record_rate")
+  private BigDecimal rate;
 
-    @Column(name = "fixed_rate")
-    private BigDecimal fxRate;
+  @Column(name = "fixed_rate")
+  private BigDecimal fxRate;
 
-    @Setter(value = AccessLevel.PACKAGE)
-    @Formula("select avg(rec.record_rate) from daily_record rec where rec.currency = currency")
-    private BigDecimal avgRate;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+  @Setter(value = AccessLevel.PRIVATE)
+  @Formula("select avg(r.record_rate) from daily_record r where r.currency = currency")
+  private BigDecimal avgRate;
 }

@@ -14,15 +14,19 @@ import static org.junit.Assert.assertEquals;
 @ActiveProfiles(value = "oracle", inheritProfiles = false)
 @DatabaseSetup("/DailyRecordRepositoryTest.xml")
 public class DailyRecordRepositoryTest extends TestBase {
-    @Autowired
-    private DailyRecordRepository dailyRecordRepository;
+  @Autowired
+  private DailyRecordRepository dailyRecordRepository;
 
-    @Test
-    public void findRateByCurrency() {
-        DailyRecord record = dailyRecordRepository.findById(1L).orElseThrow(NullPointerException::new);
-        BigDecimal expected = BigDecimal.valueOf(2);
+  @Test
+  public void findById() {
+    DailyRecord record = dailyRecordRepository.findById(1L).orElseThrow(NullPointerException::new);
+    BigDecimal expected = BigDecimal.valueOf(2);
 
-        assertEquals(0, record.getAvgRate().compareTo(expected));
-    }
+    assertEquals(0, record.getAvgRate().compareTo(expected));
+  }
 
+  @Test
+  public void findRateByCurrency() {
+    dailyRecordRepository.findRateByCurrency("USD");
+  }
 }
