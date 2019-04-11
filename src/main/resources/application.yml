@@ -1,12 +1,4 @@
-logging.level.roo: error
-logging.level.org.springframework: error
-logging.level.org.springframework.transaction: error
-logging.level.org.springframework.transaction.interceptor.TransactionInterceptor: error
-logging.level.org.springframework.orm.jpa.JpaTransactionManager: error
-logging.level.org.hibernate: error
-logging.level.org.hibernate.engine.transaction: error
-logging.level.p6spy: error
-logging.level.org.hibernate.SQL: error
+logging.level.root: error
 
 spring.main.banner-mode: "off"
 spring:
