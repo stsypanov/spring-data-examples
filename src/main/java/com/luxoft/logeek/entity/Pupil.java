@@ -7,7 +7,11 @@ import org.hibernate.annotations.DynamicUpdate;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
 @EntityListeners({PupilListener.class})
@@ -17,34 +21,34 @@ import java.time.LocalDate;
 @DynamicUpdate
 public class Pupil {
 
-	@Id
-	@GeneratedValue
-	private Long id;
+  @Id
+  @GeneratedValue
+  private Long id;
 
-	@Column
-	public int age;
-	
-	@Column
-	private String name;
+  @Column
+  public int age;
 
-	@Column
-	private String lastName;
+  @Column
+  private String name;
 
-	@Column
-	private String schoolName;
-	
-	@Column
-	private LocalDate enrolled;
+  @Column
+  private String lastName;
 
-	protected Pupil() {
-	}
+  @Column
+  private String schoolName;
 
-	public Pupil(int age) {
-		this.age = age;
-	}
+  @Column
+  private LocalDate enrolled;
 
-	public Pupil(int age, String name) {
-		this.age = age;
-		this.name = name;
-	}
+  protected Pupil() {
+  }
+
+  public Pupil(int age) {
+    this.age = age;
+  }
+
+  public Pupil(int age, String name) {
+    this.age = age;
+    this.name = name;
+  }
 }

@@ -2,7 +2,14 @@ package com.luxoft.logeek.benchmark;
 
 import com.luxoft.logeek.entity.Pupil;
 import com.luxoft.logeek.repository.PupilRepository;
-import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.State;
 
 import java.util.List;
 import java.util.Set;

@@ -2,7 +2,13 @@ package com.luxoft.logeek.benchmark;
 
 import com.luxoft.logeek.entity.EntityWithManyStringFields;
 import com.luxoft.logeek.repository.EntityWithManyStringFieldsRepository;
-import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.State;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
