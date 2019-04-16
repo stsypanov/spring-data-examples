@@ -36,7 +36,7 @@ group = 'com.luxoft.logeek'
 version = '1.0-SNAPSHOT'
 description = 'Examples for Luxoft Logeek Night Spring Data talk'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 11
 
 tasks.withType(JavaCompile) {
   options.encoding = 'UTF-8'
