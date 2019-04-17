@@ -21,44 +21,29 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements BaseJpaRepository<T, ID> {
 
-	private final JpaEntityInformation<T, ?> entityInfo;
-	private final EntityManager entityManager;
+  private final JpaEntityInformation<T, ?> entityInfo;
+  private final EntityManager entityManager;
 
-	public BaseJpaRepositoryImpl(JpaEntityInformation<T, ?> entityInfo, EntityManager entityManager) {
-		super(entityInfo, entityManager);
-		this.entityInfo = entityInfo;
-		this.entityManager = entityManager;
-	}
+  public BaseJpaRepositoryImpl(JpaEntityInformation<T, ?> entityInfo, EntityManager entityManager) {
+    super(entityInfo, entityManager);
+    this.entityInfo = entityInfo;
+    this.entityManager = entityManager;
+  }
 
-	@Override
-	public T findOne(ID id, String graphName) {
-		return findOne(id, graphName, false);
-	}
+  @Override
+  public T findOne(ID id, String graphName) {
+    EntityGraph<?> graph = entityManager.getEntityGraph(graphName);
 
-	@Override
-	public T findOne(ID id, String graphName, boolean readOnly) {
-		Assert.notNull(id, "The given id must not be null!");
+    Map<String, Object> hints = Collections.singletonMap(QueryHints.HINT_LOADGRAPH, graph);
 
-		EntityGraph<?> entityGraph = entityManager.getEntityGraph(graphName);
-
-		return this.findOne(id, entityGraph, readOnly);
-	}
-
-	@Override
-	public T findOne(ID id, EntityGraph graph, boolean readOnly) {
-		Map<String, Object> hints = new HashMap<>();
-		hints.put(QueryHints.HINT_READONLY, readOnly);
-		hints.put(QueryHints.HINT_LOADGRAPH, graph);
-
-		return entityManager.find(getDomainClass(), id, hints);
-	}
+    return entityManager.find(getDomainClass(), id, hints);
+  }
 
 	@Override
 	public T findOne(ID id, boolean readOnly) {
@@ -75,60 +60,48 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 				.getSingleResult();
 	}
 
-	@Override
-	public T findOneStateless(ID id) {
-		try (StatelessSession statelessSession = entityManager.unwrap(Session.class).getSessionFactory().openStatelessSession()) {
-			return (T) statelessSession.get(getDomainClass(), id);
-		}
-	}
+  @Override
+  public T findOneStateless(ID id) {
+    try (StatelessSession statelessSession = entityManager.unwrap(Session.class).getSessionFactory().openStatelessSession()) {
+      return (T) statelessSession.get(getDomainClass(), id);
+    }
+  }
 
+  @Override
+  public List<T> findAllById(Iterable<ID> ids) {
+    Assert.notNull(ids, "The given Iterable of Id's must not be null!");
 
-/*
-    //This does not turn off dirty checking
-	@Override
-	public T findOne(ID id, boolean readOnly) {
-		Map<String, Object> hints = new HashMap<>();
-		hints.put(QueryHints.HINT_READONLY, readOnly);
+    Set<ID> idsCopy = Sets.newHashSet(ids);
 
-		return entityManager.find(getDomainClass(), id, hints);
-	}
-*/
+    if (idsCopy.size() <= OracleConstants.MAX_IN_COUNT) {
+      return super.findAllById(ids);
+    }
 
-	@Override
-	public List<T> findAllById(Iterable<ID> ids) {
-		Assert.notNull(ids, "The given Iterable of Id's must not be null!");
+    return findAll(idsCopy);
+  }
 
-		Set<ID> idsCopy = Sets.newHashSet(ids);
+  private List<T> findAll(Collection<ID> ids) {
+    CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+    CriteriaQuery<T> query = cb.createQuery(getDomainClass());
 
-		if (idsCopy.size() <= OracleConstants.MAX_IN_COUNT) {
-			return super.findAllById(ids);
-		}
+    Root<T> from = query.from(getDomainClass());
 
-		return findAll(idsCopy);
-	}
+    Predicate predicate = toPredicate(cb, ids, from);
+    query = query.select(from).where(predicate);
 
-	private List<T> findAll(Collection<ID> ids) {
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-		CriteriaQuery<T> query = cb.createQuery(getDomainClass());
+    return entityManager.createQuery(query).getResultList();
+  }
 
-		Root<T> from = query.from(getDomainClass());
+  private Predicate toPredicate(CriteriaBuilder cb, Collection<ID> ids, Root<T> root) {
+    ArrayList<ID> idList = new ArrayList<>(ids);
+    List<List<ID>> chunks = Lists.partition(idList, OracleConstants.MAX_IN_COUNT);
 
-		Predicate predicate = toPredicate(cb, ids, from);
-		query = query.select(from).where(predicate);
+    SingularAttribute<? super T, ?> id = entityInfo.getIdAttribute();
 
-		return entityManager.createQuery(query).getResultList();
-	}
-
-	private Predicate toPredicate(CriteriaBuilder cb, Collection<ID> ids, Root<T> root) {
-		ArrayList<ID> idList = new ArrayList<>(ids);
-		List<List<ID>> chunks = Lists.partition(idList, OracleConstants.MAX_IN_COUNT);
-
-		SingularAttribute<? super T, ?> id = entityInfo.getIdAttribute();
-
-		Predicate[] predicates = chunks.stream()
-				.map(chunk -> root.get(id).in(chunk))
-				.toArray(Predicate[]::new);
-		return cb.or(predicates);
-	}
+    Predicate[] predicates = chunks.stream()
+      .map(chunk -> root.get(id).in(chunk))
+      .toArray(Predicate[]::new);
+    return cb.or(predicates);
+  }
 
 }
