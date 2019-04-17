@@ -3,7 +3,7 @@ spring:
     hibernate:
       ddl-auto: create
     show-sql: true
+    properties:
+      format_sql: true
   main:
     banner-mode: "off"
-
-spring.jpa.properties.hibernate.format_sql: true

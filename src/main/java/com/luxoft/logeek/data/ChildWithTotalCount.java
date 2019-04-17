@@ -14,6 +14,6 @@ public interface ChildWithTotalCount {
   @Value("#{target.age}")
   short getAge();
 
-  Long getTotalCount();
+  long getTotalCount();
 
 }
