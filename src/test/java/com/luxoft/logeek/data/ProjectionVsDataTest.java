@@ -27,7 +27,7 @@ public class ProjectionVsDataTest extends TestBase {
   public void findAllWithTotalCount() {
     List<ChildWithTotalCount> allWithTotalCount = childRepository.findAllWithTotalCountAsProjection();
 
-    long totalCount = allWithTotalCount.get(0).getTotalCount();
+    long totalCount = allWithTotalCount.get(0).getCount();
 
     assertThat(totalCount, is(5L));
   }

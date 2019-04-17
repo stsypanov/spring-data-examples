@@ -50,7 +50,7 @@ public interface ChildRepository extends BaseJpaRepository<Child, Long>, ChildRe
     "c.id as id," +
     "c.parent as parent, " +
     "c.age as age, " +
-    "total_count(c.id) as totalCount " +
+    "total_count(c.id) as count " +
     "from Child c")
   List<ChildWithTotalCount> findAllWithTotalCountAsProjection();
 }
