@@ -18,44 +18,44 @@ import static org.junit.Assert.assertNotEquals;
 @Ignore
 @Sql("/BaseJpaRepositoryImplFindAllReadOnlyTest.sql")
 public class BaseJpaRepositoryImplFindAllReadOnlyTest extends TestBase {
-	private final Integer newAge = 0;
+  private final Integer newAge = 0;
 
-	private List<Long> ids = asList(1L, 2L, 3L);
-	private boolean readOnly;
+  private List<Long> ids = asList(1L, 2L, 3L);
+  private boolean readOnly;
 
-	@Test
-	public void testFindAll_readOnlyFalse_expectValueUpdated() {
-		readOnly = false;
+  @Test
+  public void testFindAll_readOnlyFalse_expectValueUpdated() {
+    readOnly = false;
 //		pupilRepository.findAll(ids, readOnly).forEach(pupil -> pupil.setAge(newAge));
-	}
+  }
 
-	@Test
-	public void testFindAll_readOnlyTrue_expectValueNotUpdated() {
-		readOnly = true;
+  @Test
+  public void testFindAll_readOnlyTrue_expectValueNotUpdated() {
+    readOnly = true;
 //		pupilRepository.findAll(ids, true).forEach(pupil -> pupil.setAge(newAge));
-	}
+  }
 
-	@AfterTransaction
-	public void afterTransaction() {
-		super.afterTransaction();
+  @AfterTransaction
+  public void afterTransaction() {
+    super.afterTransaction();
 
-		if (readOnly) {
-			assertNotModified();
-		} else {
-			assertModified();
-		}
-	}
+    if (readOnly) {
+      assertNotModified();
+    } else {
+      assertModified();
+    }
+  }
 
-	private void assertNotModified() {
-		pupilRepository.findAllById(ids).stream().map(Pupil::getAge).forEach(age -> {
-			assertNotEquals(newAge, age);
-		});
-	}
+  private void assertNotModified() {
+    pupilRepository.findAllById(ids).stream().map(Pupil::getAge).forEach(age -> {
+      assertNotEquals(newAge, age);
+    });
+  }
 
-	private void assertModified() {
-		pupilRepository.findAllById(ids).stream().map(Pupil::getAge).forEach(age -> {
-			assertEquals(newAge, age);
-		});
-	}
+  private void assertModified() {
+    pupilRepository.findAllById(ids).stream().map(Pupil::getAge).forEach(age -> {
+      assertEquals(newAge, age);
+    });
+  }
 
 }

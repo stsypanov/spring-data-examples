@@ -16,20 +16,20 @@ import static org.junit.Assert.assertNotNull;
 @ActiveProfiles(value = "oracle", inheritProfiles = false)//todo h2 must support oracle "in" restriction
 public class BaseJpaRepositoryImplTest extends TestBase {
 
-	private List<Long> ids;
+  private List<Long> ids;
 
-	@Before
-	public void setUp() {
-		ids = LongStream.range(1, OracleConstants.MAX_IN_COUNT * 3)
-				.boxed()
-				.collect(Collectors.toList());
-	}
+  @Before
+  public void setUp() {
+    ids = LongStream.range(1, OracleConstants.MAX_IN_COUNT * 3)
+      .boxed()
+      .collect(Collectors.toList());
+  }
 
-	@Test
-	public void findAll() {
-		List<Child> all = childRepository.findAllById(ids);
+  @Test
+  public void findAll() {
+    List<Child> all = childRepository.findAllById(ids);
 
-		assertNotNull(all);
-	}
+    assertNotNull(all);
+  }
 
 }

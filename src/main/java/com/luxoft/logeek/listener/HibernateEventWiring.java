@@ -14,15 +14,15 @@ import javax.persistence.EntityManagerFactory;
 @Profile("deleteListenerOn")
 @RequiredArgsConstructor
 public class HibernateEventWiring {
-	private final EntityManagerFactory emf;
-	private final DeleteListener deleteListener;
+  private final EntityManagerFactory emf;
+  private final DeleteListener deleteListener;
 
-	@PostConstruct
-	public void registerListeners() {
-		emf.unwrap(SessionFactoryImpl.class)
-				.getServiceRegistry()
-				.getService(EventListenerRegistry.class)
-				.getEventListenerGroup(EventType.DELETE)
-				.prependListener(deleteListener);
-	}
+  @PostConstruct
+  public void registerListeners() {
+    emf.unwrap(SessionFactoryImpl.class)
+      .getServiceRegistry()
+      .getService(EventListenerRegistry.class)
+      .getEventListenerGroup(EventType.DELETE)
+      .prependListener(deleteListener);
+  }
 }

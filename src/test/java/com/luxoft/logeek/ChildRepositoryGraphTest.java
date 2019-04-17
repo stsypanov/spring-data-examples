@@ -12,22 +12,22 @@ import static org.junit.Assert.assertTrue;
 @Sql("/ChildRepositoryGraphTest.sql")
 public class ChildRepositoryGraphTest extends TestBase {
 
-	private final Long childId = 1L;
+  private final Long childId = 1L;
 
-	@Test
-	public void testGraph_expectFieldInitialized() {
-		Child child1 = childRepository.findOne(childId, Child.PARENT);
+  @Test
+  public void testGraph_expectFieldInitialized() {
+    Child child1 = childRepository.findOne(childId, Child.PARENT);
 
-		boolean initialized = Hibernate.isInitialized(child1.getParent());
-		assertTrue(initialized);
-	}
+    boolean initialized = Hibernate.isInitialized(child1.getParent());
+    assertTrue(initialized);
+  }
 
-	@Test
-	public void testGraph_expectFieldNotInitialized() {
-		Child child1 = childRepository.findById(childId).orElseThrow(NullPointerException::new);
+  @Test
+  public void testGraph_expectFieldNotInitialized() {
+    Child child1 = childRepository.findById(childId).orElseThrow(NullPointerException::new);
 
-		boolean initialized = Hibernate.isInitialized(child1.getParent());
-		assertFalse(initialized);
-	}
+    boolean initialized = Hibernate.isInitialized(child1.getParent());
+    assertFalse(initialized);
+  }
 
 }

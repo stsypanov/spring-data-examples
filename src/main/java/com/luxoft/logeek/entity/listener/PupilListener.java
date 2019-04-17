@@ -9,15 +9,15 @@ import javax.persistence.PreRemove;
  */
 public class PupilListener {
 
-	public static final String MESSAGE =
-			"It's prohibited to delete pupils older than 9.";
+  public static final String MESSAGE =
+    "It's prohibited to delete pupils older than 9.";
 
-	@PreRemove
-	void preRemove(Pupil pupil) {
-		int age = pupil.getAge();
-		if (age > 9) {
-			throw new RuntimeException(MESSAGE);
-		}
-	}
+  @PreRemove
+  void preRemove(Pupil pupil) {
+    int age = pupil.getAge();
+    if (age > 9) {
+      throw new RuntimeException(MESSAGE);
+    }
+  }
 
 }

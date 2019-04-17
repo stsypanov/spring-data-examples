@@ -7,11 +7,11 @@ import org.springframework.context.ConfigurableApplicationContext;
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class BenchmarkBase {
-	protected ThreadLocalRandom random;
-	protected ConfigurableApplicationContext context;
+  protected ThreadLocalRandom random;
+  protected ConfigurableApplicationContext context;
 
-	void initContext() {
-		context = SpringApplication.run(AppConfig.class);
-		random = ThreadLocalRandom.current();
-	}
+  void initContext() {
+    context = SpringApplication.run(AppConfig.class);
+    random = ThreadLocalRandom.current();
+  }
 }

@@ -4,7 +4,7 @@ select * from
 (
 select t1.id from table1 t1
 <#if doUnion>
-    union all
-    <#include ("templates/IncludedTemplate.sql.vm")>
+  union all
+  <#include ("templates/IncludedTemplate.sql.vm")>
 </#if>
 );

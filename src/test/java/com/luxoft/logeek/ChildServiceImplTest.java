@@ -16,22 +16,22 @@ import static org.junit.Assert.assertEquals;
  */
 @Sql("/ChildServiceImplTest.sql")
 public class ChildServiceImplTest extends TestBase {
-    @Autowired
-    private ChildService childService;
+  @Autowired
+  private ChildService childService;
 
-    @Test
-    public void newChildForParent() {
-        childService.newChildForParent(1L);
-    }
+  @Test
+  public void newChildForParent() {
+    childService.newChildForParent(1L);
+  }
 
-    @Test
-    public void optimizedNewChildForParent() {
-        childService.optimizedNewChildForParent(1L);
-    }
+  @Test
+  public void optimizedNewChildForParent() {
+    childService.optimizedNewChildForParent(1L);
+  }
 
-    @After
-    public void tearDown() {
-        List<Child> children = childRepository.findAll();
-        assertEquals(children.size(), 1);
-    }
+  @After
+  public void tearDown() {
+    List<Child> children = childRepository.findAll();
+    assertEquals(children.size(), 1);
+  }
 }

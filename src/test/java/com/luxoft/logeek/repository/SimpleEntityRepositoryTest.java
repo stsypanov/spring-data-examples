@@ -13,18 +13,18 @@ import static org.junit.Assert.assertEquals;
 
 public class SimpleEntityRepositoryTest extends TestBase {
 
-    @Autowired
-    private SimpleEntityRepository repository;
+  @Autowired
+  private SimpleEntityRepository repository;
 
-    @Test
-    public void findAllByName() {
-        repository.save(new SimpleEntity(1, "ivan"));
+  @Test
+  public void findAllByName() {
+    repository.save(new SimpleEntity(1, "ivan"));
 
-        List<HasIdAndName> coll1 = repository.findAllByName("ivan");
+    List<HasIdAndName> coll1 = repository.findAllByName("ivan");
 
-        List<IdAndNameDto> coll2 = repository.findAllByNameUsingDto("ivan");
+    List<IdAndNameDto> coll2 = repository.findAllByNameUsingDto("ivan");
 
-        assertEquals(coll1.size(), coll2.size());
-    }
+    assertEquals(coll1.size(), coll2.size());
+  }
 
 }

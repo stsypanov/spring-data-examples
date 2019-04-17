@@ -9,8 +9,8 @@ import javax.persistence.IdClass;
 @Entity
 @IdClass(value = CompositeKey.class)
 public class EntityWithCompositeKey {
-	@Id
-	private Long key1;
-	@Id
-	private Long key2;
+  @Id
+  private Long key1;
+  @Id
+  private Long key2;
 }

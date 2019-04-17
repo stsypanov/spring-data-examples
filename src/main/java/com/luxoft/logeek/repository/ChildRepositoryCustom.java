@@ -5,6 +5,6 @@ import com.luxoft.logeek.entity.Child;
 import java.util.List;
 
 public interface ChildRepositoryCustom {
-	
-	List<Child> findAll(boolean fetchParent, boolean fetchToys, boolean orderByAge);
+
+  List<Child> findAll(boolean fetchParent, boolean fetchToys, boolean orderByAge);
 }

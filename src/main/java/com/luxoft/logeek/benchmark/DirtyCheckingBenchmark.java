@@ -17,28 +17,28 @@ import java.util.concurrent.TimeUnit;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 public class DirtyCheckingBenchmark extends BenchmarkBase {
-    private FindOneService service;
-    private Long id;
+  private FindOneService service;
+  private Long id;
 
-    @Setup
-    public void setup() {
-        super.initContext();
-        service = context.getBean(FindOneService.class);
-        id = service.save(new SomeEntity(1L, 2L)).getId();
-    }
+  @Setup
+  public void setup() {
+    super.initContext();
+    service = context.getBean(FindOneService.class);
+    id = service.save(new SomeEntity(1L, 2L)).getId();
+  }
 
-    @Benchmark
-    public SomeEntity measureFindOneReadOnly() {
-        return service.findOne(id, true);
-    }
+  @Benchmark
+  public SomeEntity measureFindOneReadOnly() {
+    return service.findOne(id, true);
+  }
 
-    @Benchmark
-    public SomeEntity measureFindOne() {
-        return service.findOne(id, false);
-    }
+  @Benchmark
+  public SomeEntity measureFindOne() {
+    return service.findOne(id, false);
+  }
 
-    @Benchmark
-    public Optional<SomeEntity> measureConventionalFindOne() {
-        return service.findOne(id);
-    }
+  @Benchmark
+  public Optional<SomeEntity> measureConventionalFindOne() {
+    return service.findOne(id);
+  }
 }

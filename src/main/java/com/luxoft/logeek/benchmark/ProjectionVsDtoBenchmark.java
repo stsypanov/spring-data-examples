@@ -21,30 +21,30 @@ import java.util.stream.IntStream;
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @BenchmarkMode(value = Mode.AverageTime)
 public class ProjectionVsDtoBenchmark extends BenchmarkBase {
-    private SimpleEntityRepository repository;
+  private SimpleEntityRepository repository;
 
-    @Setup
-    public void before() {
-        super.initContext();
-        repository = context.getBean(SimpleEntityRepository.class);
-        IntStream.range(0, 10)
-                .boxed()
-                .map(id -> new SimpleEntity(id, "ivan"))
-                .forEach(repository::save);
-    }
+  @Setup
+  public void before() {
+    super.initContext();
+    repository = context.getBean(SimpleEntityRepository.class);
+    IntStream.range(0, 10)
+      .boxed()
+      .map(id -> new SimpleEntity(id, "ivan"))
+      .forEach(repository::save);
+  }
 
-    @TearDown
-    public void after() {
-        repository.deleteAllInBatch();
-    }
+  @TearDown
+  public void after() {
+    repository.deleteAllInBatch();
+  }
 
-    @Benchmark
-    public List<IdAndNameDto> findAllByNameUsingObject() {
-        return repository.findAllByNameUsingDto("ivan");
-    }
+  @Benchmark
+  public List<IdAndNameDto> findAllByNameUsingObject() {
+    return repository.findAllByNameUsingDto("ivan");
+  }
 
-    @Benchmark
-    public List<HasIdAndName> findAllByName() {
-        return repository.findAllByName("ivan");
-    }
+  @Benchmark
+  public List<HasIdAndName> findAllByName() {
+    return repository.findAllByName("ivan");
+  }
 }

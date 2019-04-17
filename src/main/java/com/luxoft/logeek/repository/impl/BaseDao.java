@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 abstract class BaseDao {
-	
-	@PersistenceContext
-	protected EntityManager em;
+
+  @PersistenceContext
+  protected EntityManager em;
 }

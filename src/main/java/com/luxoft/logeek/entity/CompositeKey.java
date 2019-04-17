@@ -12,6 +12,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CompositeKey implements Serializable {
-	private Long key1;
-	private Long key2;
+  private Long key1;
+  private Long key2;
 }

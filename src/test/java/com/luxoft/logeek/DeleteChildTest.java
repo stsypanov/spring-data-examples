@@ -10,24 +10,24 @@ import static org.junit.Assert.assertNull;
 @Sql("/DeleteChildTest.sql")
 public class DeleteChildTest extends TestBase {
 
-    private Long papaId = 1L;
+  private Long papaId = 1L;
 
-    @Test
-    public void deleteAllInBatch_expectParentIsNotDeleted() {
-        childRepository.deleteAllInBatch();
+  @Test
+  public void deleteAllInBatch_expectParentIsNotDeleted() {
+    childRepository.deleteAllInBatch();
 
-        Parent papa = parentRepository.findById(papaId).orElse(null);
+    Parent papa = parentRepository.findById(papaId).orElse(null);
 
-        assertNotNull(papa);
-    }
+    assertNotNull(papa);
+  }
 
-    @Test
-    public void deleteAll_expectParentIsDeleted() {
-        childRepository.deleteAll();//проверить, почему в лог записан update
+  @Test
+  public void deleteAll_expectParentIsDeleted() {
+    childRepository.deleteAll();//проверить, почему в лог записан update
 
-        Parent papa = parentRepository.findById(papaId).orElse(null);
+    Parent papa = parentRepository.findById(papaId).orElse(null);
 
-        assertNull(papa);
-    }
+    assertNull(papa);
+  }
 
 }

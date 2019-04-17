@@ -9,16 +9,16 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 public class BenchmarkRunner {
 
-	public static void main(String[] args) throws RunnerException {
-		Options opt = new OptionsBuilder()
-//				.include(ByteCodeInstrumentationBenchmarkForSingleEntity.class.getSimpleName())
+  public static void main(String[] args) throws RunnerException {
+    Options opt = new OptionsBuilder()
+//				.include(ByteCodeInstrumentationBenchmark.class.getSimpleName())
 //				.include(DistinctVsSetBenchmark.class.getSimpleName())
-				.include(ProjectionVsDtoBenchmark.class.getSimpleName())
-				.warmupIterations(10)
-				.measurementIterations(10)
-				.forks(10)//0 makes debugging possible
-				.build();
+      .include(ProjectionVsDtoBenchmark.class.getSimpleName())
+      .warmupIterations(10)
+      .measurementIterations(10)
+      .forks(10)//0 makes debugging possible
+      .build();
 
-		new Runner(opt).run();
-	}
+    new Runner(opt).run();
+  }
 }

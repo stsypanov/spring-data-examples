@@ -5,12 +5,12 @@
 select child
 from Child child
 <#if fetchParent>
-    left join fetch child.parent
+  left join fetch child.parent
 </#if>
 <#if fetchToys>
-    left join fetch child.toys
+  left join fetch child.toys
 </#if>
 
 <#if orderByAge>
-    order by child.age
+  order by child.age
 </#if>

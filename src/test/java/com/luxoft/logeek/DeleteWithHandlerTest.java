@@ -13,32 +13,32 @@ import static org.junit.Assert.assertThat;
 @Commit
 @Sql("/DeleteWithHandlerTest.sql")
 public class DeleteWithHandlerTest extends TestBase {
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
+  @Rule
+  public ExpectedException exception = ExpectedException.none();
 
-    private boolean entityListenerUsed;
+  private boolean entityListenerUsed;
 
-    @Test(expected = Exception.class)
-    public void deleteAll() {
-        entityListenerUsed = true;
+  @Test(expected = Exception.class)
+  public void deleteAll() {
+    entityListenerUsed = true;
 
-        exception.expect(Exception.class);
-        pupilRepository.deleteAll();
+    exception.expect(Exception.class);
+    pupilRepository.deleteAll();
+  }
+
+  @Test
+  public void deleteAllInBatch() {
+    entityListenerUsed = false;
+
+    pupilRepository.deleteAllInBatch();
+  }
+
+  @After
+  public void tearDown() {
+    if (entityListenerUsed) {
+      assertThat(pupilRepository.findAll().size(), is(1));
+    } else {
+      assertThat(pupilRepository.findAll().size(), is(0));
     }
-
-    @Test
-    public void deleteAllInBatch() {
-        entityListenerUsed = false;
-
-        pupilRepository.deleteAllInBatch();
-    }
-
-    @After
-    public void tearDown() {
-        if (entityListenerUsed) {
-            assertThat(pupilRepository.findAll().size(), is(1));
-        } else {
-            assertThat(pupilRepository.findAll().size(), is(0));
-        }
-    }
+  }
 }

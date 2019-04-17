@@ -10,25 +10,25 @@ import static org.junit.Assert.assertEquals;
 
 @Sql("/BankAccountControlRepositoryTest.sql")
 public class BankAccountControlRepositoryTest extends TestBase {
-    @Autowired
-    BankAccountControlRepository bankAccountControlRepository;
-    private Long count1;
-    private Long count2;
+  @Autowired
+  BankAccountControlRepository bankAccountControlRepository;
+  private Long count1;
+  private Long count2;
 
-    @Test
-    public void countByUserAccountId() {
-        count1 = bankAccountControlRepository.countByUserAccountId(1L);
-    }
+  @Test
+  public void countByUserAccountId() {
+    count1 = bankAccountControlRepository.countByUserAccountId(1L);
+  }
 
-    @Test
-    public void countByUserAccount_Id() {
-        count2 = bankAccountControlRepository.countByUserAccount_Id(1L);
-    }
+  @Test
+  public void countByUserAccount_Id() {
+    count2 = bankAccountControlRepository.countByUserAccount_Id(1L);
+  }
 
-    @After
-    public void tearDown() {
-        if (count1 != null && count2 != null) {
-            assertEquals(count1, count2);
-        }
+  @After
+  public void tearDown() {
+    if (count1 != null && count2 != null) {
+      assertEquals(count1, count2);
     }
+  }
 }

@@ -12,19 +12,19 @@ import java.util.List;
 @ActiveProfiles(value = "h2", inheritProfiles = false)
 public class ProjectionVsDataTest extends TestBase {
 
-	@Test
-	public void getChildData() {
-		List<ChildData> allWithParents = childRepository.findAllWithTotalCountAsData();
+  @Test
+  public void getChildData() {
+    List<ChildData> allWithParents = childRepository.findAllWithTotalCountAsData();
 
-		allWithParents.forEach(ChildData::getChild);
-	}
+    allWithParents.forEach(ChildData::getChild);
+  }
 
-	@Test
-	public void findAllWithTotalCount() {
-		List<ChildWithTotalCount> allWithTotalCount = childRepository.findAllWithTotalCountAsProjection();
-		
-		Long totalCount = allWithTotalCount.get(0).getTotalCount();
-		Parent parent = allWithTotalCount.get(0).getParent();
-	}
+  @Test
+  public void findAllWithTotalCount() {
+    List<ChildWithTotalCount> allWithTotalCount = childRepository.findAllWithTotalCountAsProjection();
+
+    Long totalCount = allWithTotalCount.get(0).getTotalCount();
+    Parent parent = allWithTotalCount.get(0).getParent();
+  }
 
 }

@@ -13,9 +13,9 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SimpleEntity {
-    @Id
-    private int id;
+  @Id
+  private int id;
 
-    @Column
-    private String name;
+  @Column
+  private String name;
 }

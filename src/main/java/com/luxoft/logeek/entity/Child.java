@@ -25,41 +25,41 @@ import java.util.List;
 @Setter
 @Entity
 @NamedEntityGraphs(value = {
-		@NamedEntityGraph(name = Child.PARENT, attributeNodes = {
-				@NamedAttributeNode("parent")
-		}),
-		@NamedEntityGraph(name = Child.TOYS, attributeNodes = {
-				@NamedAttributeNode("toys")
-		})
+  @NamedEntityGraph(name = Child.PARENT, attributeNodes = {
+    @NamedAttributeNode("parent")
+  }),
+  @NamedEntityGraph(name = Child.TOYS, attributeNodes = {
+    @NamedAttributeNode("toys")
+  })
 })
 public class Child {
-	public static final String PARENT = "Child[parent]";
-	public static final String TOYS = "Child[toys]";
+  public static final String PARENT = "Child[parent]";
+  public static final String TOYS = "Child[toys]";
 
-	@Id
-	@GeneratedValue
-	private Long id;
+  @Id
+  @GeneratedValue
+  private Long id;
 
-	@JoinColumn(name = "parent_id")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Parent parent;
+  @JoinColumn(name = "parent_id")
+  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  private Parent parent;
 
-	@Column
-	private short age;
+  @Column
+  private short age;
 
-	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-	@LazyCollection(value = LazyCollectionOption.EXTRA)
-	private List<Toy> toys = new ArrayList<>();
+  @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+  @LazyCollection(value = LazyCollectionOption.EXTRA)
+  private List<Toy> toys = new ArrayList<>();
 
-	public Child(Parent parent) {
-		this.parent = parent;
-	}
+  public Child(Parent parent) {
+    this.parent = parent;
+  }
 
-	public Child() {
-	}
+  public Child() {
+  }
 
-	public void addToy(Toy toy) {
-		toy.setOwner(this);
-		toys.add(toy);
-	}
+  public void addToy(Toy toy) {
+    toy.setOwner(this);
+    toys.add(toy);
+  }
 }

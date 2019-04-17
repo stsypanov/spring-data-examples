@@ -13,45 +13,45 @@ import static org.junit.Assert.assertTrue;
 @SuppressWarnings("unused")
 public class DeleteAllPupilsTest extends TestBase {
 
-    @Override
-    @Before
-    public void setUp() {
-        List<Pupil> pupils = Arrays.asList(
-                new Pupil(1),
-                new Pupil(2),
-                new Pupil(3),
-                new Pupil(4),
-                new Pupil(5),
-                new Pupil(6)
-        );
-        pupilRepository.saveAll(pupils);
-        pupilRepository.flush();
-    }
+  @Override
+  @Before
+  public void setUp() {
+    List<Pupil> pupils = Arrays.asList(
+      new Pupil(1),
+      new Pupil(2),
+      new Pupil(3),
+      new Pupil(4),
+      new Pupil(5),
+      new Pupil(6)
+    );
+    pupilRepository.saveAll(pupils);
+    pupilRepository.flush();
+  }
 
-    /**
-     * What queries will be executed?
-     */
-    @Test
-    public void deleteAll() {
-        pupilRepository.deleteAll();
-        assertTrue(pupilRepository.findAll().isEmpty());
-    }
+  /**
+   * What queries will be executed?
+   */
+  @Test
+  public void deleteAll() {
+    pupilRepository.deleteAll();
+    assertTrue(pupilRepository.findAll().isEmpty());
+  }
 
-    @Test
-    public void deleteOne() {
-        List<Pupil> all = pupilRepository.findAll();
-        pupilRepository.delete(all.iterator().next());
-    }
+  @Test
+  public void deleteOne() {
+    List<Pupil> all = pupilRepository.findAll();
+    pupilRepository.delete(all.iterator().next());
+  }
 
-    @Test
-    public void deleteAllInBatch() {
-        List<Pupil> all = pupilRepository.findAll();
+  @Test
+  public void deleteAllInBatch() {
+    List<Pupil> all = pupilRepository.findAll();
 
-        assertFalse(pupilRepository.findAll().isEmpty());
+    assertFalse(pupilRepository.findAll().isEmpty());
 
-        pupilRepository.deleteAllInBatch();
+    pupilRepository.deleteAllInBatch();
 
-        assertTrue(pupilRepository.findAll().isEmpty());
-    }
+    assertTrue(pupilRepository.findAll().isEmpty());
+  }
 
 }

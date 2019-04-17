@@ -6,7 +6,7 @@ import javax.persistence.Id;
 @Entity
 public class UserAccount {
 
-    @Id
-    private long id;
+  @Id
+  private long id;
 
 }

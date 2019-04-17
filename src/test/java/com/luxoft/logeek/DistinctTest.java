@@ -10,26 +10,26 @@ import java.util.stream.Collectors;
 
 public class DistinctTest extends TestBase {
 
-	@Before
-	public void setUp() {
-		initRandom();
-		List<Pupil> pupils = random
-				.ints(1000, 1, 400)
-				.boxed()
-				.map(randomLong -> new Pupil(randomLong, String.valueOf(random.nextInt(100))))
-				.collect(Collectors.toList());
+  @Before
+  public void setUp() {
+    initRandom();
+    List<Pupil> pupils = random
+      .ints(1000, 1, 400)
+      .boxed()
+      .map(randomLong -> new Pupil(randomLong, String.valueOf(random.nextInt(100))))
+      .collect(Collectors.toList());
 
-		pupilRepository.saveAll(pupils);
-	}
+    pupilRepository.saveAll(pupils);
+  }
 
-	@Test
-	public void findWithDistinct() {
-		List<String> pupils = pupilRepository.findAllNames();
-	}
+  @Test
+  public void findWithDistinct() {
+    List<String> pupils = pupilRepository.findAllNames();
+  }
 
-	@Test
-	public void findWithHashSetDistinct() {
-		Set<String> pupils = pupilRepository.findAllNamesAsSet();
-	}
+  @Test
+  public void findWithHashSetDistinct() {
+    Set<String> pupils = pupilRepository.findAllNamesAsSet();
+  }
 
 }

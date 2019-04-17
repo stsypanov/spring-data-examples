@@ -2,7 +2,7 @@ package com.luxoft.logeek.data;
 
 public interface HasIdAndName {
 
-    int getId();
+  int getId();
 
-    String getName();
+  String getName();
 }

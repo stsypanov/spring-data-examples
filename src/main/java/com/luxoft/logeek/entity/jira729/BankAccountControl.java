@@ -7,11 +7,11 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class BankAccountControl {
-    @Id
-    private long id;
- 
-    @ManyToOne
-    @JoinColumn(name ="uac_id", nullable = false)
-    private UserAccount userAccount;
+  @Id
+  private long id;
+
+  @ManyToOne
+  @JoinColumn(name = "uac_id", nullable = false)
+  private UserAccount userAccount;
 
 }

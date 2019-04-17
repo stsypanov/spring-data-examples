@@ -7,6 +7,6 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public class ChildData {
-	private final Child child;
-	private final long count;
+  private final Child child;
+  private final long count;
 }

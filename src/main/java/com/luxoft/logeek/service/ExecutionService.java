@@ -6,12 +6,12 @@ import java.util.List;
 
 public interface ExecutionService {
 
-    void setUp(int size);
+  void setUp(int size);
 
-    List<EntityWithManyStringFields> executeFieldModification();
+  List<EntityWithManyStringFields> executeFieldModification();
 
-    List<EntityWithManyStringFields> executeWithoutFieldModification();
+  List<EntityWithManyStringFields> executeWithoutFieldModification();
 
-    void tearDown();
+  void tearDown();
 
 }

@@ -6,9 +6,9 @@ import java.util.Optional;
 
 public interface FindOneService {
 
-    SomeEntity findOne(Long id, boolean readOnly);
+  SomeEntity findOne(Long id, boolean readOnly);
 
-    Optional<SomeEntity> findOne(Long id);
+  Optional<SomeEntity> findOne(Long id);
 
-    SomeEntity save(SomeEntity entity);
+  SomeEntity save(SomeEntity entity);
 }

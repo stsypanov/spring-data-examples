@@ -22,34 +22,34 @@ import java.util.concurrent.ThreadLocalRandom;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AppConfig.class)
 public abstract class TestBase {
-	@PersistenceContext
-	protected EntityManager em;
-	@Autowired
-	protected PupilRepository pupilRepository;
-	@Autowired
-	protected ChildRepository childRepository;
-	@Autowired
-	protected ParentRepository parentRepository;
+  @PersistenceContext
+  protected EntityManager em;
+  @Autowired
+  protected PupilRepository pupilRepository;
+  @Autowired
+  protected ChildRepository childRepository;
+  @Autowired
+  protected ParentRepository parentRepository;
 
-	protected Random random;
+  protected Random random;
 
-	public void setUp() {
-		initRandom();
-	}
+  public void setUp() {
+    initRandom();
+  }
 
-	protected void initRandom() {
-		random = ThreadLocalRandom.current();
-	}
+  protected void initRandom() {
+    random = ThreadLocalRandom.current();
+  }
 
-	@BeforeTransaction
-	public void beforeTransaction() {
-		System.out.println("------------------");
-		System.out.println("Transaction begins");
-	}
+  @BeforeTransaction
+  public void beforeTransaction() {
+    System.out.println("------------------");
+    System.out.println("Transaction begins");
+  }
 
-	@AfterTransaction
-	public void afterTransaction() {
-		System.out.println("------------------");
-		System.out.println("Transaction finished");
-	}
+  @AfterTransaction
+  public void afterTransaction() {
+    System.out.println("------------------");
+    System.out.println("Transaction finished");
+  }
 }

@@ -5,9 +5,9 @@ import org.hibernate.dialect.function.StandardSQLFunction;
 
 public class CustomOracleDialect extends Oracle12cDialect {
 
-    public CustomOracleDialect() {
-        super();
-        registerFunction("coalesce", new StandardSQLFunction("coalesce"));
-        registerFunction("total_count", new TotalCountFunc());
-    }
+  public CustomOracleDialect() {
+    super();
+    registerFunction("coalesce", new StandardSQLFunction("coalesce"));
+    registerFunction("total_count", new TotalCountFunc());
+  }
 }

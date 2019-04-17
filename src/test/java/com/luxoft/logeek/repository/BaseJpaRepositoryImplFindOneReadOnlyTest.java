@@ -20,54 +20,54 @@ import static org.hamcrest.core.IsNot.not;
 @Sql(value = "/BaseJpaRepositoryImplFindOneReadOnlyTest.sql")
 public class BaseJpaRepositoryImplFindOneReadOnlyTest extends TestBase {
 
-	private final Long pupilId = 1L;
-	private final int newAge = 0;
-	
-	private boolean readOnly;
+  private final Long pupilId = 1L;
+  private final int newAge = 0;
 
-	@Rule
-	public ExpectedException expectedException = ExpectedException.none();
+  private boolean readOnly;
 
-	@Test
-	public void testFindOneReadOnlyTrue_expectValueNotUpdated() {
-		readOnly = true;
-		Pupil pupil = pupilRepository.findOne(pupilId, readOnly);
-		pupil.setAge(newAge);
-	}
+  @Rule
+  public ExpectedException expectedException = ExpectedException.none();
 
-	@Test
-	public void testFindOneReadOnlyTrue_useEntityManager_expectValueNotUpdated() {
-		expectedException.expect(AssertionError.class);
+  @Test
+  public void testFindOneReadOnlyTrue_expectValueNotUpdated() {
+    readOnly = true;
+    Pupil pupil = pupilRepository.findOne(pupilId, readOnly);
+    pupil.setAge(newAge);
+  }
 
-		readOnly = true;
+  @Test
+  public void testFindOneReadOnlyTrue_useEntityManager_expectValueNotUpdated() {
+    expectedException.expect(AssertionError.class);
 
-		Map<String, Object> hints = new HashMap<>();
-		hints.put(QueryHints.HINT_READONLY, readOnly);
+    readOnly = true;
 
-		Pupil pupil = em.find(Pupil.class, pupilId, hints);
-		pupil.setAge(newAge); //todo bug: dirty checking is on, while HINT_READONLY = true
-	}
+    Map<String, Object> hints = new HashMap<>();
+    hints.put(QueryHints.HINT_READONLY, readOnly);
 
-	@Test
-	public void testFindOneReadOnlyFalse_expectValueUpdated() {
-		readOnly = false;
-		pupilRepository.findOne(pupilId, readOnly).setAge(newAge);
-	}
+    Pupil pupil = em.find(Pupil.class, pupilId, hints);
+    pupil.setAge(newAge); //todo bug: dirty checking is on, while HINT_READONLY = true
+  }
 
-	@Test
-	public void testFindOneStateless_expectValueNotUpdated() {
-		readOnly = true;
-		pupilRepository.findOneStateless(pupilId).setAge(newAge);
-	}
+  @Test
+  public void testFindOneReadOnlyFalse_expectValueUpdated() {
+    readOnly = false;
+    pupilRepository.findOne(pupilId, readOnly).setAge(newAge);
+  }
 
-	@After
-	public void afterTransaction() {
-		int actualAge = pupilRepository.findById(pupilId).map(Pupil::getAge).orElseThrow(RuntimeException::new);
+  @Test
+  public void testFindOneStateless_expectValueNotUpdated() {
+    readOnly = true;
+    pupilRepository.findOneStateless(pupilId).setAge(newAge);
+  }
 
-		if (readOnly) {
-			assertThat(newAge, not(actualAge));
-		} else {
-			assertThat(newAge, equalTo(actualAge));
-		}
-	}
+  @After
+  public void afterTransaction() {
+    int actualAge = pupilRepository.findById(pupilId).map(Pupil::getAge).orElseThrow(RuntimeException::new);
+
+    if (readOnly) {
+      assertThat(newAge, not(actualAge));
+    } else {
+      assertThat(newAge, equalTo(actualAge));
+    }
+  }
 }

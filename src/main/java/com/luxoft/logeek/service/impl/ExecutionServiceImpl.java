@@ -16,47 +16,47 @@ import static java.util.stream.Collectors.toList;
 @Transactional
 @RequiredArgsConstructor
 public class ExecutionServiceImpl implements ExecutionService {
-    private final EntityWithManyStringFieldsRepository repository;
-    private final Random random = new Random();
+  private final EntityWithManyStringFieldsRepository repository;
+  private final Random random = new Random();
 
-    @Override
-    public void setUp(int entityCount) {
-        List<EntityWithManyStringFields> items = random
-                .ints(entityCount)
-                .boxed()
-                .map(rnd -> {
-                    EntityWithManyStringFields entity = new EntityWithManyStringFields();
-                    entity.setField1(random.nextGaussian() + "");
-                    entity.setField2(random.nextGaussian() + "");
-                    entity.setField3(random.nextGaussian() + "");
-                    entity.setField4(random.nextGaussian() + "");
-                    entity.setField5(random.nextGaussian() + "");
-                    entity.setField6(random.nextGaussian() + "");
-                    entity.setField7(random.nextGaussian() + "");
-                    entity.setField8(random.nextGaussian() + "");
-                    return entity;
-                })
-                .collect(toList());
+  @Override
+  public void setUp(int entityCount) {
+    List<EntityWithManyStringFields> items = random
+      .ints(entityCount)
+      .boxed()
+      .map(rnd -> {
+        EntityWithManyStringFields entity = new EntityWithManyStringFields();
+        entity.setField1(random.nextGaussian() + "");
+        entity.setField2(random.nextGaussian() + "");
+        entity.setField3(random.nextGaussian() + "");
+        entity.setField4(random.nextGaussian() + "");
+        entity.setField5(random.nextGaussian() + "");
+        entity.setField6(random.nextGaussian() + "");
+        entity.setField7(random.nextGaussian() + "");
+        entity.setField8(random.nextGaussian() + "");
+        return entity;
+      })
+      .collect(toList());
 
-        repository.saveAll(items);
-    }
+    repository.saveAll(items);
+  }
 
-    @Override
-    public List<EntityWithManyStringFields> executeFieldModification() {
-        List<EntityWithManyStringFields> entities = repository.findAll();
-        entities.forEach(entity -> entity.setField1(random.nextGaussian() + ""));
+  @Override
+  public List<EntityWithManyStringFields> executeFieldModification() {
+    List<EntityWithManyStringFields> entities = repository.findAll();
+    entities.forEach(entity -> entity.setField1(random.nextGaussian() + ""));
 
-        return repository.saveAll(entities);
-    }
+    return repository.saveAll(entities);
+  }
 
-    @Override
-    public List<EntityWithManyStringFields> executeWithoutFieldModification() {
-        List<EntityWithManyStringFields> entities = repository.findAll();
-        return repository.saveAll(entities);
-    }
+  @Override
+  public List<EntityWithManyStringFields> executeWithoutFieldModification() {
+    List<EntityWithManyStringFields> entities = repository.findAll();
+    return repository.saveAll(entities);
+  }
 
-    @Override
-    public void tearDown() {
-        repository.deleteAllInBatch();
-    }
+  @Override
+  public void tearDown() {
+    repository.deleteAllInBatch();
+  }
 }

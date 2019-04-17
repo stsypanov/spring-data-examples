@@ -10,26 +10,26 @@ import java.util.Set;
 
 public interface PupilRepository extends BaseJpaRepository<Pupil, Long> {
 
-	@Query("select p from Pupil p where p.age >= :age")
-	Set<Pupil> findPupilsOlderThan(@Param("age") int age);
+  @Query("select p from Pupil p where p.age >= :age")
+  Set<Pupil> findPupilsOlderThan(@Param("age") int age);
 
-	@Query("select p from Pupil p where p.age >= :age " +
-			"order by p.age")
-	Set<Pupil> findPupilsOlderThanOrderedByAge(@Param("age") int age);
+  @Query("select p from Pupil p where p.age >= :age " +
+    "order by p.age")
+  Set<Pupil> findPupilsOlderThanOrderedByAge(@Param("age") int age);
 
-	@Query("select p from Pupil p where p.age >= :age " +
-			"order by p.age")
-	HashSet<Pupil> findPupilsOlderThanSortedByAge(@Param("age") int age);
-	
-	@Query("select distinct p.name from Pupil p")
-	List<String> findAllNames();
+  @Query("select p from Pupil p where p.age >= :age " +
+    "order by p.age")
+  HashSet<Pupil> findPupilsOlderThanSortedByAge(@Param("age") int age);
 
-	@Query("select p.name from Pupil p")
-	Set<String> findAllNamesAsSet();
+  @Query("select distinct p.name from Pupil p")
+  List<String> findAllNames();
 
-	@Query("select distinct p from Pupil p")
-	List<String> findAllDistinct();
+  @Query("select p.name from Pupil p")
+  Set<String> findAllNamesAsSet();
 
-	@Query("select p from Pupil p")
-	Set<String> findAllAsSet();
+  @Query("select distinct p from Pupil p")
+  List<String> findAllDistinct();
+
+  @Query("select p from Pupil p")
+  Set<String> findAllAsSet();
 }

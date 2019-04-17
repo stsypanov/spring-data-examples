@@ -21,38 +21,38 @@ import static java.util.stream.Collectors.toList;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)
 public class ByteCodeInstrumentationBenchmark extends BenchmarkBase {
-	private EntityWithManyStringFieldsRepository repository;
+  private EntityWithManyStringFieldsRepository repository;
 
-	@Setup
-	public void init() {
-		super.initContext();
-		repository = context.getBean(EntityWithManyStringFieldsRepository.class);
-		List<EntityWithManyStringFields> pupils = random
-				.ints(100000, 0, 400)
-				.boxed()
-				.map(rnd -> {
-					EntityWithManyStringFields entity = new EntityWithManyStringFields();
-					entity.setField1(random.nextGaussian() +"");
-					entity.setField2(random.nextGaussian() +"");
-					entity.setField3(random.nextGaussian() +"");
-					entity.setField4(random.nextGaussian() +"");
-					entity.setField5(random.nextGaussian() +"");
-					entity.setField6(random.nextGaussian() +"");
-					entity.setField7(random.nextGaussian() +"");
-					entity.setField8(random.nextGaussian() +"");
-					return entity;
-				})
-				.collect(toList());
+  @Setup
+  public void init() {
+    super.initContext();
+    repository = context.getBean(EntityWithManyStringFieldsRepository.class);
+    List<EntityWithManyStringFields> pupils = random
+      .ints(100000, 0, 400)
+      .boxed()
+      .map(rnd -> {
+        EntityWithManyStringFields entity = new EntityWithManyStringFields();
+        entity.setField1(random.nextGaussian() + "");
+        entity.setField2(random.nextGaussian() + "");
+        entity.setField3(random.nextGaussian() + "");
+        entity.setField4(random.nextGaussian() + "");
+        entity.setField5(random.nextGaussian() + "");
+        entity.setField6(random.nextGaussian() + "");
+        entity.setField7(random.nextGaussian() + "");
+        entity.setField8(random.nextGaussian() + "");
+        return entity;
+      })
+      .collect(toList());
 
-		repository.saveAll(pupils);
-	}
+    repository.saveAll(pupils);
+  }
 
-	@Benchmark
-	public List<EntityWithManyStringFields> measureConventionalDirtyChecking() {
-		List<EntityWithManyStringFields> entities = repository.findAll();
-		entities = entities.stream()
-				.peek(entity -> {
-					entity.setField1(random.nextGaussian() +"");
+  @Benchmark
+  public List<EntityWithManyStringFields> measureConventionalDirtyChecking() {
+    List<EntityWithManyStringFields> entities = repository.findAll();
+    entities = entities.stream()
+      .peek(entity -> {
+        entity.setField1(random.nextGaussian() + "");
 //					entity.setField2(random.nextGaussian() +"");
 //					entity.setField3(random.nextGaussian() +"");
 //					entity.setField4(random.nextGaussian() +"");
@@ -60,11 +60,11 @@ public class ByteCodeInstrumentationBenchmark extends BenchmarkBase {
 //					entity.setField6(random.nextGaussian() +"");
 //					entity.setField7(random.nextGaussian() +"");
 //					entity.setField8(random.nextGaussian() +"");
-				})
-				.collect(toList());
+      })
+      .collect(toList());
 
-		entities = repository.saveAll(entities);
-		repository.flush();
-		return entities;
-	}
+    entities = repository.saveAll(entities);
+    repository.flush();
+    return entities;
+  }
 }

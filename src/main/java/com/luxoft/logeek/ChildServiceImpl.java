@@ -14,22 +14,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @RequiredArgsConstructor
 public class ChildServiceImpl implements ChildService {
-    private final ChildRepository childRepository;
-    private final ParentRepository parentRepository;
+  private final ChildRepository childRepository;
+  private final ParentRepository parentRepository;
 
-    @Override
-    public Child newChildForParent(long parentId) {
-        Child child = new Child();
-        parentRepository.findById(parentId).ifPresent(child::setParent);
+  @Override
+  public Child newChildForParent(long parentId) {
+    Child child = new Child();
+    parentRepository.findById(parentId).ifPresent(child::setParent);
 
-        return childRepository.save(child);
-    }
+    return childRepository.save(child);
+  }
 
-    @Override
-    public Child optimizedNewChildForParent(long parentId) {
-        Child child = new Child();
-        child.setParent(parentRepository.getOne(parentId));
+  @Override
+  public Child optimizedNewChildForParent(long parentId) {
+    Child child = new Child();
+    child.setParent(parentRepository.getOne(parentId));
 
-        return childRepository.save(child);
-    }
+    return childRepository.save(child);
+  }
 }

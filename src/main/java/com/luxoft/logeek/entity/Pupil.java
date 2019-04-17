@@ -21,13 +21,11 @@ import java.time.LocalDate;
 @DynamicUpdate
 public class Pupil {
 
+  @Column
+  public int age;
   @Id
   @GeneratedValue
   private Long id;
-
-  @Column
-  public int age;
-
   @Column
   private String name;
 

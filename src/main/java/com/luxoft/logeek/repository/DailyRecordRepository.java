@@ -9,10 +9,10 @@ import java.math.BigDecimal;
 @SuppressWarnings("SpringDataRepositoryMethodReturnTypeInspection")
 public interface DailyRecordRepository extends BaseJpaRepository<DailyRecord, Long> {
 
-    @Query("select coalesce(record.fxRate, record.avgRate) " +
-            " from DailyRecord record " +
-            "where record.currency = :currency")
-    BigDecimal findRateByCurrency(@Param("currency") String currency);
+  @Query("select coalesce(record.fxRate, record.avgRate) " +
+          " from DailyRecord record " +
+          "where record.currency = :currency")
+  BigDecimal findRateByCurrency(@Param("currency") String currency);
 
 
     /*@Query("select coalesce(record.fixedRate, record.recordRate, record.averageRecordRate) " +
