@@ -1,8 +1,11 @@
 package com.luxoft.logeek.repository;
 
+import com.luxoft.logeek.data.BriefChildData;
 import com.luxoft.logeek.data.ChildData;
 import com.luxoft.logeek.data.ChildWithTotalCount;
 import com.luxoft.logeek.entity.Child;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -45,6 +48,14 @@ public interface ChildRepository extends BaseJpaRepository<Child, Long>, ChildRe
     "total_count(c.id) " +
     ") from Child c")
   List<ChildData> findAllWithTotalCountAsData();
+
+  @Query("select new com.luxoft.logeek.data.BriefChildData(" +
+    "c.id, " +
+    "c.age " +
+    ") from Child c " +
+    " join c.parent p " +
+    "where p.name = 'папа'")
+  Page<BriefChildData> browse(Pageable pageable);
 
   @Query("select " +
     "c.id as id," +

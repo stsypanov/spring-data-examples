@@ -1,8 +1,12 @@
 spring:
   jpa:
     database-platform: com.luxoft.logeek.config.CustomPostgresDialect
+    hibernate:
+      ddl-auto: create-drop
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres?currentSchema=jpa-test
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-test-query: drop schema if exists "jpa-test";create schema "jpa-test";

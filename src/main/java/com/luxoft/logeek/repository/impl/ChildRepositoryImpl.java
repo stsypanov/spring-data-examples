@@ -1,9 +1,15 @@
 package com.luxoft.logeek.repository.impl;
 
+import com.luxoft.logeek.data.BriefChildData;
 import com.luxoft.logeek.entity.Child;
 import com.luxoft.logeek.repository.ChildRepositoryCustom;
 import com.luxoft.logeek.util.TemplateParser;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Session;
+import org.hibernate.transform.Transformers;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +31,27 @@ public class ChildRepositoryImpl extends BaseDao implements ChildRepositoryCusto
     String query = templateParser.prepareQuery(BASE_CHILD_TEMPLATE.name, params);
 
     return em.createQuery(query, Child.class).getResultList();
+  }
+
+  @Override
+  public Page<BriefChildData> browseWithTotalCount(Pageable pageable) {
+    String query =
+      "select " +
+        " c.id as id," +
+        " c.age as age, " +
+        " total_count(c.id) as totalCount" +
+        " from Child c " +
+        "join c.parent p " +
+        "where p.name = 'папа'";
+
+    List<BriefChildData> list = em.unwrap(Session.class)
+      .createQuery(query)
+      .setFirstResult((int) pageable.getOffset())
+      .setMaxResults(pageable.getPageSize())
+      .setResultTransformer(Transformers.aliasToBean(BriefChildData.class))
+      .getResultList();
+
+    return new PageImpl<>(list, pageable, list.get(0).getTotalCount());
   }
 
   @RequiredArgsConstructor
