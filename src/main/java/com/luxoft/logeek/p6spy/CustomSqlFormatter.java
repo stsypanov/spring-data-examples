@@ -8,14 +8,6 @@ public class CustomSqlFormatter implements MessageFormattingStrategy {
   @Override
   public String formatMessage(int connectionId, String now, long elapsed, String category, String prepared, String sql, String url) {
     return
-      "elapsed: " +
-      elapsed +
-      " ms;\nprepared:\n" +
-      P6Util.singleLine(prepared) +
-      "\nsql:\n" +
-      P6Util.singleLine(sql) +
-      "\ncategory: " +
-      category +
-      '\n';
+      "elapsed: " + elapsed + " ms\tsql:\t" + P6Util.singleLine(sql);
   }
 }

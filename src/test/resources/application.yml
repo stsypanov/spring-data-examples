@@ -2,8 +2,16 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-    show-sql: true
+    show-sql: false
     properties:
       format_sql: true
   main:
     banner-mode: "off"
+
+decorator:
+  datasource:
+    datasource-proxy:
+      slow-query:
+        threshold: 0
+    p6spy:
+      enable-logging: true
