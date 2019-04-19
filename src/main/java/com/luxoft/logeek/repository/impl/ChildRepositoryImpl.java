@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,13 @@ public class ChildRepositoryImpl extends BaseDao implements ChildRepositoryCusto
       .setResultTransformer(Transformers.aliasToBean(BriefChildData.class))
       .getResultList();
 
-    return new PageImpl<>(list, pageable, list.get(0).getTotalCount());
+    if (list.isEmpty()) {
+      return new PageImpl(Collections.emptyList());
+    }
+
+    long totalCount = list.get(0).getTotalCount();
+
+    return new PageImpl<>(list, pageable, totalCount);
   }
 
   @RequiredArgsConstructor
