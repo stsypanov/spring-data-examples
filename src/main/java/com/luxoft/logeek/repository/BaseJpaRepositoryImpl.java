@@ -1,7 +1,6 @@
 package com.luxoft.logeek.repository;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.luxoft.logeek.misc.OracleConstants;
 import org.hibernate.Session;
 import org.hibernate.StatelessSession;
@@ -19,11 +18,9 @@ import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements BaseJpaRepository<T, ID> {
 
@@ -69,7 +66,8 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
     Assert.notNull(id, "The given id must not be null!");
 
     try (StatelessSession statelessSession = entityManager.unwrap(Session.class).getSessionFactory().openStatelessSession()) {
-      return (T) statelessSession.get(getDomainClass(), id);
+      Class<T> domainClass = getDomainClass();
+      return domainClass.cast(statelessSession.get(domainClass, id));
     }
   }
 
@@ -77,7 +75,7 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
   public List<T> findAllById(Iterable<ID> ids) {
     Assert.notNull(ids, "The given Iterable of Id's must not be null!");
 
-    Set<ID> idsCopy = Sets.newHashSet(ids);
+    ArrayList<ID> idsCopy = Lists.newArrayList(ids);
 
     if (idsCopy.size() <= OracleConstants.MAX_IN_COUNT) {
       return super.findAllById(ids);
@@ -86,7 +84,7 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
     return findAll(idsCopy);
   }
 
-  private List<T> findAll(Collection<ID> ids) {
+  private List<T> findAll(ArrayList<ID> ids) {
     CriteriaBuilder cb = entityManager.getCriteriaBuilder();
     CriteriaQuery<T> query = cb.createQuery(getDomainClass());
 
@@ -98,9 +96,8 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
     return entityManager.createQuery(query).getResultList();
   }
 
-  private Predicate toPredicate(CriteriaBuilder cb, Collection<ID> ids, Root<T> root) {
-    ArrayList<ID> idList = new ArrayList<>(ids);
-    List<List<ID>> chunks = Lists.partition(idList, OracleConstants.MAX_IN_COUNT);
+  private Predicate toPredicate(CriteriaBuilder cb, ArrayList<ID> ids, Root<T> root) {
+    List<List<ID>> chunks = Lists.partition(ids, OracleConstants.MAX_IN_COUNT);
 
     SingularAttribute<? super T, ?> id = entityInfo.getIdAttribute();
 
