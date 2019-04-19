@@ -38,6 +38,8 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 
   @Override
   public T findOne(ID id, String graphName) {
+    Assert.notNull(id, "The given id must not be null!");
+
     EntityGraph<?> graph = entityManager.getEntityGraph(graphName);
 
     Map<String, Object> hints = Collections.singletonMap(QueryHints.HINT_LOADGRAPH, graph);
@@ -45,23 +47,27 @@ public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
     return entityManager.find(getDomainClass(), id, hints);
   }
 
-	@Override
-	public T findOne(ID id, boolean readOnly) {
-		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<T> query = criteriaBuilder.createQuery(getDomainClass());
+  @Override
+  public T findOne(ID id, boolean readOnly) {
+    Assert.notNull(id, "The given id must not be null!");
 
-		Root<T> from = query.from(getDomainClass());
-        Predicate predicate = criteriaBuilder.equal(from.get(entityInfo.getIdAttribute()), id);
+    CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+    CriteriaQuery<T> query = criteriaBuilder.createQuery(getDomainClass());
 
-        query = query.select(from).where(predicate);
+    Root<T> from = query.from(getDomainClass());
+    Predicate predicate = criteriaBuilder.equal(from.get(entityInfo.getIdAttribute()), id);
 
-		return entityManager.createQuery(query)
-				.setHint(QueryHints.HINT_READONLY, readOnly)
-				.getSingleResult();
-	}
+    query = query.select(from).where(predicate);
+
+    return entityManager.createQuery(query)
+      .setHint(QueryHints.HINT_READONLY, readOnly)
+      .getSingleResult();
+  }
 
   @Override
   public T findOneStateless(ID id) {
+    Assert.notNull(id, "The given id must not be null!");
+
     try (StatelessSession statelessSession = entityManager.unwrap(Session.class).getSessionFactory().openStatelessSession()) {
       return (T) statelessSession.get(getDomainClass(), id);
     }
