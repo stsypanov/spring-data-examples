@@ -1,0 +1,12 @@
+JDK 8
+
+                                                    (count)  Mode  Cnt       Score      Error   Units
+findAllByName                                             1  avgt   50      16.188 ±    0.643   us/op
+findAllByNameUsingObject                                  1  avgt   50      13.991 ±    0.208   us/op
+findAllByName                                           100  avgt   50     235.077 ±    2.407   us/op
+findAllByNameUsingObject                                100  avgt   50      65.713 ±    1.618   us/op
+
+findAllByName:·gc.alloc.rate.norm                         1  avgt   50   20842.539 ±   24.394    B/op
+findAllByNameUsingObject:·gc.alloc.rate.norm              1  avgt   50   13802.823 ±   29.680    B/op
+findAllByName:·gc.alloc.rate.norm                       100  avgt   50  519894.926 ± 1588.438    B/op
+findAllByNameUsingObject:·gc.alloc.rate.norm            100  avgt   50   41812.605 ±   40.003    B/op
