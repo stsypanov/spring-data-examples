@@ -1,12 +1,25 @@
 JDK 8
 
                                                     (count)  Mode  Cnt       Score      Error   Units
-findAllByName                                             1  avgt   50      16.188 ±    0.643   us/op
-findAllByNameUsingObject                                  1  avgt   50      13.991 ±    0.208   us/op
-findAllByName                                           100  avgt   50     235.077 ±    2.407   us/op
-findAllByNameUsingObject                                100  avgt   50      65.713 ±    1.618   us/op
+findAllByName                                             1  avgt   50      15.781 ±    0.716   us/op
+findAllByNameUsingObject                                  1  avgt   50      15.136 ±    0.756   us/op
+findAllByName                                           100  avgt   50     232.865 ±    4.530   us/op
+findAllByNameUsingObject                                100  avgt   50      69.586 ±    3.768   us/op
 
-findAllByName:·gc.alloc.rate.norm                         1  avgt   50   20842.539 ±   24.394    B/op
-findAllByNameUsingObject:·gc.alloc.rate.norm              1  avgt   50   13802.823 ±   29.680    B/op
-findAllByName:·gc.alloc.rate.norm                       100  avgt   50  519894.926 ± 1588.438    B/op
-findAllByNameUsingObject:·gc.alloc.rate.norm            100  avgt   50   41812.605 ±   40.003    B/op
+findAllByName:·gc.alloc.rate.norm                         1  avgt   50   20774.739 ±   40.353    B/op
+findAllByNameUsingObject:·gc.alloc.rate.norm              1  avgt   50   13809.035 ±   22.354    B/op
+findAllByName:·gc.alloc.rate.norm                       100  avgt   50  521777.026 ± 1557.856    B/op
+findAllByNameUsingObject:·gc.alloc.rate.norm            100  avgt   50   41794.840 ±   49.202    B/op
+
+JDK 11
+
+                                                    (count)  Mode  Cnt       Score      Error   Units
+findAllByName                                             1  avgt   50      19.245 ±    0.882   us/op
+findAllByNameUsingObject                                  1  avgt   50      15.503 ±    0.235   us/op
+findAllByName                                           100  avgt   50     213.152 ±    2.976   us/op
+findAllByNameUsingObject                                100  avgt   50      65.698 ±    6.197   us/op
+
+findAllByName:·gc.alloc.rate.norm                         1  avgt   50   19285.155 ±   36.345    B/op
+findAllByNameUsingObject:·gc.alloc.rate.norm              1  avgt   50   12591.612 ±   15.392    B/op
+findAllByName:·gc.alloc.rate.norm                       100  avgt   50  497630.511 ± 2180.970    B/op
+findAllByNameUsingObject:·gc.alloc.rate.norm            100  avgt   50   40634.827 ±   33.747    B/op
