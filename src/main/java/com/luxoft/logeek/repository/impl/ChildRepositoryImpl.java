@@ -46,7 +46,7 @@ public class ChildRepositoryImpl extends BaseDao implements ChildRepositoryCusto
         "where p.name = 'папа'";
 
     List<BriefChildData> list = em.unwrap(Session.class)
-      .createQuery(query, BriefChildData.class)
+      .createQuery(query)
       .setFirstResult((int) pageable.getOffset())
       .setMaxResults(pageable.getPageSize())
       .setResultTransformer(Transformers.aliasToBean(BriefChildData.class))
