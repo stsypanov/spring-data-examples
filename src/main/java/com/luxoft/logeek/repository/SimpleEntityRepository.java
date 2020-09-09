@@ -4,7 +4,6 @@ import com.luxoft.logeek.data.HasIdAndName;
 import com.luxoft.logeek.data.IdAndNameDto;
 import com.luxoft.logeek.entity.SimpleEntity;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 

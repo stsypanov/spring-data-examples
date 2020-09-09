@@ -3,7 +3,6 @@ package com.luxoft.logeek.repository.datajpa729;
 import com.luxoft.logeek.entity.jira729.BankAccountControl;
 import com.luxoft.logeek.repository.BaseJpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 public interface BankAccountControlRepository extends BaseJpaRepository<BankAccountControl, Long> {
 
@@ -16,5 +15,5 @@ public interface BankAccountControlRepository extends BaseJpaRepository<BankAcco
 
   @Query("select count(c.id) from BankAccountControl c " +
     " where c.userAccount.id = :id")
-  long countByUserAccountId(@Param("id") Long id);
+  long countByUserAccountId(Long id);
 }
