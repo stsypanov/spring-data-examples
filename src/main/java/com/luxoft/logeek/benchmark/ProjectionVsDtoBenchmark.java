@@ -43,12 +43,12 @@ public class ProjectionVsDtoBenchmark extends BenchmarkBase {
   }
 
   @Benchmark
-  public List<IdAndNameDto> findAllByNameUsingObject() {
+  public List<IdAndNameDto> dto() {
     return repository.findAllByNameUsingDto("ivan");
   }
 
   @Benchmark
-  public List<HasIdAndName> findAllByName() {
+  public List<HasIdAndName> projection() {
     return repository.findAllByName("ivan");
   }
 }
