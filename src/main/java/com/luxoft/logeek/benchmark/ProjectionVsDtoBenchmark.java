@@ -33,7 +33,7 @@ public class ProjectionVsDtoBenchmark extends BenchmarkBase {
     repository = context.getBean(SimpleEntityRepository.class);
     IntStream.range(0, count)
       .boxed()
-      .map(id -> new SimpleEntity(id, "ivan"))
+      .map(id -> new SimpleEntity(id, "ivan", "", "", "", "", "", ""))
       .forEach(repository::save);
   }
 
