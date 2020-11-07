@@ -18,13 +18,13 @@ public class SimpleEntityRepositoryTest extends TestBase {
 
   @Test
   public void findAllByName() {
-    repository.save(new SimpleEntity(1, "ivan", "","","","","",""));
+    repository.save(new SimpleEntity(1, "ivan", "", "", "", "", "", ""));
 
-    List<HasIdAndName> dtos = repository.findAllByName("ivan");
+    List<HasIdAndName> projections = repository.findAllByName("ivan");
 
-    List<IdAndNameDto> projections = repository.findAllByNameUsingDto("ivan");
+    List<IdAndNameDto> dtos = repository.findAllByNameUsingDto("ivan");
 
-    assertEquals(dtos.size(), projections.size());
+    assertEquals(projections.size(), dtos.size());
   }
 
 }
