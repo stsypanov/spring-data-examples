@@ -18,8 +18,7 @@ ext {
 dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
   implementation 'org.springframework.boot:spring-boot-starter-freemarker'
-  implementation 'com.h2database:h2:1.4.199'
-  implementation 'org.postgresql:postgresql:42.2.5'
+  implementation 'org.postgresql:postgresql'
   implementation 'p6spy:p6spy:3.8.0'
   implementation 'com.google.guava:guava:23.0'
   implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.3'
@@ -30,6 +29,7 @@ dependencies {
   implementation "org.openjdk.jmh:jmh-core:${jmhVersion}"
   annotationProcessor "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
 
+  testImplementation 'com.h2database:h2'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
@@ -48,4 +48,9 @@ targetCompatibility = 19
 tasks.withType(JavaCompile) {
   options.encoding = 'UTF-8'
   options.compilerArgs << '-Xlint:unchecked'
+  options.compilerArgs << '-parameters'
+}
+
+test {
+  useJUnitPlatform()
 }
