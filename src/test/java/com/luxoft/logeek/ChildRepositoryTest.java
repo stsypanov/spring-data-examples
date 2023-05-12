@@ -63,4 +63,9 @@ class ChildRepositoryTest extends TestBase {
     children.forEach(child -> assertFalse(Hibernate.isInitialized(child.getParent())));
   }
 
+  @Test
+  void findByParentIds() {
+    assertThat(childRepository.findAllByParentIds1(List.of())).asList().hasSize(6);
+    assertThat(childRepository.findAllByParentIds1(List.of(2L))).asList().hasSize(2);
+  }
 }

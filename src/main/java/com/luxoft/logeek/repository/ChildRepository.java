@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Collection;
 import java.util.List;
 
 @SuppressWarnings({"SameParameterValue", "unused"})
@@ -40,6 +41,12 @@ public interface ChildRepository extends BaseJpaRepository<Child, Long>, ChildRe
     " join child.parent parent " +
     "where parent.id in :ids")
   List<Child> findAllByParentIds(Iterable<Long> ids);
+
+  @Query("select child from Child child " +
+    " join child.parent parent " +
+    " where (:#{#ids.isEmpty()} = true) " +
+    "    or (:#{#ids.isEmpty()} = false and parent.id in :ids)")
+  List<Child> findAllByParentIds1(Collection<Long> ids);
 
 
   @Query("select new com.luxoft.logeek.data.ChildData(" +
