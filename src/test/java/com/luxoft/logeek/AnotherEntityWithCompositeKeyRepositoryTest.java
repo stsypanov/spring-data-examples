@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Sql("/EntityWithCompositeKeyRepositoryTest.sql")
-public class EntityWithCompositeKeyRepositoryTest extends TestBase {
+class AnotherEntityWithCompositeKeyRepositoryTest extends TestBase {
 
   @Autowired
   private EntityWithCompositeKeyRepository entityWithCompositeKeyRepository;
