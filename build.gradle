@@ -1,7 +1,6 @@
 plugins {
   id 'java'
-  id 'maven'
-  id 'org.springframework.boot' version '2.1.2.RELEASE'
+  id 'org.springframework.boot' version '2.7.11'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -13,25 +12,25 @@ repositories {
 
 ext {
   jmhVersion = '1.25'
+  lombokVersion = '1.18.26'
 }
 
 dependencies {
-  compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-  compile 'org.springframework.boot:spring-boot-starter-freemarker'
-  compile 'org.springframework.boot:spring-boot-starter-log4j2'
-  compile 'com.h2database:h2:1.4.199'
-  compile 'org.postgresql:postgresql:42.2.5'
-  compile 'p6spy:p6spy:3.8.0'
-  compile 'com.google.guava:guava:23.0'
-  compile 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.3'
+  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  implementation 'org.springframework.boot:spring-boot-starter-freemarker'
+  implementation 'com.h2database:h2:1.4.199'
+  implementation 'org.postgresql:postgresql:42.2.5'
+  implementation 'p6spy:p6spy:3.8.0'
+  implementation 'com.google.guava:guava:23.0'
+  implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.3'
 
-  compileOnly 'org.projectlombok:lombok:1.18.6'
-  annotationProcessor 'org.projectlombok:lombok:1.18.6'
-  
-  compile "org.openjdk.jmh:jmh-core:${jmhVersion}"
+  compileOnly "org.projectlombok:lombok:${lombokVersion}"
+  annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+  implementation "org.openjdk.jmh:jmh-core:${jmhVersion}"
   annotationProcessor "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
 
-  testCompile 'org.springframework.boot:spring-boot-starter-test'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 configurations {
@@ -43,7 +42,8 @@ group = 'com.luxoft.logeek'
 version = '1.0-SNAPSHOT'
 description = 'Examples for Luxoft Logeek Night Spring Data talk'
 
-sourceCompatibility = 11
+sourceCompatibility = 19
+targetCompatibility = 19
 
 tasks.withType(JavaCompile) {
   options.encoding = 'UTF-8'
