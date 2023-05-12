@@ -1,9 +1,9 @@
 package com.luxoft.logeek.config;
 
-import org.hibernate.dialect.Oracle12cDialect;
+import org.hibernate.dialect.H2Dialect;
 import org.hibernate.dialect.function.StandardSQLFunction;
 
-public class CustomOracleDialect extends Oracle12cDialect {
+public class CustomOracleDialect extends H2Dialect {
 
   public CustomOracleDialect() {
     super();
