@@ -3,8 +3,8 @@ package com.luxoft.logeek;
 import com.luxoft.logeek.entity.Child;
 import com.luxoft.logeek.entity.Parent;
 import com.luxoft.logeek.entity.Pupil;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.test.annotation.Commit;
 
 import java.time.LocalDate;
@@ -14,10 +14,10 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 @Commit
-public class InstrumentationTest extends TestBase {
+class InstrumentationTest extends TestBase {
 
 
-  @Before
+  @BeforeEach
   @Override
   public void setUp() {
     super.setUp();
@@ -47,7 +47,7 @@ public class InstrumentationTest extends TestBase {
   }
 
   @Test
-  public void name() {
+  void name() {
     List<Pupil> pupils = pupilRepository.findAll();
     List<Pupil> updatedPupils = pupils.stream()
       .peek(pupil -> {

@@ -3,14 +3,14 @@ package com.luxoft.logeek;
 import com.luxoft.logeek.entity.CompositeKey;
 import com.luxoft.logeek.repository.EntityWithCompositeKeyRepository;
 import com.luxoft.logeek.repository.another.AnotherEntityWithCompositeKeyRepository;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Sql("/EntityWithCompositeKeyRepositoryTest.sql")
 public class EntityWithCompositeKeyRepositoryTest extends TestBase {
@@ -29,13 +29,13 @@ public class EntityWithCompositeKeyRepositoryTest extends TestBase {
   );
 
   @Test//case for @EmbeddedId
-  public void findAll() {
+  void findAll() {
     int size = entityWithCompositeKeyRepository.findAllById(compositeKeys).size();
     assertEquals(size, 5);
   }
 
   @Test//case for @Id @Id
-  public void _findAll() {
+  void _findAll() {
     int size = anotherEntityWithCompositeKeyRepository.findAllById(compositeKeys).size();
     assertEquals(size, 5);
   }

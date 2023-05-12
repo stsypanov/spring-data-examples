@@ -4,20 +4,20 @@ import com.luxoft.logeek.TestBase;
 import com.luxoft.logeek.data.HasIdAndName;
 import com.luxoft.logeek.data.IdAndNameDto;
 import com.luxoft.logeek.entity.SimpleEntity;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SimpleEntityRepositoryTest extends TestBase {
+class SimpleEntityRepositoryTest extends TestBase {
 
   @Autowired
   private SimpleEntityRepository repository;
 
   @Test
-  public void findAllByName() {
+  void findAllByName() {
     repository.save(new SimpleEntity(1, "ivan", "", "", "", "", "", ""));
 
     List<HasIdAndName> projections = repository.findAllByName("ivan");

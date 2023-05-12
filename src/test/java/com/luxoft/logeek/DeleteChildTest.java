@@ -1,19 +1,19 @@
 package com.luxoft.logeek;
 
 import com.luxoft.logeek.entity.Parent;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.test.context.jdbc.Sql;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @Sql("/DeleteChildTest.sql")
-public class DeleteChildTest extends TestBase {
+class DeleteChildTest extends TestBase {
 
   private Long papaId = 1L;
 
   @Test
-  public void deleteAllInBatch_expectParentIsNotDeleted() {
+  void deleteAllInBatch_expectParentIsNotDeleted() {
     childRepository.deleteAllInBatch();
 
     Parent papa = parentRepository.findById(papaId).orElse(null);
@@ -22,7 +22,7 @@ public class DeleteChildTest extends TestBase {
   }
 
   @Test
-  public void deleteAll_expectParentIsDeleted() {
+  void deleteAll_expectParentIsDeleted() {
     childRepository.deleteAll();//проверить, почему в лог записан update
 
     Parent papa = parentRepository.findById(papaId).orElse(null);

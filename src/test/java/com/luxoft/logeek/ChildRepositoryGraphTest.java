@@ -3,19 +3,19 @@ package com.luxoft.logeek;
 import com.luxoft.logeek.entity.Child;
 
 import org.hibernate.Hibernate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.test.context.jdbc.Sql;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Sql("/ChildRepositoryGraphTest.sql")
-public class ChildRepositoryGraphTest extends TestBase {
+class ChildRepositoryGraphTest extends TestBase {
 
   private final Long childId = 1L;
 
   @Test
-  public void testGraph_expectFieldInitialized() {
+  void testGraph_expectFieldInitialized() {
     Child child1 = childRepository.findOne(childId, Child.PARENT);
 
     boolean initialized = Hibernate.isInitialized(child1.getParent());
@@ -23,7 +23,7 @@ public class ChildRepositoryGraphTest extends TestBase {
   }
 
   @Test
-  public void testGraph_expectFieldNotInitialized() {
+  void testGraph_expectFieldNotInitialized() {
     Child child1 = childRepository.findById(childId).orElseThrow(NullPointerException::new);
 
     boolean initialized = Hibernate.isInitialized(child1.getParent());

@@ -3,11 +3,11 @@ package com.luxoft.logeek;
 import com.luxoft.logeek.repository.ChildRepository;
 import com.luxoft.logeek.repository.ParentRepository;
 import com.luxoft.logeek.repository.PupilRepository;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.transaction.AfterTransaction;
 import org.springframework.test.context.transaction.BeforeTransaction;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +19,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @Transactional
 @ActiveProfiles(profiles = "h2")
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = AppConfig.class)
 public abstract class TestBase {
   @PersistenceContext
@@ -33,7 +33,7 @@ public abstract class TestBase {
 
   protected Random random;
 
-  public void setUp() {
+  void setUp() {
     initRandom();
   }
 
@@ -42,7 +42,7 @@ public abstract class TestBase {
   }
 
   @BeforeTransaction
-  public void beforeTransaction() {
+  void beforeTransaction() {
     System.out.println("------------------");
     System.out.println("Transaction begins");
   }

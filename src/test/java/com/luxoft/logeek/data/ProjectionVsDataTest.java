@@ -1,7 +1,7 @@
 package com.luxoft.logeek.data;
 
 import com.luxoft.logeek.TestBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
@@ -14,10 +14,10 @@ import static org.hamcrest.core.Is.is;
 
 @Sql("/ProjectionVsDataTest.sql")
 @ActiveProfiles(value = "oracle", inheritProfiles = false)
-public class ProjectionVsDataTest extends TestBase {
+class ProjectionVsDataTest extends TestBase {
 
   @Test
-  public void getChildData() {
+  void getChildData() {
     List<ChildData> allWithParents = childRepository.findAllWithTotalCountAsData();
 
     long count = allWithParents.get(0).getCount();
@@ -26,7 +26,7 @@ public class ProjectionVsDataTest extends TestBase {
   }
 
   @Test
-  public void findAllWithTotalCount() {
+  void findAllWithTotalCount() {
     List<ChildWithTotalCount> allWithTotalCount = childRepository.findAllWithTotalCountAsProjection();
 
     long totalCount = allWithTotalCount.get(0).getCount();
@@ -35,7 +35,7 @@ public class ProjectionVsDataTest extends TestBase {
   }
 
   @Test
-  public void browse() {
+  void browse() {
     PageRequest request = PageRequest.of(0, 3);
 
     Page<BriefChildData> page = childRepository.browse(request);
@@ -45,7 +45,7 @@ public class ProjectionVsDataTest extends TestBase {
   }
 
   @Test
-  public void browseWithTotalCount() {
+  void browseWithTotalCount() {
     PageRequest request = PageRequest.of(0, 3);
 
     Page<BriefChildData> page = childRepository.browseWithTotalCount(request);

@@ -1,20 +1,20 @@
 package com.luxoft.logeek;
 
 import com.luxoft.logeek.entity.Pupil;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SuppressWarnings("unused")
-public class DeleteAllPupilsTest extends TestBase {
+class DeleteAllPupilsTest extends TestBase {
 
   @Override
-  @Before
+  @BeforeEach
   public void setUp() {
     List<Pupil> pupils = Arrays.asList(
       new Pupil(1),
@@ -32,19 +32,19 @@ public class DeleteAllPupilsTest extends TestBase {
    * What queries will be executed?
    */
   @Test
-  public void deleteAll() {
+  void deleteAll() {
     pupilRepository.deleteAll();
     assertTrue(pupilRepository.findAll().isEmpty());
   }
 
   @Test
-  public void deleteOne() {
+  void deleteOne() {
     List<Pupil> all = pupilRepository.findAll();
     pupilRepository.delete(all.iterator().next());
   }
 
   @Test
-  public void deleteAllInBatch() {
+  void deleteAllInBatch() {
     List<Pupil> all = pupilRepository.findAll();
 
     assertFalse(pupilRepository.findAll().isEmpty());

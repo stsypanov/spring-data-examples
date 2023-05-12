@@ -1,44 +1,38 @@
 package com.luxoft.logeek;
 
-import org.junit.After;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.jdbc.Sql;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Commit
 @Sql("/DeleteWithHandlerTest.sql")
-public class DeleteWithHandlerTest extends TestBase {
-  @Rule
-  public ExpectedException exception = ExpectedException.none();
+class DeleteWithHandlerTest extends TestBase {
 
   private boolean entityListenerUsed;
 
-  @Test(expected = Exception.class)
-  public void deleteAll() {
+  @Test
+  void deleteAll() {
     entityListenerUsed = true;
 
-    exception.expect(Exception.class);
     pupilRepository.deleteAll();
   }
 
   @Test
-  public void deleteAllInBatch() {
+  void deleteAllInBatch() {
     entityListenerUsed = false;
 
     pupilRepository.deleteAllInBatch();
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     if (entityListenerUsed) {
-      assertThat(pupilRepository.findAll().size(), is(1));
+      assertThat(pupilRepository.findAll().size()).isEqualTo(1);
     } else {
-      assertThat(pupilRepository.findAll().size(), is(0));
+      assertThat(pupilRepository.findAll().size()).isEqualTo(0);
     }
   }
 }

@@ -1,20 +1,21 @@
 package com.luxoft.logeek;
 
 import com.luxoft.logeek.entity.Child;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.test.context.jdbc.Sql;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 
 @Sql("/BlindFindOneTest.sql")
-public class BlindFindOneTest extends TestBase {
+class BlindFindOneTest extends TestBase {
 
   private Long childId;
   private Long parentId = 1L;
 
   @Test
-  public void testFindOne() {
+  void testFindOne() {
     Child child = new Child();
     parentRepository.findById(parentId).ifPresent(child::setParent);
 
@@ -22,15 +23,15 @@ public class BlindFindOneTest extends TestBase {
   }
 
   @Test
-  public void testGetOne() {
+  void testGetOne() {
     Child child = new Child();
     child.setParent(parentRepository.getOne(parentId));
 
     childId = childRepository.save(child).getId();
   }
 
-  @After
-  public void after() {
+  @AfterEach
+  void after() {
     final Child child = childRepository.findById(childId).orElse(null);
     assertNotNull(child);
 

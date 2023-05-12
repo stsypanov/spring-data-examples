@@ -2,8 +2,8 @@ package com.luxoft.logeek;
 
 import com.luxoft.logeek.entity.SomeEntity;
 import com.luxoft.logeek.repository.SomeRepository;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InterfaceNarrowingTest extends TestBase {
 
@@ -26,7 +26,7 @@ public class InterfaceNarrowingTest extends TestBase {
   private SomeRepository repository;
 
   @Override
-  @Before
+  @BeforeEach
   public void setUp() {
     initRandom();
     List<SomeEntity> entities = random.longs(50)

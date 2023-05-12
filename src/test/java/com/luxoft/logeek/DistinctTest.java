@@ -1,16 +1,16 @@
 package com.luxoft.logeek;
 
 import com.luxoft.logeek.entity.Pupil;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class DistinctTest extends TestBase {
+class DistinctTest extends TestBase {
 
-  @Before
+  @BeforeEach
   public void setUp() {
     initRandom();
     List<Pupil> pupils = random
@@ -23,12 +23,12 @@ public class DistinctTest extends TestBase {
   }
 
   @Test
-  public void findWithDistinct() {
+  void findWithDistinct() {
     List<String> pupils = pupilRepository.findAllNames();
   }
 
   @Test
-  public void findWithHashSetDistinct() {
+  void findWithHashSetDistinct() {
     Set<String> pupils = pupilRepository.findAllNamesAsSet();
   }
 
