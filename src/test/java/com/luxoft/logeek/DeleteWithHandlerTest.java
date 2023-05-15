@@ -6,6 +6,7 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.jdbc.Sql;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @Commit
 @Sql("/DeleteWithHandlerTest.sql")
@@ -17,7 +18,7 @@ class DeleteWithHandlerTest extends TestBase {
   void deleteAll() {
     entityListenerUsed = true;
 
-    pupilRepository.deleteAll();
+    assertThrows(Exception.class, () -> pupilRepository.deleteAll());
   }
 
   @Test

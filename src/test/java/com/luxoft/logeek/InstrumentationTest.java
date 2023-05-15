@@ -21,8 +21,8 @@ class InstrumentationTest extends TestBase {
   @Override
   public void setUp() {
     super.setUp();
-    Parent papa = new Parent("папа");
-    Parent mama = new Parent("мама");
+    Parent papa = new Parent("father");
+    Parent mama = new Parent("mother");
 
     Child child1 = new Child(papa);
     Child child2 = new Child(papa);

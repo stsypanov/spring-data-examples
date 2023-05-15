@@ -26,14 +26,14 @@ class ChildUpdaterTest extends TestBase {
   @Test
   void updateChild() {
     short age = 10;
-    Parent parent = new Parent("папа");
+    Parent parent = new Parent("father");
     childUpdater.updateChild(childId, age, parent);
   }
 
   @Test
   void updateChildIncorrectly() {
     short age = 10;
-    Parent parent = new Parent("папа");
+    Parent parent = new Parent("father");
     childUpdater.updateChildIncorrectly(childId, age, parent);
   }
 

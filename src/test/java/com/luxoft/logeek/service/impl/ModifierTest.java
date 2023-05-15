@@ -16,8 +16,8 @@ class ModifierTest extends TestBase {
   @Autowired
   private Modifier modifier;
 
-  private final Long id1 = 1L;
-  private final Long id2 = 2L;
+  private final Long id1 = 11L;
+  private final Long id2 = 22L;
   private boolean modified1;
   private boolean modified2;
 

@@ -43,7 +43,7 @@ public class ChildRepositoryImpl extends BaseDao implements ChildRepositoryCusto
         " total_count(c.id) as totalCount" +
         " from Child c " +
         "join c.parent p " +
-        "where p.name = 'папа'";
+        "where p.name = 'father'";
 
     List<BriefChildData> list = em.unwrap(Session.class)
       .createQuery(query)

@@ -60,7 +60,7 @@ public interface ChildRepository extends BaseJpaRepository<Child, Long>, ChildRe
     "c.age " +
     ") from Child c " +
     " join c.parent p " +
-    "where p.name = 'папа'")
+    "where p.name = 'father'")
   Page<BriefChildData> browse(Pageable pageable);
 
   @Query("select " +

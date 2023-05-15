@@ -1,1 +1,1 @@
-insert into parent (id, name) values (1, 'папа');
+insert into parent (id, name) values (1, 'father');

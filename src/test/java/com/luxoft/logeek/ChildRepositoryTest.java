@@ -18,19 +18,19 @@ class ChildRepositoryTest extends TestBase {
 
   @Test
   void testNamedQuery() {
-    List<Child> children = childRepository.findByParentName("мама");
+    List<Child> children = childRepository.findByParentName("mother");
     assertEquals(2, children.size());
   }
 
   @Test
   void testQueryWithExplicitJoin() {
-    List<Child> children = childRepository.findByParentNameWithExplicitJoin("мама");
+    List<Child> children = childRepository.findByParentNameWithExplicitJoin("mother");
     assertEquals(2, children.size());
   }
 
   @Test
   void testQueryWithoutExplicitJoin() {
-    List<Child> children = childRepository.findByParentNameNoExplicitJoin("мама");
+    List<Child> children = childRepository.findByParentNameNoExplicitJoin("mother");
     assertEquals(2, children.size());
   }
 
