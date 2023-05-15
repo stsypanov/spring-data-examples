@@ -10,7 +10,7 @@ public interface SomeRepository extends BaseJpaRepository<SomeEntity, Long> {
 //	@Query("select e from SomeEntity e where e.value in :values")
 //	List<SomeEntity> findByValueIn(List<Long> values);
 
-  List<SomeEntity> findByValueIn(List<Long> values);
+  List<SomeEntity> findBySomeValueIn(List<Long> values);
 
-  List<SomeEntity> findByValueIn(Set<Long> values);
+  List<SomeEntity> findBySomeValueIn(Set<Long> values);
 }

@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class InterfaceNarrowingTest extends TestBase {
+class InterfaceNarrowingTest extends TestBase {
 
   private static final Long TWO = 2L;
   private static final Long THREE = 3L;
@@ -54,12 +54,12 @@ public class InterfaceNarrowingTest extends TestBase {
   }
 
   @Test
-  public void findByIdsWithPossibleDuplicates() {
+  void findByIdsWithPossibleDuplicates() {
     List<Long> idList = Arrays.asList(TWO, TWO, THREE, SEVEN, FIVE, NINE, THREE, SEVEN, NINE);
     Set<Long> idSet = new HashSet<>(idList);
 
-    List<SomeEntity> byIdList = repository.findByValueIn(idList);
-    List<SomeEntity> byIdSet = repository.findByValueIn(idSet);
+    List<SomeEntity> byIdList = repository.findBySomeValueIn(idList);
+    List<SomeEntity> byIdSet = repository.findBySomeValueIn(idSet);
 
     assertEquals(byIdList, byIdSet);
   }

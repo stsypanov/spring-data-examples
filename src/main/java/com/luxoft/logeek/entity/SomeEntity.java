@@ -16,7 +16,7 @@ public class SomeEntity {
   @Id
   private Long id;
   @Column
-  private Long value;
+  private Long someValue;
 
   protected SomeEntity() {
   }
