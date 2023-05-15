@@ -20,6 +20,7 @@ class ProjectionVsDataTest extends TestBase {
 
   @BeforeEach
   void setUp() {
+//    fix HHH-15318, see https://stackoverflow.com/a/73634236/12473843
     Mode.getInstance("ORACLE").limit = true;
   }
 
