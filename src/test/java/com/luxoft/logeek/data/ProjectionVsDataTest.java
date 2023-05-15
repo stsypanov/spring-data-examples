@@ -1,6 +1,8 @@
 package com.luxoft.logeek.data;
 
 import com.luxoft.logeek.TestBase;
+import org.h2.engine.Mode;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +17,11 @@ import static org.hamcrest.core.Is.is;
 @Sql("/ProjectionVsDataTest.sql")
 @ActiveProfiles(value = "oracle", inheritProfiles = false)
 class ProjectionVsDataTest extends TestBase {
+
+  @BeforeEach
+  void setUp() {
+    Mode.getInstance("ORACLE").limit = true;
+  }
 
   @Test
   void getChildData() {
