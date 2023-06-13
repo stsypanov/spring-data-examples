@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Collection;
 import java.util.List;
 
-@SuppressWarnings({"SameParameterValue", "unused"})
+@SuppressWarnings({"SameParameterValue", "UnusedReturnValue"})
 public interface ChildRepository extends BaseJpaRepository<Child, Long>, ChildRepositoryCustom {
 
   List<Child> findByParentName(String name);

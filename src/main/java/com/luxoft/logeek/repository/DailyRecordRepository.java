@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.math.BigDecimal;
 
-@SuppressWarnings("SpringDataRepositoryMethodReturnTypeInspection")
+@SuppressWarnings("UnusedReturnValue")
 public interface DailyRecordRepository extends BaseJpaRepository<DailyRecord, Long> {
 
   @Query("""
