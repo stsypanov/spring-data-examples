@@ -51,7 +51,7 @@ public interface ChildRepository extends BaseJpaRepository<Child, Long>, ChildRe
           where (:#{#ids.isEmpty()} = true)
              or (:#{#ids.isEmpty()} = false and parent.id in :ids)
           """)
-  List<Child> findAllByParentIds1(Collection<Long> ids);
+  List<Child> findAllByParentIds_dontFilterIfEmpty(Collection<Long> ids);
 
   @Query("select new com.luxoft.logeek.data.ChildData(c, total_count(c.id) ) from Child c")
   List<ChildData> findAllWithTotalCountAsData();

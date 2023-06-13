@@ -65,7 +65,13 @@ class ChildRepositoryTest extends TestBase {
 
   @Test
   void findByParentIds() {
-    assertThat(childRepository.findAllByParentIds1(List.of())).asList().hasSize(6);
-    assertThat(childRepository.findAllByParentIds1(List.of(2L))).asList().hasSize(2);
+    assertThat(childRepository.findAllByParentIds(List.of())).asList().isEmpty();
+    assertThat(childRepository.findAllByParentIds(List.of(2L))).asList().hasSize(2);
+  }
+
+  @Test
+  void findAllByParentIds_dontFilterIfEmpty() {
+    assertThat(childRepository.findAllByParentIds_dontFilterIfEmpty(List.of())).asList().hasSize(6);
+    assertThat(childRepository.findAllByParentIds_dontFilterIfEmpty(List.of(2L))).asList().hasSize(2);
   }
 }
